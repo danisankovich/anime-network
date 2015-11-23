@@ -1,0 +1,25 @@
+h1 {
+  color: green;
+}
+h1 h2 {
+  color: red;
+}
+h1 li {
+  color: black;
+}
+
+#anime {
+  text-align: center;
+}
+
+.anime {
+  height: 402px;
+}
+
+p {
+  text-align: center;
+}
+
+.failureLogin {
+  color: red;
+}
