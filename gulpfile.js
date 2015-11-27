@@ -1,16 +1,16 @@
-var gulp = require('gulp'),
-    $ = require('gulp-load-plugins')(),
-    sass = require('gulp-ruby-sass'),
-    autoprefixer = require('gulp-autoprefixer'),
-    minifycss = require('gulp-minify-css'),
-    uglify = require('gulp-uglify'),
-    rename = require('gulp-rename'),
-    notify = require('gulp-notify'),
-    cache = require('gulp-cache'),
-    watch = require('gulp-watch'),
-    browser = require('browser-sync'),
-    run = require('run-sequence'),
-    del = require('del');
+var gulp = require('gulp');
+var fs = require('fs');
+var del = require('del');
+var run = require('gulp-run');
+var concat = require("gulp-concat");
+var coffee = require('gulp-coffee');
+var addsrc = require('gulp-add-src');
+var uglify = require('gulp-uglify');
+var sass = require('gulp-ruby-sass');
+var autoprefixer = require('gulp-autoprefixer');
+var minifycss = require('gulp-minify-css');
+var rename = require('gulp-rename');
+var notify = require('gulp-notify');
 
 gulp.task('styles', function() {
   return sass('public/stylesheets/style.scss', { style: 'expanded' })
@@ -22,20 +22,41 @@ gulp.task('styles', function() {
     .pipe(notify({ message: 'Styles task complete' }));
 });
 
-gulp.task('default', function() {
-    gulp.start('styles', 'watch');
+gulp.task("deldist", function() {
+  del("public/dist");
 });
 
-gulp.task('clean', function(cb) {
-    del(['public/stylesheets/css/css'], cb);
+gulp.task('js', function() {
+  gulp.src("public/javascripts/*.coffee")
+  .pipe(coffee())
+  .pipe(addsrc("public/javascripts/jsmain/*.js"))
+  .pipe(concat("bundle.js")) //concats thos files into a bundle
+  // .pipe(uglify())
+  .pipe(uglify({mangle: false}))
+  .pipe(gulp.dest("public/dist"))//sends that bundle to a destination
+  .pipe(notify({ message: 'Build task complete' }));
 });
 
-gulp.task('reload', function(){
-  browser.reload();
+gulp.task('build', ["js",  "styles"]);
+
+gulp.task('watch', function() {
+  gulp.watch("public/*", ['build']);
 });
 
-gulp.task('watch', function () {
-    return watch('public/stylesheets/style.scss', function() {
-          gulp.start('styles', 'reload');
-        });
+gulp.task('compress', function() {
+  return gulp.src('public/dist/bundle.js')
+  .pipe(uglify())
+  .pipe(gulp.dest('public/dist'))
+  .pipe(notify({ message: 'uglification task complete' }));
 });
+
+gulp.task('styles', function() {
+  return sass('public/stylesheets/*.scss', { style: 'expanded' })
+    .pipe(autoprefixer('last 2 version'))
+    .pipe(rename({suffix: '.min'}))
+    .pipe(minifycss())
+    .pipe(gulp.dest('public/dist'))
+    .pipe(notify({ message: 'Styles task complete' }));
+});
+
+gulp.task("default", ["build", "watch"]);

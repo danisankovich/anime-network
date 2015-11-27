@@ -17,7 +17,6 @@ app.controller('mainCtrl', function($scope, $state, $http){
     }
   });
   $scope.register = function(newUser) {
-    // mixpanel.track("New User Registered");
     $scope.newUser = newUser;
     $http.post('http://localhost:3000/register', $scope.newUser).success(function(err, data) {
       if(err.hasOwnProperty('name') === true) {
