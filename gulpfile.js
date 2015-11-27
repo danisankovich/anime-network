@@ -11,6 +11,7 @@ var autoprefixer = require('gulp-autoprefixer');
 var minifycss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var notify = require('gulp-notify');
+var livereload = require('gulp-livereload');
 
 gulp.task('styles', function() {
   return sass('public/stylesheets/style.scss', { style: 'expanded' })
@@ -31,12 +32,12 @@ gulp.task('js', function() {
   .pipe(addsrc("public/javascripts/jsmain/controllers/*.js"))
   .pipe(concat("bundle.js")) //concats thos files into a bundle
   // .pipe(uglify())
-  // .pipe(uglify({mangle: false}))
+  .pipe(uglify({mangle: false}))
   .pipe(gulp.dest("public/dist"))//sends that bundle to a destination
   .pipe(notify({ message: 'Build task complete' }));
 });
 
-gulp.task('build', ["deldist", "js",  "styles", "watch"]);
+gulp.task('build', ["js",  "styles", "watch"]);
 
 gulp.task('compress', function() {
   return gulp.src('public/dist/bundle.js')
@@ -54,8 +55,9 @@ gulp.task('styles', function() {
     .pipe(notify({ message: 'Styles task complete' }));
 });
 gulp.task('watch', function() {
-  gulp.watch("public/javascipts/jsmain/*", ['deldist', 'build']);
-  gulp.watch('public/stylesheets/*', ['deldist', 'build']);
+  gulp.watch("public/javascripts/jsmain/script.js", ['build']);
+  gulp.watch("public/javascripts/jsmain/controllers/mainCtrl.js", ['build']);
+  gulp.watch('public/stylesheets/*', ['build']);
 });
 
-gulp.task("default", ["build"]);
+gulp.task("default", ["deldist", "build"]);

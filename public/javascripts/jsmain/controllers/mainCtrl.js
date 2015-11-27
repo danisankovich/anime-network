@@ -5,18 +5,16 @@ app.controller('mainCtrl', function($scope, $state, $http){
       $scope.currentUser = user.username;
     }
   });
-  console.log("hello");
-
   $scope.register = function(newUser) {
     $scope.newUser = newUser;
     $http.post('http://localhost:3000/register', $scope.newUser).success(function(err, data) {
       if(err.hasOwnProperty('name') === true) {
-        sweetAlert("Uh Oh", err.message, "error");
+        sweetAlert("Uh Oh ", err.message, "error");
         return;
       }
       else if(err.hasOwnProperty('errmsg')) {
         console.log(err);
-        sweetAlert("Uh Oh", newUser.email + "is already registered", "error");
+        sweetAlert("Uh Oh ", newUser.email + " is already registered", "error");
         return;
       }
       else {
