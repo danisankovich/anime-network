@@ -6,13 +6,24 @@ app.controller('mainCtrl', function($scope, $state, $http){
   //   }
   // });
 
-
+  // var unirest = require('unirest');
   $scope.searchAnime = function(anime) {
-    anime = anime.toLowerCase().split(' ').join("-");
-    console.log(anime);
-    $http.get('https://hummingbird.me/api/v1/anime/' + anime).success(function(anime) {
-      $scope.anime = anime;
-      console.log($scope.anime.title);
+    // anime = anime.toLowerCase().split(' ').join("-");
+    // console.log(anime);
+    // // $http.get('https://hummingbird.me/api/v1/anime/' + anime).success(function(anime) {
+    // //   $scope.anime = anime;
+    // //   console.log($scope.anime.title);
+    // // });
+    // unirest.get("https://hummingbirdv1.p.mashape.com/anime/steins-gate")
+    // .header("X-Mashape-Key", "fL30UnxVmgmsh80IDMvD28obwFSup1Fv6mNjsnjhuV3M9VbB2R")
+    // .header("Accept", "application/json")
+    // .end(function (result) {
+    //   console.log(result.status, result.headers, result.body);
+    // });
+    console.log('okay');
+    // $http.get("http://localhost:4000/anime").success(function() {
+    $http.get("https://animenetwork.herokuapp.com/anime").success(function() {
+      console.log("yes");
     });
   };
 

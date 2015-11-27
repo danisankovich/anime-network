@@ -3,6 +3,7 @@ var router = express.Router();
 var passport = require('passport');
 var logout = require('express-passport-logout');
 var User = require('../models/user');
+var unirest = require('unirest');
 
 router.get('/', function(req, res, next) {
   res.render('index', { user: req.user });
@@ -18,6 +19,16 @@ router.get('/user', function(req, res, next) {
       res.json(req.user);
     }
   });
+});
+
+router.get('/anime', function(req, res, next) {
+  unirest.get("https://hummingbirdv1.p.mashape.com/anime/steins-gate")
+  .header("X-Mashape-Key", "fL30UnxVmgmsh80IDMvD28obwFSup1Fv6mNjsnjhuV3M9VbB2R")
+  .header("Accept", "application/json")
+  .end(function (result) {
+    console.log(result.status, result.headers, result.body);
+  });
+  res.send();
 });
 
 router.get('/register', function(req, res) {
