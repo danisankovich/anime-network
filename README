@@ -6,7 +6,7 @@ clone the repo
 
 >npm install
 
-to launch a server on port 3000
+to launch a server on port 4000
 >nodemon
 or
 >npm start

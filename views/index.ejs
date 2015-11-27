@@ -11,7 +11,7 @@
 </head>
 <body ng-app="Anime">
 
-  <nav class="top-bar" data-topbar role="navigation">
+  <nav class="top-bar" data-topbar role="navigation" ng-controller="mainCtrl">
     <ul class="title-area">
       <li class="name">
         <h1><a ui-sref="/" class="navbar-brand" href="#">Anime Network</a></h1>
@@ -21,6 +21,18 @@
 
     <section class="top-bar-section">
       <ul class="nav navbar-nav navbar-right right">
+        <li class="has-form">
+            <form ng-submit="searchAnime(anime)" >
+          <div class="row collapse">
+              <div class="large-8 small-9 columns">
+                <input type="text" ng-model="anime" placeholder="Find Anime">
+              </div>
+              <div class="large-4 small-3 columns">
+                <button type="submit" class="alert button expand">Search</button>
+              </div>
+          </div>
+            </form>
+        </li>
         <% if (user) { %>
           <li><a ui-sref="#">Link 1</a></li>
           <li><a ui-sref="#">Link 2</a></li>
@@ -28,7 +40,7 @@
         <% } else { %>
           <% } %>
           <% if (user) { %>
-            <li>{{currentUser}}</li>
+            <li><a>{{currentUser}}</a></li>
             <li><a href='/logout'>Logout <span class="glyphicon glyphicon-log-in"></span></a></li>
             <% } else { %>
               <li><a ui-sref="login">Login</a></li>

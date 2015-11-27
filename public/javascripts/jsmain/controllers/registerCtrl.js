@@ -1,19 +1,10 @@
-app.controller('mainCtrl', function($scope, $state, $http){
+app.controller('registerCtrl', function($scope, $state, $http){
   $http.get('http://localhost:4000/user').success(function(user) {
     if(user) {
-      console.log("user", user);
+      console.log("use", user);
       $scope.currentUser = user.username;
     }
   });
-
-
-  $scope.searchAnime = function(anime) {
-    $http.get('http://hummingbird.me/api/v1/anime/' + anime.split(" ").join("-")).success(function(anime) {
-      $scope.anime = anime;
-      console.log($scope.anime.title);
-    });
-  };
-
   $scope.register = function(newUser) {
     $scope.newUser = newUser;
     $http.post('http://localhost:4000/register', $scope.newUser).success(function(err, data) {
