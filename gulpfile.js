@@ -27,21 +27,16 @@ gulp.task("deldist", function() {
 });
 
 gulp.task('js', function() {
-  gulp.src("public/javascripts/*.coffee")
-  .pipe(coffee())
-  .pipe(addsrc("public/javascripts/jsmain/*.js"))
+  gulp.src("public/javascripts/jsmain/script.js")
+  .pipe(addsrc("public/javascripts/jsmain/controllers/*.js"))
   .pipe(concat("bundle.js")) //concats thos files into a bundle
   // .pipe(uglify())
-  .pipe(uglify({mangle: false}))
+  // .pipe(uglify({mangle: false}))
   .pipe(gulp.dest("public/dist"))//sends that bundle to a destination
   .pipe(notify({ message: 'Build task complete' }));
 });
 
-gulp.task('build', ["js",  "styles"]);
-
-gulp.task('watch', function() {
-  gulp.watch("public/*", ['build']);
-});
+gulp.task('build', ["deldist", "js",  "styles", "watch"]);
 
 gulp.task('compress', function() {
   return gulp.src('public/dist/bundle.js')
@@ -58,5 +53,9 @@ gulp.task('styles', function() {
     .pipe(gulp.dest('public/dist'))
     .pipe(notify({ message: 'Styles task complete' }));
 });
+gulp.task('watch', function() {
+  gulp.watch("public/javascipts/jsmain/*", ['deldist', 'build']);
+  gulp.watch('public/stylesheets/*', ['deldist', 'build']);
+});
 
-gulp.task("default", ["build", "watch"]);
+gulp.task("default", ["build"]);
