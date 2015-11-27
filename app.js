@@ -36,13 +36,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
-// app.use(function (req, res, next) {
-//     res.setHeader('Access-Control-Allow-Origin', '*');
-//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-//     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-//     next();
-// });
-
 
 var User = require('./models/user');
 passport.use(new LocalStrategy(User.authenticate()));
@@ -59,7 +52,7 @@ var logout = function(req, res){
   }
   res.redirect('/');
 };
-app.get('/logout', logout);
+// app.get('/logout', logout);
 
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -76,13 +69,12 @@ if (app.get('env') === 'development') {
     });
   });
 }
-
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
+  // res.render('error', {
+  //   message: err.message,
+  //   error: {}
+  // });
 });
 
 

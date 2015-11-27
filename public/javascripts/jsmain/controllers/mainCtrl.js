@@ -1,10 +1,10 @@
 app.controller('mainCtrl', function($scope, $state, $http){
-  $http.get('http://localhost:4000/user').success(function(user) {
-    if(user) {
-      console.log("user", user);
-      $scope.currentUser = user.username;
-    }
-  });
+  // $http.get('http://localhost:4000/user').success(function(user) {
+  //   if(user) {
+  //     console.log("user", user);
+  //     $scope.currentUser = user.username;
+  //   }
+  // });
 
 
   $scope.searchAnime = function(anime) {
