@@ -26,9 +26,11 @@ router.get('/anime', function(req, res, next) {
   .header("X-Mashape-Key", "fL30UnxVmgmsh80IDMvD28obwFSup1Fv6mNjsnjhuV3M9VbB2R")
   .header("Accept", "application/json")
   .end(function (result) {
-    console.log(result.status, result.headers, result.body);
+    console.log("statusasfsdfa", result.status);
+    console.log("headersrsdsfasdf", result.headers);
+    console.log('Bodydajgsdlgjsdlgj', result.body);
+    res.send(result.body);
   });
-  res.send();
 });
 
 router.get('/register', function(req, res) {

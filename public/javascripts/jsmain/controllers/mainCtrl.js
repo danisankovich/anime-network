@@ -21,9 +21,10 @@ app.controller('mainCtrl', function($scope, $state, $http){
     //   console.log(result.status, result.headers, result.body);
     // });
     console.log('okay');
-    // $http.get("http://localhost:4000/anime").success(function() {
-    $http.get("https://animenetwork.herokuapp.com/anime").success(function() {
-      console.log("yes");
+    // $http.get("http://localhost:4000/anime").success(function(err, result) {
+    $http.get("https://animenetwork.herokuapp.com/anime").success(function(err, result) {
+      console.log(result);
+      console.log(err);
     });
   };
 
