@@ -10,7 +10,7 @@ app.controller('mainCtrl', function($scope, $state, $http){
   $scope.searchAnime = function(anime) {
     anime = anime.toLowerCase().split(' ').join("-");
     console.log(anime);
-    $http.get('http://hummingbird.me/api/v1/anime/' + anime).success(function(anime) {
+    $http.get('https://hummingbird.me/api/v1/anime/' + anime).success(function(anime) {
       $scope.anime = anime;
       console.log($scope.anime.title);
     });
