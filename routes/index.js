@@ -3,7 +3,9 @@ var router = express.Router();
 var passport = require('passport');
 var logout = require('express-passport-logout');
 var User = require('../models/user');
+var Anime = require('../models/anime');
 var unirest = require('unirest');
+var mongoose = require('mongoose');
 
 router.get('/', function(req, res, next) {
   res.render('index', { user: req.user });
@@ -21,15 +23,30 @@ router.get('/user', function(req, res, next) {
   });
 });
 
-router.get('/anime', function(req, res, next) {
-  unirest.get("https://hummingbirdv1.p.mashape.com/anime/steins-gate")
+router.get('/anime/:id', function(req, res) {
+  console.log("req.body", req.params.id);
+  unirest.get("https://hummingbirdv1.p.mashape.com/anime/" + req.params.id)
   .header("X-Mashape-Key", "fL30UnxVmgmsh80IDMvD28obwFSup1Fv6mNjsnjhuV3M9VbB2R")
   .header("Accept", "application/json")
   .end(function (result) {
-    console.log("statusasfsdfa", result.status);
-    console.log("headersrsdsfasdf", result.headers);
     console.log('Bodydajgsdlgjsdlgj', result.body);
-    res.send(result.body);
+    Anime.create(result.body, function(err, anime) {
+      console.log('asdfasdfasdf', err);
+      console.log("animeasdfsadfasd", anime);
+      res.send();
+    });
+    // res.send(result.body);
+  });
+});
+
+router.post('/', function(req, res) {
+  console.log(req.body);
+  Anime.create("yes", function(err, anime) {
+    if (err) {
+      res.send(err);
+    }
+    console.log("animeasdfsadfasd", anime);
+    res.send(anime);
   });
 });
 

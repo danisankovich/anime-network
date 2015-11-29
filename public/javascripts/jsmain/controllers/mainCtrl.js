@@ -1,32 +1,38 @@
 app.controller('mainCtrl', function($scope, $state, $http){
-  // $http.get('http://localhost:4000/user').success(function(user) {
-  //   if(user) {
-  //     console.log("user", user);
-  //     $scope.currentUser = user.username;
-  //   }
-  // });
+  var whichUrl = 'http://localhost:4000';
+  // var whichUrl = 'https://animenetwork.herokuapp.com/';
+
+  $http.get('http://localhost:4000/user').success(function(user) {
+    if(user) {
+      console.log("user", user);
+      $scope.currentUser = user.username;
+    }
+  });
 
   // var unirest = require('unirest');
   $scope.searchAnime = function(anime) {
-    // anime = anime.toLowerCase().split(' ').join("-");
+    anime = anime.toLowerCase().split(' ').join("-");
     // console.log(anime);
-    // // $http.get('https://hummingbird.me/api/v1/anime/' + anime).success(function(anime) {
-    // //   $scope.anime = anime;
-    // //   console.log($scope.anime.title);
-    // // });
-    // unirest.get("https://hummingbirdv1.p.mashape.com/anime/steins-gate")
-    // .header("X-Mashape-Key", "fL30UnxVmgmsh80IDMvD28obwFSup1Fv6mNjsnjhuV3M9VbB2R")
-    // .header("Accept", "application/json")
-    // .end(function (result) {
-    //   console.log(result.status, result.headers, result.body);
-    // });
-    console.log('okay');
-    // $http.get("http://localhost:4000/anime").success(function(err, result) {
-    $http.get("https://animenetwork.herokuapp.com/anime").success(function(err, result) {
-      console.log(result);
-      console.log(err);
-    });
-  };
+    // for(var i = 0; i <= 0; i++) {
+    //   $http.get('http://hummingbird.me/api/v1/anime/' + i).then(function(anime) {
+    //     console.log(anime.data);
+        // $http.post('http://localhost:4000/', anime.data).then(function(err, response){
+        //   console.log("err", err);
+        //   console.log("response", response);
+        // });
+//       $http.get('https://hummingbird.me/api/v1/anime/1').success(function(anime) {
+//         $scope.anime = anime;
+//         console.log($scope.anime);
+//     });
+// };
+    for(var i = 10000; i < 11564; i++) {
+      $http.get("http://localhost:4000/anime/" + i.toString()).success(function(err, result) {
+      // $http.get("https://animenetwork.herokuapp.com/anime").success(function(err, result) {
+        console.log(result);
+        console.log(err);
+      });
+  }
+};
 
   $scope.register = function(newUser) {
     $scope.newUser = newUser;
