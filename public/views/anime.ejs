@@ -1,23 +1,27 @@
 <div class="container">
 
   <div class="row">
+<button ng-click="genres()"></button>
 
-
-      <div class="large-12 medium-12 small-12 columns">
-        <div class="large-12 medium-12 small-12 columns">
-        <h1 id="anime">Anime</h1>
-        <p id="anime">
-        <ul>
-          <li>Title: {{anime.title}}</li>
-          <li>Synopsis: {{anime.synopsis}}</li>
+    <div class="large-12 medium-12 small-12 columns">
+      <h1 id="anime">{{anime.title}}</h1>
+      <div class="large-3 medium-3 small-3 columns borderbar">
+        <ul class="showInfoBar">
+          <li><img src="{{anime.cover_image}}" alt=""></li>
           <li>Status: {{anime.status}}</li>
           <li>Active: {{anime.started_airing}}--{{anime.finished_airing}}</li>
           <li>#Episodes: {{anime.episode_count}} Episodes</li>
           <li>Episode Length: {{anime.episode_length}} Mins</li>
-          <li><img src="{{anime.cover_image}}" alt=""></li>
           <li>Rating: {{anime.age_rating}}</li>
           <li>Genres: <span ng-repeat="genre in anime.genres">{{genre.name}}, </span></li>
         </ul>
+      </div>
+      <div class="large-9 medium-9 small-9 columns">
+        <p id="anime">
+          <ul class="synopsis">
+            <li>Synopsis: </li>
+            <li><p>{{anime.synopsis}}</p></li>
+          </ul>
         </p>
       </div>
       <div class="large-3 small-3 medium-3 columns">

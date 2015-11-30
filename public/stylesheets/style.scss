@@ -1,22 +1,14 @@
-h1 {
-  color: green;
-  h2 {
-    color: red;
-  }
-  li {
-    color: black;
-  }
-}
 #anime {
   text-align: center;
+}
+ul.synopsis {
+  li {
+    list-style: none;
+  }
 }
 
 .anime {
   height: 402px;
-}
-
-p {
-  text-align: center;
 }
 
 footer {
@@ -32,4 +24,14 @@ footer {
 
 #tags {
   margin-right: 60px;
+}
+.borderbar {
+  border-right: black 1px solid;
+  .showInfoBar {
+
+    li {
+      border-bottom: 1px solid #DCDCDC;
+      list-style: none;
+    }
+  }
 }

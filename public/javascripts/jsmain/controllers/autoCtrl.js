@@ -15,7 +15,7 @@ app.controller('autoCtrl', function($scope, $state, $http){
       select: function(event, ui) {
         $(this).val(ui.item.value);
         console.log("hi", $(this).val());
-        $scope.anime = $(this).val().toLowerCase().split(" ").join("-");
+        $scope.anime = $(this).val();
       }
     });
 
@@ -30,6 +30,6 @@ app.controller('autoCtrl', function($scope, $state, $http){
       $scope.currentUser = user.username;
     }
   });
-  });
 
+  });
 });
