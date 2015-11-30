@@ -16,11 +16,13 @@ app.controller('autoCtrl', function($scope, $state, $http){
         $(this).val(ui.item.value);
         console.log("hi", $(this).val());
         $scope.anime = $(this).val();
+        console.log($scope.anime);
+
       }
     });
 
   $scope.searchAnime = function() {
-    anime = $scope.anime;
+    anime = document.getElementById('tags').value;
     // console.log(this);
     $state.go('anime', {animename: anime});
   };
