@@ -2,21 +2,7 @@ app.controller('mainCtrl', function($scope, $state, $http){
   $scope.results1 = [];
   var whichUrl = 'http://localhost:4000';
   // var whichUrl = 'https://animenetwork.herokuapp.com/';
-  $(document).ready(function() {
-  console.log('yes');
-  var availableTags = [];
-  $http.get('http://localhost:4000/anime').success(function(anime) {
-    anime.forEach(function(e) {
-      if(e.title !== undefined) {
-        availableTags.push(e.title);
-      }
-    });
-  });
-  $( "#tags" ).autocomplete({
-    minLength:3,
-    source: availableTags
-  });
-})();
+
 
   $http.get('http://localhost:4000/user').success(function(user) {
     if(user) {
@@ -24,10 +10,6 @@ app.controller('mainCtrl', function($scope, $state, $http){
       $scope.currentUser = user.username;
     }
   });
-
-
-
-  /* ...more code... */
 
 
   // var unirest = require('unirest');

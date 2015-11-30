@@ -29,8 +29,8 @@ gulp.task("deldist", function() {
 });
 
 gulp.task('js', function() {
-  gulp.src("public/javascripts/jsmain/script.js")
-  .pipe(addsrc("public/javascripts/jsmain/controllers/*.js"))
+  gulp.src(["public/javascripts/jsmain/script.js", "public/javascripts/jsmain/controllers/*.js"])
+  // .pipe(addsrc("public/javascripts/jsmain/controllers/*.js"))
   .pipe(concat("bundle.js"))
   .pipe(uglify({mangle: false}))
   .pipe(gulp.dest("public/dist"));

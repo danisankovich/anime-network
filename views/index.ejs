@@ -15,7 +15,7 @@
 </head>
 <body ng-app="Anime">
 
-  <nav class="top-bar" data-topbar role="navigation" ng-controller="mainCtrl">
+  <nav class="top-bar" data-topbar role="navigation" ng-controller="autoCtrl">
     <ul class="title-area">
       <li class="name">
         <h1><a ui-sref="/" class="navbar-brand" href="#">Anime Network</a></h1>
@@ -26,19 +26,19 @@
     <section class="top-bar-section">
       <ul class="nav navbar-nav navbar-right right">
         <li class="has-form">
-            <form ng-submit="searchAnime(anime)" >
+            <form>
           <div class="row collapse">
               <!-- <div class="large-8 small-9 columns">
                 <input type="text" ng-model="anime" placeholder="Find Anime">
               </div> -->
               <!-- <form id="form" role="form"> -->
               <div class="form-group move-down large-8 small-9 columns ui-widget">
-                <input id="tags">
+                <input id="tags" ng-model="anime">
               </div>
               <!-- <div>result: {{result}}</div> -->
           <!-- </form> -->
               <div class="large-4 small-3 columns">
-                <button type="submit" class="alert button expand">Search</button>
+                <button type="button" class="alert button expand" ng-click="searchAnime(anime)">Search</button>
               </div>
           </div>
             </form>

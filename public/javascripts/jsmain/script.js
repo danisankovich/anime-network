@@ -5,6 +5,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
   $stateProvider
   .state('/', { url: '/', templateUrl: 'views/home.ejs', controller: 'mainCtrl' })
   .state('login', { url: '/login', templateUrl: 'views/login.ejs', controller: 'mainCtrl' })
-  .state('login2', { url: '/login2', templateUrl: 'views/login2.ejs', controller: 'mainCtrl' })
-  .state('register', { url: '/register', templateUrl: 'views/register.ejs', controller: 'registerCtrl' });
+  .state('login2', { url: '/loginerror', templateUrl: 'views/login2.ejs', controller: 'mainCtrl' })
+  .state('register', { url: '/register', templateUrl: 'views/register.ejs', controller: 'registerCtrl' })
+  .state('anime', { url: '/anime/{animename}', templateUrl: 'views/anime.ejs', controller: 'animeCtrl' });
 }]);

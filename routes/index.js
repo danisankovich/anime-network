@@ -31,6 +31,15 @@ router.get('/anime', function(req, res) {
     res.send(anime);
   });
 });
+
+router.get('/animesearch/:id', function(req, res) {
+  console.log("everything", req.params.id);
+  Anime.find({slug: req.params.id}, function(err, anime) {
+    if(err) { res.send(err);}
+    console.log(anime);
+    res.send(anime[0]);
+  });
+});
 // router.get('/anime/:id', function(req, res) {  //for getting from api
 //   console.log("req.body", req.params.id);
 //   unirest.get("https://hummingbirdv1.p.mashape.com/anime/" + req.params.id)
@@ -46,17 +55,17 @@ router.get('/anime', function(req, res) {
 //     // res.send(result.body);
 //   });
 // });
-
-router.post('/', function(req, res) {
-  console.log(req.body);
-  Anime.create("yes", function(err, anime) {
-    if (err) {
-      res.send(err);
-    }
-    console.log("animeasdfsadfasd", anime);
-    res.send(anime);
-  });
-});
+//
+// router.post('/', function(req, res) {
+//   console.log(req.body);
+//   Anime.create("yes", function(err, anime) {
+//     if (err) {
+//       res.send(err);
+//     }
+//     console.log("animeasdfsadfasd", anime);
+//     res.send(anime);
+//   });
+// });
 
 router.get('/register', function(req, res) {
 
@@ -83,12 +92,12 @@ router.get('/login', function(req, res) {
 //   res.redirect('/');
 // });
 router.post('/login', passport.authenticate('local', { failureRedirect: '/#/login2' }), function(req, res, next) {
-req.session.save(function (err) {
-if (err) {
-return next(err);
-}
-res.redirect('/');
-});
+  req.session.save(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect('/');
+  });
 });
 
 module.exports = router;
