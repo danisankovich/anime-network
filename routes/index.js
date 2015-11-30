@@ -41,11 +41,12 @@ router.get('/animesearch/:id', function(req, res) {
     res.send(anime[0]);
   });
 });
-router.get('/genres', function(req, res) {
-  var x = [1, 2, 3, 4];
+router.post('/genres', function(req, res) {
+  var x = req.body;
+  console.log(x);
   if(x.length === 1) {
     Anime.find(
-        {genres: {$elemMatch: {name:'Action'}}}, function(err, anime) {
+        {genres: {$elemMatch: {name:req.body[0]}}}, function(err, anime) {
       if(err) { res.send(err); }
       console.log(anime);
       res.send(anime);
@@ -54,8 +55,8 @@ router.get('/genres', function(req, res) {
   if(x.length === 2) {
     Anime.find(
       {$and: [
-        {genres: {$elemMatch: {name:'Action'}}},
-        {genres: {$elemMatch: {name:'Demons'}}},
+        {genres: {$elemMatch: {name:req.body[0]}}},
+        {genres: {$elemMatch: {name:req.body[1]}}},
       ]}, function(err, anime) {
       if(err) { res.send(err); }
       console.log(anime);
@@ -65,9 +66,9 @@ router.get('/genres', function(req, res) {
   if(x.length === 3) {
     Anime.find(
       {$and: [
-        {genres: {$elemMatch: {name:'Action'}}},
-        {genres: {$elemMatch: {name:'Demons'}}},
-        {genres: {$elemMatch: {name:'Action'}}},
+        {genres: {$elemMatch: {name:req.body[0]}}},
+        {genres: {$elemMatch: {name:req.body[1]}}},
+        {genres: {$elemMatch: {name:req.body[2]}}},
       ]}, function(err, anime) {
       if(err) { res.send(err); }
       console.log(anime);
@@ -77,10 +78,10 @@ router.get('/genres', function(req, res) {
   if(x.length === 4) {
     Anime.find(
       {$and: [
-        {genres: {$elemMatch: {name:'Action'}}},
-        {genres: {$elemMatch: {name:'Demons'}}},
-        {genres: {$elemMatch: {name:'Action'}}},
-        {genres: {$elemMatch: {name:'Mystery'}}},
+        {genres: {$elemMatch: {name:req.body[0]}}},
+        {genres: {$elemMatch: {name:req.body[1]}}},
+        {genres: {$elemMatch: {name:req.body[2]}}},
+        {genres: {$elemMatch: {name:req.body[3]}}},
       ]}, function(err, anime) {
       if(err) { res.send(err); }
       console.log(anime);

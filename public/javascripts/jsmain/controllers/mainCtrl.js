@@ -12,6 +12,7 @@ app.controller('mainCtrl', function($scope, $state, $http){
   });
 
 
+
   // var unirest = require('unirest');
   // $scope.searchAnime = function(anime) {
   //   anime = anime.toLowerCase().split(' ').join("-");

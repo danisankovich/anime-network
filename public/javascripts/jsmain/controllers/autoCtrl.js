@@ -24,12 +24,40 @@ app.controller('autoCtrl', function($scope, $state, $http){
     // console.log(this);
     $state.go('anime', {animename: anime});
   };
+
   $http.get('http://localhost:4000/user').success(function(user) {
     if(user) {
       console.log("user", user);
       $scope.currentUser = user.username;
     }
   });
+
+  jQuery(function(){
+    var max = 4;
+    var checkboxes = $('input[type="checkbox"]');
+
+    checkboxes.change(function(){
+        var current = checkboxes.filter(':checked').length;
+        checkboxes.filter(':not(:checked)').prop('disabled', current >= max);
+    });
+  });
+  $scope.hideGenre = false;
+  $scope.genres = function(genre) {
+    console.log('yes');
+    $scope.searchGenres = [];
+    for(var key in genre) {
+      if (genre[key] === true) {
+        $scope.searchGenres.push(key);
+      }
+    }
+    $http.post('http://localhost:4000/genres', $scope.searchGenres).success(function(anime) {
+      console.log(anime);
+    });
+  };
+  // $scope.showGenre = function() {
+  //   $scope.hideGenre = ($scope.hideGenre === true) ? false : true;
+  //   return $scope.hideGenre;
+  // };
 
   });
 });
