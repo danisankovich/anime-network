@@ -1,6 +1,22 @@
 app.controller('mainCtrl', function($scope, $state, $http){
+  $scope.results1 = [];
   var whichUrl = 'http://localhost:4000';
   // var whichUrl = 'https://animenetwork.herokuapp.com/';
+  $(document).ready(function() {
+  console.log('yes');
+  var availableTags = [];
+  $http.get('http://localhost:4000/anime').success(function(anime) {
+    anime.forEach(function(e) {
+      if(e.title !== undefined) {
+        availableTags.push(e.title);
+      }
+    });
+  });
+  $( "#tags" ).autocomplete({
+    minLength:3,
+    source: availableTags
+  });
+})();
 
   $http.get('http://localhost:4000/user').success(function(user) {
     if(user) {
@@ -9,9 +25,14 @@ app.controller('mainCtrl', function($scope, $state, $http){
     }
   });
 
+
+
+  /* ...more code... */
+
+
   // var unirest = require('unirest');
-  $scope.searchAnime = function(anime) {
-    anime = anime.toLowerCase().split(' ').join("-");
+  // $scope.searchAnime = function(anime) {
+  //   anime = anime.toLowerCase().split(' ').join("-");
     // console.log(anime);
     // for(var i = 0; i <= 0; i++) {
     //   $http.get('http://hummingbird.me/api/v1/anime/' + i).then(function(anime) {
@@ -25,14 +46,14 @@ app.controller('mainCtrl', function($scope, $state, $http){
 //         console.log($scope.anime);
 //     });
 // };
-    for(var i = 10000; i < 11564; i++) {
-      $http.get("http://localhost:4000/anime/" + i.toString()).success(function(err, result) {
-      // $http.get("https://animenetwork.herokuapp.com/anime").success(function(err, result) {
-        console.log(result);
-        console.log(err);
-      });
-  }
-};
+  //   for(var i = 10000; i < 11564; i++) {
+  //     $http.get("http://localhost:4000/anime/" + i.toString()).success(function(err, result) {
+  //     // $http.get("https://animenetwork.herokuapp.com/anime").success(function(err, result) {
+  //       console.log(result);
+  //       console.log(err);
+  //     });
+  // }
+// };
 
   $scope.register = function(newUser) {
     $scope.newUser = newUser;

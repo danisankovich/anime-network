@@ -5,8 +5,13 @@
   <link rel='stylesheet' href='/stylesheets/css/foundation.min.css' />
   <link rel='stylesheet' href='/stylesheets/css/normalize.css' />
   <link rel='stylesheet' href='/stylesheets/sweetalert-master/dist/sweetalert.css' />
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <link rel="stylesheet" href="/dist/style.min.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <script>
+</script>
 </head>
 <body ng-app="Anime">
 
@@ -23,9 +28,15 @@
         <li class="has-form">
             <form ng-submit="searchAnime(anime)" >
           <div class="row collapse">
-              <div class="large-8 small-9 columns">
+              <!-- <div class="large-8 small-9 columns">
                 <input type="text" ng-model="anime" placeholder="Find Anime">
+              </div> -->
+              <!-- <form id="form" role="form"> -->
+              <div class="form-group move-down large-8 small-9 columns ui-widget">
+                <input id="tags">
               </div>
+              <!-- <div>result: {{result}}</div> -->
+          <!-- </form> -->
               <div class="large-4 small-3 columns">
                 <button type="submit" class="alert button expand">Search</button>
               </div>
@@ -59,13 +70,13 @@
             <h6>website: michaelsankovich.com</h6>
           </footer>
         </body>
-        <script src="/javascripts/js/vendor/jquery.js"></script>
-        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <!-- <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script> -->
+        <!-- <script src="/javascripts/js/vendor/jquery.js"></script> -->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
         <script src="/javascripts/js/vendor/modernizr.js"></script>
-        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
         <script src="/stylesheets/sweetalert-master/dist/sweetalert.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
+        <script src="/otherjs/other.js"></script>
         <script src="/dist/bundle.js"></script>
         <!-- <script src="/javascripts/script.js"></script> -->
         </html>

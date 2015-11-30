@@ -6,6 +6,7 @@ var User = require('../models/user');
 var Anime = require('../models/anime');
 var unirest = require('unirest');
 var mongoose = require('mongoose');
+var fs = require('fs');
 
 router.get('/', function(req, res, next) {
   res.render('index', { user: req.user });
@@ -23,21 +24,28 @@ router.get('/user', function(req, res, next) {
   });
 });
 
-router.get('/anime/:id', function(req, res) {
-  console.log("req.body", req.params.id);
-  unirest.get("https://hummingbirdv1.p.mashape.com/anime/" + req.params.id)
-  .header("X-Mashape-Key", "fL30UnxVmgmsh80IDMvD28obwFSup1Fv6mNjsnjhuV3M9VbB2R")
-  .header("Accept", "application/json")
-  .end(function (result) {
-    console.log('Bodydajgsdlgjsdlgj', result.body);
-    Anime.create(result.body, function(err, anime) {
-      console.log('asdfasdfasdf', err);
-      console.log("animeasdfsadfasd", anime);
-      res.send();
-    });
-    // res.send(result.body);
+
+router.get('/anime', function(req, res) {
+  Anime.find({}, function(err, anime) {
+    console.log(anime);
+    res.send(anime);
   });
 });
+// router.get('/anime/:id', function(req, res) {  //for getting from api
+//   console.log("req.body", req.params.id);
+//   unirest.get("https://hummingbirdv1.p.mashape.com/anime/" + req.params.id)
+//   .header("X-Mashape-Key", "fL30UnxVmgmsh80IDMvD28obwFSup1Fv6mNjsnjhuV3M9VbB2R")
+//   .header("Accept", "application/json")
+//   .end(function (result) {
+//     console.log('Bodydajgsdlgjsdlgj', result.body);
+//     Anime.create(result.body, function(err, anime) {
+//       console.log('asdfasdfasdf', err);
+//       console.log("animeasdfsadfasd", anime);
+//       res.send();
+//     });
+//     // res.send(result.body);
+//   });
+// });
 
 router.post('/', function(req, res) {
   console.log(req.body);
