@@ -16,6 +16,7 @@
           <li>Episode Length: {{anime.episode_length}} Mins</li>
           <li><img src="{{anime.cover_image}}" alt=""></li>
           <li>Rating: {{anime.age_rating}}</li>
+          <li>Genres: <span ng-repeat="genre in anime.genres">{{genre.name}}, </span></li>
         </ul>
         </p>
       </div>
