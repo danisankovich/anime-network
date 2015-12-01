@@ -5,7 +5,9 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
     var availableTags = [];
     $http.get($scope.whichUrl + '/anime').success(function(anime) {
       anime.forEach(function(e) {
-        availableTags.push(e.title);
+        if (e.title !== undefined) {
+          availableTags.push(e.title);
+        }
       });
     });
     $( "#tags" ).autocomplete({
