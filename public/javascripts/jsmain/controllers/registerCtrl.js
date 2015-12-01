@@ -1,5 +1,7 @@
 app.controller('registerCtrl', function($scope, $state, $http){
-  // $http.get('http://localhost:4000/user').success(function(user) {
+    // $scope.whichUrl = 'http://localhost:4000';
+    $scope.whichUrl = 'https://animenetwork.herokuapp.com/';
+  // $http.get($scope.whichUrl + '/user').success(function(user) {
   //   if(user) {
   //     console.log("use", user);
   //     $scope.currentUser = user.username;
@@ -7,7 +9,7 @@ app.controller('registerCtrl', function($scope, $state, $http){
   // });
   $scope.register = function(newUser) {
     $scope.newUser = newUser;
-    $http.post('http://localhost:4000/register', $scope.newUser).success(function(err, data) {
+    $http.post($scope.whichUrl + '/register', $scope.newUser).success(function(err, data) {
       if(err.hasOwnProperty('name') === true) {
         sweetAlert("Uh Oh  ", err.message, "error");
         return;

@@ -17,6 +17,7 @@ router.get('/user', function(req, res, next) {
   User.findById(req.user.id, function(err, user) {
     if (err) {
       console.error(err);
+      res.send(err);
     }
     else {
       res.json(req.user);
@@ -169,12 +170,12 @@ router.get('/login', function(req, res) {
 // router.post('/login', passport.authenticate('local'), function(req, res) {
 //   res.redirect('/');
 // });
-router.post('/login', passport.authenticate('local', { failureRedirect: '/#/login2' }), function(req, res, next) {
+router.post('/login', passport.authenticate('local', { failureRedirect: '/#/loginerror' }), function(req, res, next) {
   req.session.save(function (err) {
     if (err) {
       return next(err);
     }
-    res.redirect('/');
+    res.redirect('/#');
   });
 });
 

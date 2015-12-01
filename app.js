@@ -66,7 +66,7 @@ var logout = function(req, res){
   }
   res.redirect('/');
 };
-// app.get('/logout', logout);
+app.get('/logout', logout);
 
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
