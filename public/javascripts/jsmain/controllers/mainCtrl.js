@@ -1,7 +1,7 @@
 app.controller('mainCtrl', function($scope, $state, $http){
   $scope.results1 = [];
   // $scope.whichUrl = 'http://localhost:4000';
-  $scope.whichUrl = 'https://animenetwork.herokuapp.com/';
+  $scope.whichUrl = 'https://animenetwork.herokuapp.com';
 
 
   $http.get($scope.whichUrl + '/user').success(function(err, user) {

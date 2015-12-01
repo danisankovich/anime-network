@@ -1,7 +1,7 @@
 app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location){
   $(document).ready(function() {
     // $scope.whichUrl = 'http://localhost:4000';
-    $scope.whichUrl = 'https://animenetwork.herokuapp.com/';
+    $scope.whichUrl = 'https://animenetwork.herokuapp.com';
     var availableTags = [];
     $http.get($scope.whichUrl + '/anime').success(function(anime) {
       anime.forEach(function(e) {
@@ -23,7 +23,7 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
     document.getElementById('tags').value = '';
   };
 
-  $http.get('http://localhost:4000/user').success(function(user) {
+  $http.get($scope.whichUrl + '/user').success(function(user) {
     if(user) {
       $scope.currentUser = user.username;
     }
