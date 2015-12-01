@@ -1,4 +1,4 @@
-app.controller('autoCtrl', function($scope, $state, $http){
+app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location){
   $(document).ready(function() {
     console.log('yes');
     var availableTags = [];
@@ -45,16 +45,21 @@ app.controller('autoCtrl', function($scope, $state, $http){
   });
   $scope.hideGenre = false;
   $scope.genres = function(genre) {
-    console.log('yes');
-    $scope.searchGenres = [];
+    console.log($location.$$path === "/animegenre");
+    $rootScope.searchGenres = [];
+    console.log('itworked');
     for(var key in genre) {
       if (genre[key] === true) {
-        $scope.searchGenres.push(key);
+        $rootScope.searchGenres.push(key);
       }
     }
-    $http.post('http://localhost:4000/genres', $scope.searchGenres).success(function(anime) {
-      console.log(anime);
-    });
+    $('#myModal').foundation('reveal', 'close');
+    if ($location.$$path !== "/animegenre") {
+      $state.go('animegenre');
+    }
+    else {
+      $state.go($state.current, {}, {reload: true});
+    }
   };
   // $scope.showGenre = function() {
   //   $scope.hideGenre = ($scope.hideGenre === true) ? false : true;

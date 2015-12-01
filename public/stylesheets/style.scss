@@ -7,15 +7,25 @@ ul.synopsis {
   }
 }
 
-.genresearch {
-  border: 1px black solid;
-  border-radius: 500px;
-  font-size: 15px;
-  padding: 10px 10px 10px 10px;
-}
-
 .anime {
   height: 402px;
+}
+
+.space {
+  margin-top: 50px;
+}
+.genreImage {
+  width: 100%;
+}
+
+.scroll {
+  height:70px;
+  overflow:auto;
+}
+
+.genreBox {
+  border: 1px black solid;
+  height: 375px;
 }
 
 footer {

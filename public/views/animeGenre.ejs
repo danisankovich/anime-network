@@ -1,0 +1,27 @@
+<div class="container">
+
+
+  <div class="row">
+
+    <div class="large-12 medium-12 small-12 columns">
+      <div class="large-3 medium-3 small-3 columns" ng-repeat="a in anime">
+        <div class="space">
+          <div class="genreBox">
+            <img class="genreImage" ng-src="{{a.cover_image}}" alt="">
+            <div class="scroll">
+              <h4>{{a.title}}</h4>
+              <h6>{{a.status}}</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
+
+<script>
+$(document).foundation();
+</script>

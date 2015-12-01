@@ -9,5 +9,5 @@ app.controller('animeCtrl', function($scope, $state, $http){
     $http.get('http://localhost:4000/genres').success(function(episodes) {
       console.log(episodes);
     });
-  };
+  };  
 });
