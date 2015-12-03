@@ -6,7 +6,7 @@
     <div class="large-12 medium-12 small-12 columns">
       <div class="large-3 medium-3 small-3 columns" ng-repeat="a in anime">
         <div class="space">
-          <div class="genreBox">
+          <div class="genreBox" ng-click="toShow(show)">
             <img class="genreImage" ng-src="{{a.cover_image}}" alt="">
             <div class="scroll">
               <h4>{{a.title}}</h4>

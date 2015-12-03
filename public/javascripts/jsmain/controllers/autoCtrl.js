@@ -70,7 +70,36 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
     $rootScope.searchGenres = [];
     for(var key in genre) {
       if (genre[key] === true) {
-        $rootScope.searchGenres.push(key);
+        if(key === 'GenderBender') {
+          $rootScope.searchGenres.push('Gender Bender');
+        }
+        else if(key === 'MahouShoujo') {
+          $rootScope.searchGenres.push('Mahou Shoujo');
+        }
+        else if(key === 'MartialArts') {
+          $rootScope.searchGenres.push('Martial Arts');
+        }
+        else if(key === 'SciFi') {
+          $rootScope.searchGenres.push('Sci-Fi');
+        }
+        else if(key === 'ShounenAi') {
+          $rootScope.searchGenres.push('Shounen Ai');
+        }
+        else if(key === 'MahouShounen') {
+          $rootScope.searchGenres.push('Mahou Shounen');
+        }
+        else if(key === 'ShoujoAi') {
+          $rootScope.searchGenres.push('Shoujo Ai');
+        }
+        else if(key === 'SliceofLife') {
+          $rootScope.searchGenres.push('Slice of Life');
+        }
+        else if(key === 'SuperPower') {
+          $rootScope.searchGenres.push('Super Power');
+        }
+        else {
+          $rootScope.searchGenres.push(key);
+        }
       }
     }
     $('#myModal').foundation('reveal', 'close');
