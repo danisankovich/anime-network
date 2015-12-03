@@ -1,6 +1,6 @@
 app.controller('registerCtrl', function($scope, $state, $http){
-    // $scope.whichUrl = 'http://localhost:4000';
-    $scope.whichUrl = 'https://animenetwork.herokuapp.com';
+    $scope.whichUrl = 'http://localhost:4000';
+    // $scope.whichUrl = 'https://animenetwork.herokuapp.com';
   // $http.get($scope.whichUrl + '/user').success(function(user) {
   //   if(user) {
   //     console.log("use", user);

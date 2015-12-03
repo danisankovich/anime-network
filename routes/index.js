@@ -26,8 +26,9 @@ router.get('/user', function(req, res, next) {
 });
 
 
-router.get('/anime', function(req, res) {
-  Anime.find({}, function(err, anime) {
+router.post('/anime/:id', function(req, res) {
+  console.log(req.params.id);
+  Anime.find({title: {$regex: req.params.id}}, function(err, anime) {
     if(err) {res.send(err);}
     res.send(anime);
   });
