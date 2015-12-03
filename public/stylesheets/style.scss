@@ -14,7 +14,13 @@ ul.synopsis {
 .space {
   margin-top: 50px;
 }
+.frontspace {
+  margin-top: 50px;
+}
 .genreImage {
+  width: 100%;
+}
+.frontImage {
   width: 100%;
 }
 
@@ -22,10 +28,18 @@ ul.synopsis {
   height:70px;
   overflow:auto;
 }
+.frontScroll {
+  height:40px;
+  overflow:auto;
+}
 
 .genreBox {
   border: 1px black solid;
   height: 375px;
+}
+.frontBox {
+  border: 1px black solid;
+  width: 100%;
 }
 
 footer {

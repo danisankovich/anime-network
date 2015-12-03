@@ -14,10 +14,20 @@ var Anime = Mongoose.Schema({
   started_airing: String,
   finished_airing: String,
   community_rating: Number,
-  rating: {type: Number, default: 0},
+  rating: {type: Number},
   age_rating: String,
   genres: []
 });
+
+Anime.statics.random = function(callback) {
+  this.count(function(err, count) {
+    if (err) {
+      return callback(err);
+    }
+    var rand = Math.floor(Math.random() * count);
+    this.findOne().skip(rand).exec(callback);
+  }.bind(this));
+};
 
 module.exports = Mongoose.model('Anime', Anime);
 // module.exports = anime;

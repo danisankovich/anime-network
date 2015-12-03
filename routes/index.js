@@ -156,6 +156,30 @@ router.post('/genres', function(req, res) {
 //     res.send(anime);
 //   });
 // });
+router.post('/', function(req, res) {
+  // console.log('hello');
+  var randAnime = [];
+  for(var i = 0; i < 6; i++) {
+    var genres = [];
+    Anime.random(function(err, anime) {
+      // console.log(anime);
+      for(var key in anime.genres) {
+        genres.push(anime[key]);
+      }
+      console.log(1);
+      if(randAnime.indexOf(anime) === -1 && genres.indexOf("Hentai") === -1) {
+        console.log(2);
+        randAnime.push(anime);
+        i++;
+        // console.log(randAnime);
+      }
+      if(randAnime.length === 6) {
+        console.log(randAnime.length);
+        res.send(randAnime);
+      }
+    });
+  }
+});
 
 router.get('/register', function(req, res) {
 

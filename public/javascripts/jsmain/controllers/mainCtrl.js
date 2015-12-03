@@ -4,12 +4,20 @@ app.controller('mainCtrl', function($scope, $state, $http){
   // $scope.whichUrl = 'https://animenetwork.herokuapp.com';
 
 
-  $http.get($scope.whichUrl + '/user').success(function(err, user) {
-      $scope.currentUser = user.username;
+  // $http.get($scope.whichUrl + '/user').success(function(err, user) {
+  //     $scope.currentUser = user.username;
+  //   }).error(function(err) {
+  // });
+  $http.post($scope.whichUrl + '/').success(function(randAnime) {
+      $scope.frontAnime = randAnime;
+      console.log($scope.frontAnime);
     }).error(function(err) {
-      // console.log('error', err);
-      // $state.go('login2');
-    });
+      console.log(err);
+  });
+  $scope.toShow = function(show) {
+    // console.log(this.rand.title);
+    $state.go('anime', {animename: this.rand.title});
+  };
 
 
 
