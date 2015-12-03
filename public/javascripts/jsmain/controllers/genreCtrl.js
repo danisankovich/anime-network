@@ -7,4 +7,8 @@ app.controller('genreCtrl', function($scope, $state, $http, $rootScope){
     console.log(anime);
     $rootScope.searchGenres = [];
   });
+  $scope.toShow = function(show) {
+    console.log(this.a.title);
+    $state.go('anime', {animename: this.a.title});
+  };
 });

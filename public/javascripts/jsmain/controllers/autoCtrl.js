@@ -15,8 +15,6 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
               availableTags.push(e.title);
             }
           });
-        }).then(function() {
-          console.log(availableTags);
         });
     },200));
     function debounce(func, wait, immediate) {
@@ -43,9 +41,14 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
         $scope.anime = $(this).val();
       }
     });
+  // $scope.searchAnime = function() {
+  //   anime = document.getElementById('tags').value;
+  //   $state.go('anime', {animename: anime});
+  //   document.getElementById('tags').value = '';
+  // };
   $scope.searchAnime = function() {
     anime = document.getElementById('tags').value;
-    $state.go('anime', {animename: anime});
+    $state.go('animelist', {animename: anime});
     document.getElementById('tags').value = '';
   };
   $http.get($scope.whichUrl + '/user').success(function(user) {

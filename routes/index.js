@@ -34,12 +34,20 @@ router.post('/anime/:id', function(req, res) {
     res.send(anime);
   });
 });
+router.post('/animelist/:id', function(req, res) {
+  console.log(req.params.id);
+  var y = req.params.id.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+  Anime.find({title: { $regex: new RegExp("^" + y, "i") }}, function(err, anime) {
+    if(err) {res.send(err);}
+    res.send(anime);
+  });
+});
 
 router.get('/animesearch/:id', function(req, res) {
   console.log("everything", req.params.id.split("%20").join(" "));
   var x = req.params.id.split("%20").join(" ");
   var y = x.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-  Anime.find({title: y}, function(err, anime) {
+  Anime.find({title: { $regex: new RegExp("^" + y, "i") }}, function(err, anime) {
     if(err) { res.send(err); }
     console.log(anime);
     res.send(anime[0]);
