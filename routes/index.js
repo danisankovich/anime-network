@@ -28,7 +28,8 @@ router.get('/user', function(req, res, next) {
 
 router.post('/anime/:id', function(req, res) {
   console.log(req.params.id);
-  Anime.find({title: {$regex: req.params.id}}, function(err, anime) {
+  var y = req.params.id.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+  Anime.find({title: {$regex: y}}, function(err, anime) {
     if(err) {res.send(err);}
     res.send(anime);
   });
@@ -37,7 +38,8 @@ router.post('/anime/:id', function(req, res) {
 router.get('/animesearch/:id', function(req, res) {
   console.log("everything", req.params.id.split("%20").join(" "));
   var x = req.params.id.split("%20").join(" ");
-  Anime.find({title: x}, function(err, anime) {
+  var y = x.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+  Anime.find({title: y}, function(err, anime) {
     if(err) { res.send(err); }
     console.log(anime);
     res.send(anime[0]);
