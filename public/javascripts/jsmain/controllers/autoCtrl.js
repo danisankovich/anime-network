@@ -8,7 +8,6 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
         // tempAvailableTags = [];
         // availableTags = [];
         $scope.n = $(".autocomplete").val();
-        console.log($scope.n);
         $http.post($scope.whichUrl + '/anime/' + $scope.n).success(function(anime) {
           anime.forEach(function(e) {
             if(e.title !== undefined && availableTags.indexOf(e.title) === -1) {
@@ -53,7 +52,7 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
   };
   $http.get($scope.whichUrl + '/user').success(function(user) {
     if(user) {
-      $scope.currentUser = user.username;
+      $rootScope.currentUser = user.username;
     }
   });
 
