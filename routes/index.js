@@ -157,24 +157,18 @@ router.post('/genres', function(req, res) {
 //   });
 // });
 router.post('/', function(req, res) {
-  // console.log('hello');
   var randAnime = [];
   for(var i = 0; i < 6; i++) {
     var genres = [];
     Anime.random(function(err, anime) {
-      // console.log(anime);
-      for(var key in anime.genres) {
-        genres.push(anime[key]);
-      }
-      console.log(1);
-      if(randAnime.indexOf(anime) === -1 && genres.indexOf("Hentai") === -1) {
-        console.log(2);
+      anime.genres.forEach(function(e) {
+        genres.push(e.name);
+      });
+      if((randAnime.indexOf(anime) && genres.indexOf("Hentai")) === -1) {
         randAnime.push(anime);
         i++;
-        // console.log(randAnime);
       }
       if(randAnime.length === 6) {
-        console.log(randAnime.length);
         res.send(randAnime);
       }
     });
@@ -199,12 +193,8 @@ router.post('/register', function(req, res) {
 });
 
 router.get('/login', function(req, res) {
-
 });
 
-// router.post('/login', passport.authenticate('local'), function(req, res) {
-//   res.redirect('/');
-// });
 router.post('/login', passport.authenticate('local', { failureRedirect: '/#/loginerror' }), function(req, res, next) {
   req.session.save(function (err) {
     if (err) {

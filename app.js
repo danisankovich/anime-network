@@ -57,8 +57,8 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 //connect to mongo
-// mongoose.connect('mongodb://localhost/cthulu');
-mongoose.connect('mongodb://heroku_kpgx5jc8:8462l35gai9pfqlt7a1uj7u9av@ds057934.mongolab.com:57934/heroku_kpgx5jc8' || 'mongodb://localhost/cthulu');
+mongoose.connect('mongodb://localhost/cthulu');
+// mongoose.connect('mongodb://heroku_kpgx5jc8:8462l35gai9pfqlt7a1uj7u9av@ds057934.mongolab.com:57934/heroku_kpgx5jc8' || 'mongodb://localhost/cthulu');
 
 var logout = function(req, res){
   if (req.isAuthenticated()){
