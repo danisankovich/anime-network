@@ -5,8 +5,6 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
     var availableTags = [];
 
     $('input').keyup(debounce(function(){
-        // tempAvailableTags = [];
-        // availableTags = [];
         $scope.n = $(".autocomplete").val();
         $http.post($scope.whichUrl + '/anime/' + $scope.n).success(function(anime) {
           anime.forEach(function(e) {
@@ -30,38 +28,27 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
     		if (callNow) func.apply(context, args);
     	};
     }
-
-
     $( "#tags" ).autocomplete({
-      // minLength:2,
       source: availableTags,
       select: function(event, ui) {
         $(this).val(ui.item.value);
         $scope.anime = $(this).val();
       }
     });
-  // $scope.searchAnime = function() {
-  //   anime = document.getElementById('tags').value;
-  //   $state.go('anime', {animename: anime});
-  //   document.getElementById('tags').value = '';
-  // };
   $scope.searchAnime = function() {
     anime = document.getElementById('tags').value;
     $state.go('animelist', {animename: anime});
     document.getElementById('tags').value = '';
   };
   $http.get($scope.whichUrl + '/user').success(function(user) {
-    if(user) {
-      $rootScope.currentUser = user.username;
-    }
+    if(user) { $rootScope.currentUser = user.username; }
   });
-
-  jQuery(function(){
+  $(function(){
     var max = 4;
     var checkboxes = $('input[type="checkbox"]');
     checkboxes.change(function(){
-        var current = checkboxes.filter(':checked').length;
-        checkboxes.filter(':not(:checked)').prop('disabled', current >= max);
+      var current = checkboxes.filter(':checked').length;
+      checkboxes.filter(':not(:checked)').prop('disabled', current >= max);
     });
   });
   $scope.hideGenre = false;
@@ -102,12 +89,8 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
       }
     }
     $('#myModal').foundation('reveal', 'close');
-    if ($location.$$path !== "/animegenre") {
-      $state.go('animegenre');
-    }
-    else {
-      $state.go($state.current, {}, {reload: true});
-    }
-  };
+      if ($location.$$path !== "/animegenre") { $state.go('animegenre'); }
+      else { $state.go($state.current, {}, {reload: true}); }
+    };
   });
 });
