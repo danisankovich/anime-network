@@ -1,7 +1,7 @@
-app.controller('profileCtrl', function($scope, $state, $http, $rootScope){
-  $scope.whichUrl = 'http://localhost:4000';
+app.controller('profileCtrl', function($scope, $state, $http, $rootScope, userService){
+  // $scope.whichUrl = 'http://localhost:4000';
   // $scope.whichUrl = 'https://animenetwork.herokuapp.com';
-  $http.get($scope.whichUrl + "/user").success(function(user) {
-    $scope.user = user;
+  userService.getCurrentUser().success(function(data) {
+    $scope.user = data;
   });
 });

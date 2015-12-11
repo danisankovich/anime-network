@@ -1,16 +1,17 @@
-app.controller('mainCtrl', function($scope, $state, $http, $rootScope){
+app.controller('mainCtrl', function($scope, $state, $http, $rootScope, animeService){
   $scope.results1 = [];
   $scope.whichUrl = 'http://localhost:4000';
   // $scope.whichUrl = 'https://animenetwork.herokuapp.com';
-
-  $http.post($scope.whichUrl + '/').success(function(randAnime) {
-    $rootScope.frontAnime = randAnime;
-  }).error(function(err) {
-    console.log(err);
-  });
-  $scope.toShow = function(show) {
-    $state.go('anime', {animename: this.rand.title});
+  var init = function() {
+    console.log('i fired');
+    animeService.getRandAnime().success(function(randAnime) {
+      $rootScope.frontAnime = randAnime;
+    }).error(function(err) {
+      console.log(err);
+    });
   };
+  init();
+  $scope.toShow = animeService.showOneRandAnime;
 
   // var unirest = require('unirest');
   // $scope.searchAnime = function(anime) {

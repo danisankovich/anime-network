@@ -1,4 +1,4 @@
-app.controller('genreCtrl', function($scope, $state, $http, $rootScope){
+app.controller('genreCtrl', function($scope, $state, $http, $rootScope, animeService){
   $scope.whichUrl = 'http://localhost:4000';
   // $scope.whichUrl = 'https://animenetwork.herokuapp.com';
   $scope.search = $rootScope.searchGenres;
@@ -7,8 +7,5 @@ app.controller('genreCtrl', function($scope, $state, $http, $rootScope){
     console.log(anime);
     $rootScope.searchGenres = [];
   });
-  $scope.toShow = function(show) {
-    console.log(this.a.title);
-    $state.go('anime', {animename: this.a.title});
-  };
+  $scope.toShow = animeService.showOneAnime;
 });

@@ -6,8 +6,22 @@ app.service('animeService', function($http, $state) {
       return anime;
     });
   };
+  this.getOneAnime = function() {
+    return $http.get(whichUrl + '/animesearch/' + $state.params.animename).success(function(anime) {
+      console.log(anime);
+      return anime;
+    });
+  };
+  this.getRandAnime = function() {
+    return $http.post(whichUrl + '/').success(function(randAnime) {
+      return randAnime;
+    });
+  };
   this.showOneAnime = function() {
     console.log(this.a.title);
     $state.go('anime', {animename: this.a.title});
+  };
+  this.showOneRandAnime = function() {
+    $state.go('anime', {animename: this.rand.title});
   };
 });
