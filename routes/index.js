@@ -99,14 +99,27 @@ router.post('/genres', function(req, res) {
 router.post('/addToWatch/:id', function(req, res) {
   console.log(req.params.id);
   Anime.findByIdAndUpdate(req.params.id, {$push: {usersWatching: req.user._id}}, function(err, anime) {
-    res.send(anime);
+    User.findByIdAndUpdate(req.user.id, {$push: {watchingAnime: anime._id}}, function(err, user) {
+      res.send(user);
+    });
+  });
+});
+
+router.post('/addLike/:id', function(req, res) {
+  console.log(req.params.id);
+  Anime.findByIdAndUpdate(req.params.id, {$push: {likes: req.user._id}}, function(err, anime) {
+    User.findByIdAndUpdate(req.user.id, {$push: {likes: anime._id}}, function(err, user) {
+      res.send(user);
+    });
   });
 });
 
 router.post('/addToCompleted/:id', function(req, res) {
   console.log(req.params.id);
   Anime.findByIdAndUpdate(req.params.id, {$push: {usersCompleted: req.user._id}}, function(err, anime) {
-    res.send(anime);
+    User.findByIdAndUpdate(req.user.id, {$push: {completedAnime: anime._id}}, function(err, user) {
+      res.send(user);
+    });
   });
 });
 

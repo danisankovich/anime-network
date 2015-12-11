@@ -7,7 +7,9 @@ var User = new Schema({
   email: String,
   password: String,
   friendIds: [],
-  favoriteAnime: [],
+  likes: [],
+  watchingAnime: [],
+  completedAnime: [],
   blog: {
     name: String
   },
