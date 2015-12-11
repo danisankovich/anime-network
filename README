@@ -1,3 +1,7 @@
+deploy link: https://animenetwork.herokuapp.com/#/
+(Work In Progress. Not all anime have complete information, due to incomplete info from source APIs. User input and admin input will remedy this)
+
+
 Cthulu: a MEAN stack Single Page template
 MongoDb, AngularJs, ExpressJs, Node.js, PassportJs, Mongoose, Zurb Foundation, Gulp, SASS, Angular ui-router, ejs, SweetAlerts
 

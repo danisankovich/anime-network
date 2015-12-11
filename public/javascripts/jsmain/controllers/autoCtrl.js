@@ -1,7 +1,7 @@
 app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location, userService){
   $(document).ready(function() {
-    // $scope.whichUrl = 'http://localhost:4000';
-    $scope.whichUrl = 'https://animenetwork.herokuapp.com';
+    $scope.whichUrl = 'http://localhost:4000';
+    // $scope.whichUrl = 'https://animenetwork.herokuapp.com';
     $scope.hideGenre = false;
     var availableTags = [];
     userService.getCurrentUser().success(function(data) {
