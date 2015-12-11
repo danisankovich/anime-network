@@ -1,6 +1,6 @@
 app.controller('animeCtrl', function($scope, $state, $http, animeService){
-  $scope.whichUrl = 'http://localhost:4000';
-  // $scope.whichUrl = 'https://animenetwork.herokuapp.com';
+  // $scope.whichUrl = 'http://localhost:4000';
+  $scope.whichUrl = 'https://animenetwork.herokuapp.com';
   animeService.getOneAnime().success(function(anime) {
     $scope.anime = anime;
   });
