@@ -1,8 +1,12 @@
-app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location){
+app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location, userService){
   $(document).ready(function() {
     $scope.whichUrl = 'http://localhost:4000';
     // $scope.whichUrl = 'https://animenetwork.herokuapp.com';
+    $scope.hideGenre = false;
     var availableTags = [];
+    userService.getCurrentUser().success(function(data) {
+      $rootScope.currentUser = data;
+    });
 
     $('input').keyup(debounce(function(){
         $scope.n = $(".autocomplete").val();
@@ -40,9 +44,6 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
     $state.go('animelist', {animename: anime});
     document.getElementById('tags').value = '';
   };
-  $http.get($scope.whichUrl + '/user').success(function(user) {
-    if(user) { $rootScope.currentUser = user.username; }
-  });
   $(function(){
     var max = 4;
     var checkboxes = $('input[type="checkbox"]');
@@ -51,7 +52,6 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
       checkboxes.filter(':not(:checked)').prop('disabled', current >= max);
     });
   });
-  $scope.hideGenre = false;
   $scope.genres = function(genre) {
     $rootScope.searchGenres = [];
     for(var key in genre) {

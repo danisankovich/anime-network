@@ -51,7 +51,7 @@
         <% } else { %>
           <% } %>
           <% if (user) { %>
-            <li><a ui-sref="profile">{{currentUser}}</a></li>
+            <li><a ui-sref="profile">{{currentUser.username}}</a></li>
             <li><a href='/logout'>Logout <span class="glyphicon glyphicon-log-in"></span></a></li>
             <% } else { %>
               <li><a ui-sref="login">Login</a></li>

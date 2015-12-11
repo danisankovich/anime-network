@@ -24,7 +24,7 @@ gulp.task('styles', function() {
 gulp.task("deldist", function() { del("public/dist"); });
 
 gulp.task('js', function() {
-  gulp.src(["public/javascripts/jsmain/script.js", "public/javascripts/jsmain/controllers/*.js"])
+  gulp.src(["public/javascripts/jsmain/script.js", "public/javascripts/jsmain/controllers/*.js", "public/javascripts/jsmain/services/*.js"])
   .pipe(concat("bundle.js"))
   .pipe(uglify({mangle: false}))
   .pipe(gulp.dest("public/dist"));
@@ -40,6 +40,7 @@ gulp.task('styles', function() {
 gulp.task('watch', function() {
   gulp.watch("public/javascripts/jsmain/script.js", ['build']);
   gulp.watch("public/javascripts/jsmain/controllers/*.js", ['build']);
+  gulp.watch("public/javascripts/jsmain/services/*.js", ['build']);
   gulp.watch('public/stylesheets/*', ['build']);
 });
 
