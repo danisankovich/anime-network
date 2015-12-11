@@ -12,4 +12,7 @@ app.controller('animeCtrl', function($scope, $state, $http){
       console.log(episodes);
     });
   };
+  $scope.favoriteThis = function(show) {
+    console.log(show);
+  };
 });

@@ -96,6 +96,43 @@ router.post('/genres', function(req, res) {
   }
 });
 
+router.post('/addToWatch/:id', function(req, res) {
+  console.log(req.params.id);
+  Anime.findByIdAndUpdate(req.params.id, {$push: {usersWatching: req.user._id}}, function(err, anime) {
+    res.send(anime);
+  });
+});
+
+router.post('/addToCompleted/:id', function(req, res) {
+  console.log(req.params.id);
+  Anime.findByIdAndUpdate(req.params.id, {$push: {usersCompleted: req.user._id}}, function(err, anime) {
+    res.send(anime);
+  });
+});
+
+router.post('/addReview/:id', function(req, res) {
+  console.log(req.params.id);
+  Anime.findByIdAndUpdate(req.params.id, {$push: {reviews:
+    {
+      title: req.body.title,
+      user: req.user._id,
+      body: req.body.body,
+      rating: req.body.rating
+    }}}, function(err, anime) {
+      User.findByIdAndUpdate(req.user._id, {$push: {reviews:
+        {
+          title: req.body.title,
+          show: req.params._id,
+          body: req.body.body,
+          rating: req.body.rating
+        }}}, function(err, user) {
+          console.log(user);
+          res.send(anime);
+    });
+  });
+});
+
+
 // router.get('/episodes', function(req, res){
 //   console.log('hit');
 //   unirest.get("https://vikhyat-hummingbird-v2.p.mashape.com/anime/50")

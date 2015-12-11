@@ -10,7 +10,14 @@ var User = new Schema({
   favoriteAnime: [],
   blog: {
     name: String
-  }
+  },
+  reviews: [{
+    title: String,
+    show: String,
+    body: String,
+    date: {type: Date, default: Date.now},
+    rating: Number
+  }]
 });
 
 User.plugin(passportLocalMongoose);

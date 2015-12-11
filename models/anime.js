@@ -16,7 +16,16 @@ var Anime = Mongoose.Schema({
   community_rating: Number,
   rating: {type: Number},
   age_rating: String,
-  genres: []
+  genres: [],
+  usersCompleted: [],
+  usersWatching: [],
+  reviews: [{
+    title: String,
+    user: String,
+    body: String,
+    date: {type: Date, default: Date.now},
+    rating: Number
+  }]
 });
 
 Anime.statics.random = function(callback) {
