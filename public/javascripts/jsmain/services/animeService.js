@@ -24,4 +24,9 @@ app.service('animeService', function($http, $state) {
   this.showOneRandAnime = function() {
     $state.go('anime', {animename: this.rand.title});
   };
+  this.likeAnime = function() {
+    return $http.post(whichUrl + '/addLike/' + this.anime._id).success(function(result) {
+      return result;
+    });
+  };
 });

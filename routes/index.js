@@ -96,7 +96,7 @@ router.post('/genres', function(req, res) {
   }
 });
 
-router.post('/addToWatch/:id', function(req, res) {
+router.post('/addToWatching/:id', function(req, res) {
   console.log(req.params.id);
   Anime.findByIdAndUpdate(req.params.id, {$push: {usersWatching: req.user._id}}, function(err, anime) {
     User.findByIdAndUpdate(req.user.id, {$push: {watchingAnime: anime._id}}, function(err, user) {
@@ -105,20 +105,28 @@ router.post('/addToWatch/:id', function(req, res) {
   });
 });
 
-router.post('/addLike/:id', function(req, res) {
+router.post('/addToWillWatch/:id', function(req, res) {
   console.log(req.params.id);
-  Anime.findByIdAndUpdate(req.params.id, {$push: {likes: req.user._id}}, function(err, anime) {
-    User.findByIdAndUpdate(req.user.id, {$push: {likes: anime._id}}, function(err, user) {
-      res.send(user);
+  User.findByIdAndUpdate(req.user.id, {$push: {willWatch: req.params.id}}, function(err, user) {
+    res.send(user);
+  });
+});
+
+router.post('/addLike/:id', function(req, res) {
+  // console.log(req.params.id);
+  console.log(req.user._id);
+  Anime.findByIdAndUpdate(req.params.id, {$push: {favorites: req.user._id}}, function(err, anime) {
+    User.findByIdAndUpdate(req.user.id, {$push: {likes: req.params.id}}, function(err, user) {
+      console.log(anime);
+      res.send(anime);
     });
   });
 });
 
 router.post('/addToCompleted/:id', function(req, res) {
-  console.log(req.params.id);
   Anime.findByIdAndUpdate(req.params.id, {$push: {usersCompleted: req.user._id}}, function(err, anime) {
     User.findByIdAndUpdate(req.user.id, {$push: {completedAnime: anime._id}}, function(err, user) {
-      res.send(user);
+      res.send(anime);
     });
   });
 });

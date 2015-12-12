@@ -14,6 +14,10 @@
           <li>Episode Length: {{anime.episode_length}} Mins</li>
           <li>Rating: {{anime.age_rating}}</li>
           <li>Genres: <span ng-repeat="genre in anime.genres">{{genre.name}}, </span></li>
+          <li>
+            <span>Like this anime: </span>
+            <button ng-click="likeAnime()">Like Me</button>
+          </li>
         </ul>
       </div>
       <div class="large-9 medium-9 small-9 columns">

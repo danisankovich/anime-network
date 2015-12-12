@@ -13,4 +13,11 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService){
   $scope.favoriteThis = function(show) {
     console.log(show);
   };
+  $scope.like = animeService.likeAnime;
+  $scope.likeAnime = function() {
+    $scope.like().success(function(anime) {
+      sweetAlert("Done", "You have Liked " + anime.title, "success");
+    });
+  };
+
 });

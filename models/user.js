@@ -8,6 +8,7 @@ var User = new Schema({
   password: String,
   friendIds: [],
   likes: [],
+  willWatch: [],
   watchingAnime: [],
   completedAnime: [],
   blog: {

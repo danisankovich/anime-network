@@ -19,7 +19,7 @@ var Anime = Mongoose.Schema({
   genres: [],
   usersCompleted: [],
   usersWatching: [],
-  likes: [],
+  favorites: [],
   reviews: [{
     title: String,
     user: String,
