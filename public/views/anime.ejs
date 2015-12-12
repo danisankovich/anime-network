@@ -15,8 +15,10 @@
           <li>Rating: {{anime.age_rating}}</li>
           <li>Genres: <span ng-repeat="genre in anime.genres">{{genre.name}}, </span></li>
           <li>
-            <span>Like this anime: </span>
-            <button ng-click="likeAnime()">Like Me</button>
+            <button ng-click="likeAnime()" class="button round tiny success">Like This Anime</button>
+            <button ng-click="addToCompleted()" class="button round tiny primary">Completed?</button>
+            <button ng-click="addToWatching()" class="button round tiny warning">Watching?</button>
+            <button ng-click="willWatch()" class="button round tiny danger">Will Watch?</button>
           </li>
         </ul>
       </div>
