@@ -14,7 +14,7 @@ var Anime = Mongoose.Schema({
   started_airing: String,
   finished_airing: String,
   community_rating: Number,
-  rating: {type: Number},
+  ratings: {type: Array},
   age_rating: String,
   genres: [],
   usersCompleted: [],
@@ -26,7 +26,8 @@ var Anime = Mongoose.Schema({
     body: String,
     date: {type: Date, default: Date.now},
     rating: Number
-  }]
+  }],
+  questions: {type: Array}
 });
 
 Anime.statics.random = function(callback) {

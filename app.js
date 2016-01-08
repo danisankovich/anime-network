@@ -57,8 +57,9 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 //connect to mongo
-// mongoose.connect('mongodb://localhost/cthulu');
-mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/cthulu');
+mongoose.connect('mongodb://localhost/animenetwork');
+// mongoose.connect(process.env.MONGOLAB_URI);
+// mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/animenetwork');
 
 var logout = function(req, res){
   if (req.isAuthenticated()){

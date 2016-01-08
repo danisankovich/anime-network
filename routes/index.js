@@ -4,7 +4,7 @@ var passport = require('passport');
 var logout = require('express-passport-logout');
 var User = require('../models/user');
 var Anime = require('../models/anime');
-// var unirest = require('unirest');
+var unirest = require('unirest');
 var mongoose = require('mongoose');
 
 router.get('/', function(req, res, next) {
@@ -151,32 +151,27 @@ router.post('/addReview/:id', function(req, res) {
     });
   });
 });
-
-
-// router.get('/episodes', function(req, res){
-//   console.log('hit');
-//   unirest.get("https://vikhyat-hummingbird-v2.p.mashape.com/anime/50")
-//   .header("X-Mashape-Key", "fL30UnxVmgmsh80IDMvD28obwFSup1Fv6mNjsnjhuV3M9VbB2R")
-//   .header("Accept", "text/plain")
-//   .end(function (result) {
-//     console.log(result.status, result.headers, result.body);
-//     res.send();
-//   });
-// });
-
-// router.get('/anime/:id', function(req, res) {  //for getting from api
+// 
+// router.get('/animeget/:id', function(req, res) {  //for getting from api
 //   console.log("req.body", req.params.id);
 //   unirest.get("https://hummingbirdv1.p.mashape.com/anime/" + req.params.id)
 //   .header("X-Mashape-Key", "fL30UnxVmgmsh80IDMvD28obwFSup1Fv6mNjsnjhuV3M9VbB2R")
 //   .header("Accept", "application/json")
 //   .end(function (result) {
+//     // console.log(result)
+//     result.body.usersCompleted = [];
+//     result.body.usersWatching = [];
+//     result.body.favorites = [];
+//     result.body.reviews = [];
+//     result.body.ratings = [];
+//     result.body.questions = [];
 //     console.log('Bodydajgsdlgjsdlgj', result.body);
 //     Anime.create(result.body, function(err, anime) {
 //       console.log('asdfasdfasdf', err);
 //       console.log("animeasdfsadfasd", anime);
 //       res.send();
 //     });
-//     // res.send(result.body);
+//     res.send();
 //   });
 // });
 
