@@ -3,5 +3,9 @@ app.controller('profileCtrl', function($scope, $state, $http, $rootScope, userSe
   // // $scope.whichUrl = 'https://animenetwork.herokuapp.com';
   userService.getCurrentUser().success(function(data) {
     $scope.user = data;
+    $scope.completedLength = $scope.user.completedAnime.length
+    $scope.willWatchLength = $scope.user.willWatch.length
+    $scope.favoritedLength = $scope.user.likes.length
+    $scope.watchingLength = $scope.user.watchingAnime.length
   });
 });

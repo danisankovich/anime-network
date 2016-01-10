@@ -1,8 +1,11 @@
-app.controller('animeCtrl', function($scope, $state, $http, animeService){
+app.controller('animeCtrl', function($scope, $state, $http, animeService, userService){
   $scope.whichUrl = 'http://localhost:4000';
   // $scope.whichUrl = 'https://animenetwork.herokuapp.com';
 
-  
+  userService.getCurrentUser().success(function(data) {
+    $scope.user = data;
+  });
+
   animeService.getOneAnime().success(function(anime) {
     $scope.anime = anime;
   });
@@ -12,32 +15,50 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService){
       console.log(episodes);
     });
   };
-  $scope.favoriteThis = function(show) {
-    console.log(show);
-  };
+
   $scope.like = animeService.likeAnime;
-  $scope.likeAnime = function() {
-    $scope.like().success(function(anime) {
-      sweetAlert("Done", "You have Liked " + anime.title, "success");
-    });
+  $scope.likeAnime = function(anime) {
+    if($scope.user.likes.indexOf(anime._id) === -1) {
+      $scope.like().success(function(anime) {
+        sweetAlert("Done", "You have Liked " + anime.title, "success");
+        userService.getCurrentUser().success(function(data) {
+          $scope.user = data;
+        });
+      });
+    }
   };
   $scope.completeAnime = animeService.completeAnime;
-  $scope.addToCompleted = function() {
-    $scope.completeAnime().success(function(anime) {
-      sweetAlert("Done", "You have added  " + anime.title + " to your completed list", "success");
-    });
+  $scope.addToCompleted = function(anime) {
+    if($scope.user.completedAnime.indexOf(anime._id) === -1) {
+      $scope.completeAnime().success(function(anime) {
+        sweetAlert("Done", "You have added  " + anime.title + " to your completed list", "success");
+        userService.getCurrentUser().success(function(data) {
+          $scope.user = data;
+        });
+      });
+    };
   };
   $scope.watchingAnime = animeService.watchingAnime;
-  $scope.addToWatching = function() {
-    $scope.watchingAnime().success(function(anime) {
-      sweetAlert("Done", "You have added " + anime.title + " to your watching list", "success");
-    });
+  $scope.addToWatching = function(anime) {
+    if($scope.user.watchingAnime.indexOf(anime._id) === -1) {
+      $scope.watchingAnime().success(function(anime) {
+        sweetAlert("Done", "You have added " + anime.title + " to your watching list", "success");
+        userService.getCurrentUser().success(function(data) {
+          $scope.user = data;
+        });
+      });
+    }
   };
   $scope.willWatch = animeService.willWatch;
-  $scope.addToWillWatch = function() {
-    $scope.willWatch().success(function() {
-      sweetAlert("Done", "You have added this to your will watch list", "success");
-    });
+  $scope.addToWillWatch = function(anime) {
+    if($scope.user.willWatch.indexOf(anime._id) === -1) {
+      $scope.willWatch().success(function() {
+        sweetAlert("Done", "You have added this to your will watch list", "success");
+        userService.getCurrentUser().success(function(data) {
+          $scope.user = data;
+        });
+      });
+    }
   };
 
 });
