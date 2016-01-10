@@ -1,10 +1,8 @@
 #anime {
   text-align: center;
 }
-ul.synopsis {
-  li {
-    list-style: none;
-  }
+ul.synopsis li {
+  list-style: none;
 }
 
 .anime {
@@ -58,11 +56,8 @@ footer {
 }
 .borderbar {
   border-right: black 1px solid;
-  .showInfoBar {
-
-    li {
-      border-bottom: 1px solid #DCDCDC;
-      list-style: none;
-    }
-  }
+}
+.showInfoBar li {
+  border-bottom: 1px solid #DCDCDC;
+  list-style: none;
 }
