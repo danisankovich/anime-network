@@ -4,6 +4,9 @@ var passport = require('passport');
 var logout = require('express-passport-logout');
 var User = require('../models/user');
 var Anime = require('../models/anime');
+var Forum = require('../models/forum');
+var Review = require('../models/review');
+var Topic = require('../models/topic');
 var unirest = require('unirest');
 var mongoose = require('mongoose');
 
@@ -148,78 +151,72 @@ router.post('/addReview/:id', function(req, res) {
         }}}, function(err, user) {
           console.log(user);
           res.send(anime);
+        });
+      });
     });
-  });
-});
-//
-router.get('/animeget/:id', function(req, res) {  //for getting from api
-  console.log("req.body", req.params.id);
-  unirest.get("https://hummingbirdv1.p.mashape.com/anime/" + req.params.id)
-  .header("X-Mashape-Key", "fL30UnxVmgmsh80IDMvD28obwFSup1Fv6mNjsnjhuV3M9VbB2R")
-  .header("Accept", "application/json")
-  .end(function (result) {
-    console.log(result)
-    // result.body.usersCompleted = [];
-    // result.body.usersWatching = [];
-    // result.body.favorites = [];
-    // result.body.reviews = [];
-    // result.body.ratings = [];
-    // result.body.questions = [];
-    // console.log('Bodydajgsdlgjsdlgj', result.body);
-    // Anime.create(result.body, function(err, anime) {
-    //   console.log('asdfasdfasdf', err);
-    //   console.log("animeasdfsadfasd", anime);
-    //   res.send();
+    //
+    // router.get('/animeget/:id', function(req, res) {  //for getting from api
+    //   console.log("req.body", req.params.id);
+    //   unirest.get("https://hummingbirdv1.p.mashape.com/anime/" + req.params.id)
+    //   .header("X-Mashape-Key", "fL30UnxVmgmsh80IDMvD28obwFSup1Fv6mNjsnjhuV3M9VbB2R")
+    //   .header("Accept", "application/json")
+    //   .end(function (result) {
+    //     console.log(result)
+    //     // result.body.usersCompleted = [];
+    //     // result.body.usersWatching = [];
+    //     // result.body.favorites = [];
+    //     // result.body.reviews = [];
+    //     // result.body.ratings = [];
+    //     // result.body.questions = [];
+    //     // console.log('Bodydajgsdlgjsdlgj', result.body);
+    //     // Anime.create(result.body, function(err, anime) {
+    //     //   console.log('asdfasdfasdf', err);
+    //     //   console.log("animeasdfsadfasd", anime);
+    //     //   res.send();
+    //     // });
+    //   });
     // });
-  });
-});
+    router.post('/animereview/:id', function(req, res) {
+      console.log(req.params.id)
+      Review.create({
+        showId: req.body.show,//===shows mongoId
+        title: req.body.title,
+        user: req.body.user,
+        body: req.body.body,
+        userRating: req.body.userRating
+      }, function(err, review) {
+        Anime.findById(req.params.id, function(err, anime) {
+          anime.reviews.push(review._id)
+          anime.save();
+            User.findById(req.user._id, function(err, user) {
+              user.reviews.push(review._id)
+              user.save()
+                console.log(user);
+                res.send();
+              });
+            });
+          });
+        });
 
 
-// router.get('/anime/:id', function(req, res) {  //for getting from api
-//   console.log("req.body", req.params.id);
-//   unirest.get("https://hummingbirdv1.p.mashape.com/anime/" + req.params.id)
-//   .header("X-Mashape-Key", "fL30UnxVmgmsh80IDMvD28obwFSup1Fv6mNjsnjhuV3M9VbB2R")
-//   .header("Accept", "application/json")
-//   .end(function (result) {
-//     console.log('Bodydajgsdlgjsdlgj', result.body);
-//     Anime.create(result.body, function(err, anime) {
-//       console.log('asdfasdfasdf', err);
-//       console.log("animeasdfsadfasd", anime);
-//       res.send();
-//     });
-//     // res.send(result.body);
-//   });
-// });
-//
-// router.post('/', function(req, res) {
-//   console.log(req.body);
-//   Anime.create("yes", function(err, anime) {
-//     if (err) {
-//       res.send(err);
-//     }
-//     console.log("animeasdfsadfasd", anime);
-//     res.send(anime);
-//   });
-// });
+        router.get('/register', function(req, res) { });
 
-router.get('/register', function(req, res) { });
+        router.post('/register', function(req, res) {
+          User.register(new User({ username: req.body.username, email: req.body.email}),
+          req.body.password, function(err, user) {
+            if (err) { res.send(err); }
+            passport.authenticate('local')(req, res, function() { res.redirect('/#/'); });
+          });
+        });
 
-router.post('/register', function(req, res) {
-  User.register(new User({ username: req.body.username, email: req.body.email}),
-  req.body.password, function(err, user) {
-    if (err) { res.send(err); }
-    passport.authenticate('local')(req, res, function() { res.redirect('/#/'); });
-  });
-});
+        router.get('/login', function(req, res) {
+        });
 
-router.get('/login', function(req, res) {
-});
+        router.post('/login', passport.authenticate('local', { failureRedirect: '/#/loginerror' }), function(req, res, next) {
+          req.session.save(function (err) {
+            if (err) { return next(err); }
+            res.redirect('/#');
+          });
+        });
 
-router.post('/login', passport.authenticate('local', { failureRedirect: '/#/loginerror' }), function(req, res, next) {
-  req.session.save(function (err) {
-    if (err) { return next(err); }
-    res.redirect('/#');
-  });
-});
-
-module.exports = router;
+        module.exports = router;

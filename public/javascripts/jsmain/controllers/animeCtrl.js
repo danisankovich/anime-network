@@ -60,8 +60,12 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
       });
     }
   };
-  $scope.writeReview = function(anime) {
-    console.log(anime);
+  $scope.writeReview = function(review) {
+    review.show = $scope.anime._id;
+    review.user = $scope.user._id;
+    $http.post($scope.whichUrl + "/animereview/" + $scope.anime._id, review).success(function(response) {
+      console.log(response)
+    })
   }
 
 });

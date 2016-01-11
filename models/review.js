@@ -7,7 +7,7 @@ var Review = Mongoose.Schema({
   body: String,
   date: {type: Date, default: Date.now},
   userRating: Number,
-  ratingRating: {type: Array}
+  ratingRating: {type: Array, default: []}
 });
 
 module.exports = Mongoose.model('Review', Review);

@@ -14,13 +14,7 @@ var User = new Schema({
   blog: {
     name: String
   },
-  reviews: [{
-    title: String,
-    show: String,
-    body: String,
-    date: {type: Date, default: Date.now},
-    rating: Number
-  }]
+  reviews: []
 });
 
 User.plugin(passportLocalMongoose);

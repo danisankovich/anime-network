@@ -21,7 +21,8 @@ var Anime = Mongoose.Schema({
   usersWatching: [],
   favorites: [],
   reviews: [], //mongoid of the review you made
-  questions: {type: Array}
+  questions: {type: Array},
+  similar: []
 });
 
 Anime.statics.random = function(callback) {
