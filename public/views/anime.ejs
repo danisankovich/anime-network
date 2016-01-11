@@ -32,7 +32,15 @@
         <hr>
         <h4>Reviews <span class="pointer"><a data-reveal-id="reviewModal">(Write A Review)</a></span></h4>
         <ul>
-          <li ng-repeat="review in anime.reviews"></li>
+          <li ng-repeat="review in reviews">
+            <ul>
+              <li>Title: {{review.title}}</li>
+              <li>Created: {{review.date}}</li>
+              <li>Body: {{review.body}}</li>
+              <li>User: {{review.user}}</li>
+              <li>Rating: {{review.userRating}} / 10</li>
+            </ul>
+          </li>
         </ul>
       </div>
       <div class="large-3 small-3 medium-3 columns">
@@ -54,7 +62,7 @@
   <form ng-submit="writeReview(review)">
     Review Title: <input type="text" name="title" ng-model="review.title" class="form-control">
     Review Body: <textarea name="body" ng-model="review.body" rows="8" cols="40" class="form-control"></textarea>
-    Rating: <input type="number" name="userRating" ng-model="review.userRating" class="form-control">
+    Rating: <input type="number" name="userRating" ng-model="review.userRating" class="form-control" min=0 max=10>
     <button type="submit">Submit</button>
   </form>
   <a class="close-reveal-modal" aria-label="Close">&#215;</a>

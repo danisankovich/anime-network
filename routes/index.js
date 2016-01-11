@@ -177,7 +177,6 @@ router.post('/addReview/:id', function(req, res) {
     //   });
     // });
     router.post('/animereview/:id', function(req, res) {
-      console.log(req.params.id)
       Review.create({
         showId: req.body.show,//===shows mongoId
         title: req.body.title,
@@ -189,35 +188,40 @@ router.post('/addReview/:id', function(req, res) {
           anime.reviews.push(review._id)
           anime.ratings.push({rating:review.userRating, user: req.body.user})
           anime.save();
-            User.findById(req.user._id, function(err, user) {
-              user.reviews.push(review._id)
-              user.save()
-                console.log(user);
-                res.send();
-              });
-            });
+          User.findById(req.user._id, function(err, user) {
+            user.reviews.push(review._id)
+            user.save()
+            res.send(anime);
           });
         });
+      });
+    });
+    router.get('/reviews/:id', function(req, res) {
+      Review.find({showId: req.params.id}, function(err, reviews) {
+        console.log(reviews);
+        res.send(reviews)
+      })
+    })
 
 
-        router.get('/register', function(req, res) { });
+  router.get('/register', function(req, res) { });
 
-        router.post('/register', function(req, res) {
-          User.register(new User({ username: req.body.username, email: req.body.email}),
-          req.body.password, function(err, user) {
-            if (err) { res.send(err); }
-            passport.authenticate('local')(req, res, function() { res.redirect('/#/'); });
-          });
-        });
+  router.post('/register', function(req, res) {
+    User.register(new User({ username: req.body.username, email: req.body.email}),
+    req.body.password, function(err, user) {
+      if (err) { res.send(err); }
+      passport.authenticate('local')(req, res, function() { res.redirect('/#/'); });
+    });
+  });
 
-        router.get('/login', function(req, res) {
-        });
+  router.get('/login', function(req, res) {
+  });
 
-        router.post('/login', passport.authenticate('local', { failureRedirect: '/#/loginerror' }), function(req, res, next) {
-          req.session.save(function (err) {
-            if (err) { return next(err); }
-            res.redirect('/#');
-          });
-        });
+  router.post('/login', passport.authenticate('local', { failureRedirect: '/#/loginerror' }), function(req, res, next) {
+    req.session.save(function (err) {
+      if (err) { return next(err); }
+      res.redirect('/#');
+    });
+  });
 
-        module.exports = router;
+  module.exports = router;

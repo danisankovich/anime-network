@@ -8,6 +8,9 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
 
   animeService.getOneAnime().success(function(anime) {
     $scope.anime = anime;
+    $http.get($scope.whichUrl + "/reviews/" + anime._id).success(function(reviews){
+      $scope.reviews = reviews;
+    })
   });
   $scope.genres = function() {
     console.log('es');
