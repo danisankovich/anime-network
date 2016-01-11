@@ -187,6 +187,7 @@ router.post('/addReview/:id', function(req, res) {
       }, function(err, review) {
         Anime.findById(req.params.id, function(err, anime) {
           anime.reviews.push(review._id)
+          anime.ratings.push({rating:review.userRating, user: req.body.user})
           anime.save();
             User.findById(req.user._id, function(err, user) {
               user.reviews.push(review._id)
