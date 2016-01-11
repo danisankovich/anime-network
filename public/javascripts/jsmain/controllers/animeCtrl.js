@@ -60,5 +60,8 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
       });
     }
   };
+  $scope.writeReview = function(anime) {
+    console.log(anime);
+  }
 
 });

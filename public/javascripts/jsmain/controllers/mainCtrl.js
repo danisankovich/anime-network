@@ -34,12 +34,13 @@ app.controller('mainCtrl', function($scope, $state, $http, $rootScope, animeServ
 
     // for(var i = 11600; i < 11700; i++) {
     // $http.get("https://animenetwork.herokuapp.com/anime").success(function(err, result) {
-      // for(var i = 11564; i < 11570; i++) {
-      //   $http.get($scope.whichUrl + "/animeget/" + i.toString()).success(function(err, result) {
-      //     console.log(result);
-      //     console.log(err);
-      //   });
-      // }
+      // for(var i = 1; i < 11570; i++) {
+      for(var i = 1; i < 4; i++) {
+        $http.get($scope.whichUrl + "/animeget/" + i.toString()).success(function(err, result) {
+          console.log(result);
+          console.log(err);
+        });
+      }
     // });
   //
   $scope.register = function(newUser) {

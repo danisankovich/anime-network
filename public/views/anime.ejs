@@ -14,7 +14,7 @@
           <li>Episode Length: {{anime.episode_length}} Mins</li>
           <li>Rating: {{anime.age_rating}}</li>
           <li>Genres: <span ng-repeat="genre in anime.genres">{{genre.name}}, </span></li>
-          <li>
+          <li ng-if="user">
             <button ng-click="likeAnime(anime)" class="button round tiny success">Like This Anime</button>
             <button ng-click="addToCompleted(anime)" class="button round tiny primary">Completed?</button>
             <button ng-click="addToWatching(anime)" class="button round tiny warning">Watching?</button>
@@ -29,6 +29,11 @@
             <li><p>{{anime.synopsis}}</p></li>
           </ul>
         </p>
+        <hr>
+        <h4>Reviews <span class="pointer" ng-click="writeReview(anime)">(Write A Review)</span></h4>
+        <ul>
+          <li ng-repeat="review in anime.reviews"></li>
+        </ul>
       </div>
       <div class="large-3 small-3 medium-3 columns">
       </div>

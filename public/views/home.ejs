@@ -1,16 +1,9 @@
 <div class="container">
-
-
   <div class="row">
-
       <div class="large-12 medium-12 small-12 columns">
-        <div class="large-12 medium-12 small-12 columns">
-          Anime News Goes On Front Page too
-      </div>
-      <div class="large-3 small-3 medium-3 columns">
-      </div>
       <div class="large-6 large-centered small-6 small-centered columns">
-        <div style="text-align: center">
+        <div style="text-align: center" class="frontspace">
+          <h2>Your Random Anime List</h2>
         </div>
       </div>
     </div>
@@ -18,7 +11,7 @@
   <div class="row">
     <div class="large-12 medium-12 small-12 columns">
       <div class="large-2 medium-2 small-3 columns" ng-repeat="rand in frontAnime">
-        <div class="frontspace">
+        <div>
           <div class="frontBox" ng-click="toShow(show)">
             <img class="frontImage" ng-src="{{rand.cover_image}}" alt="">
             <div class="frontScroll">

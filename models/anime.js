@@ -20,13 +20,7 @@ var Anime = Mongoose.Schema({
   usersCompleted: [],
   usersWatching: [],
   favorites: [],
-  reviews: [{
-    title: String,
-    user: String,
-    body: String,
-    date: {type: Date, default: Date.now},
-    rating: Number
-  }],
+  reviews: [], //mongoid of the review you made
   questions: {type: Array}
 });
 
