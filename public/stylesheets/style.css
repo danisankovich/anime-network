@@ -57,6 +57,13 @@ footer {
 .borderbar {
   border-right: black 1px solid;
 }
+.borderbar2 {
+  border-right: #dddddd 1px solid;
+}
+.borderbar3 {
+  border-bottom: #cccccc 2px solid;
+  margin-top: 20px;
+}
 .showInfoBar li {
   border-bottom: 1px solid #DCDCDC;
   list-style: none;
@@ -72,4 +79,19 @@ span.pointer:hover {
 
 .mylist {
   border: black 1px solid;
+}
+
+ul.reviews {
+  list-style: none;
+}
+ul.reviews li ul {
+  list-style: none;
+  margin-top: 20px;
+}
+
+.helpfulCount {
+  font-size: 12px;
+}
+.toRight {
+  float: right;
 }

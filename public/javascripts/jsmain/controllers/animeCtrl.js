@@ -11,6 +11,12 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
     $http.get($scope.whichUrl + "/reviews/" + anime._id).success(function(reviews){
       $scope.reviews = reviews;
       $scope.reviews.forEach(function(e) {
+        if(e.body.length > 300) {
+          e.subbody = e.body.substring(0, 300) + "....."
+        }
+        else {
+          e.subbody = e.body
+        }
         $http.get($scope.whichUrl + "/user/" + e.user).success(function(user){
           e.user = user;
         })
