@@ -69,3 +69,7 @@ span.pointer {
 span.pointer:hover {
   cursor: pointer;
 }
+
+.mylist {
+  border: black 1px solid;
+}

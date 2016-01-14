@@ -1,6 +1,25 @@
 <div class="container">
+  <h1 id="anime">My Completed Anime</h1>
   <div class="row">
-    <div class="small-3 medium-3 large-3 columns borderbar">
-
+    <div class="small-10 medium-10 large-10 small-offset-1 medium-offset-1 large-offset-1 columns">
+      <table>
+        <thead>
+          <tr>
+            <th class="mylist">Anime</th>
+            <th class="mylist">Episodes</th>
+            <th class="mylist">My Rating</th>
+            <th class="mylist">A-N Rating</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="anime in completedAnime">
+            <td class="mylist">{{anime.title}}</td>
+            <td class="mylist">{{anime.episode_count}}</td>
+            <td class="mylist">Placeholder</td>
+            <td class="mylist">Placeholder</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
