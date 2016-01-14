@@ -8,4 +8,7 @@ app.controller('profileCtrl', function($scope, $state, $http, $rootScope, userSe
     $scope.favoritedLength = $scope.user.likes.length
     $scope.watchingLength = $scope.user.watchingAnime.length
   });
+  $scope.completedAnime = function() {
+    $state.go('myComplete')
+  }
 });

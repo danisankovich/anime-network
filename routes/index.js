@@ -40,7 +40,12 @@ router.get('/user', function(req, res, next) {
     else { res.json(req.user);}
   });
 });
-
+router.get('/myanimelists/:id', function(req, res) {
+  Anime.findById(req.params.id, function(err, anime) {
+    if(err) {res.send(err)}
+    res.send(anime)
+  })
+})
 
 router.post('/anime/:id', function(req, res) {
   var y = req.params.id.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});

@@ -1,10 +1,10 @@
 <div class="container">
   <div class="row">
     <div class="small-3 medium-3 large-3 columns borderbar">
-      Anime Completed: {{completedLength}} (View)
-      Anime Watching: {{watchingLength}} (View)
-      Anime Favorited: {{favoritedLength}} (View)
-      Anime To Watch: {{willWatchLength}} (View)
+      Anime Completed: {{completedLength}} <span ng-click="completedAnime()">(View)</span>
+      Anime Watching: {{watchingLength}} <span>(View)</span>
+      Anime Favorited: {{favoritedLength}} <span>(View)</span>
+      Anime To Watch: {{willWatchLength}} <span>(View)</span>
     </div>
     <div class="small-9 medium-9 large-9 columns">
       {{user.username}}
