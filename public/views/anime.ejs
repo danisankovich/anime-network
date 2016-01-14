@@ -34,10 +34,9 @@
         <ul>
           <li ng-repeat="review in reviews">
             <ul>
+              <li>Written by {{review.user.username}} on {{review.date | date: "MMM d, y"}}</li>
               <li>Title: {{review.title}}</li>
-              <li>Created: {{review.date}}</li>
               <li>Body: {{review.body}}</li>
-              <li>User: {{review.user}}</li>
               <li>Rating: {{review.userRating}} / 10</li>
             </ul>
           </li>

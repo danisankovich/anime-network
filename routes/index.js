@@ -40,6 +40,13 @@ router.get('/user', function(req, res, next) {
     else { res.json(req.user);}
   });
 });
+router.get('/user/:id', function(req, res, next) {
+  console.log(req.params.id)
+  User.findById(req.params.id, function(err, user) {
+    if (err) { res.send(err);}
+    else { res.json(user);}
+  });
+});
 router.get('/myanimelists/:id', function(req, res) {
   Anime.findById(req.params.id, function(err, anime) {
     if(err) {res.send(err)}
@@ -203,7 +210,6 @@ router.post('/addReview/:id', function(req, res) {
     });
     router.get('/reviews/:id', function(req, res) {
       Review.find({showId: req.params.id}, function(err, reviews) {
-        console.log(reviews);
         res.send(reviews)
       })
     })

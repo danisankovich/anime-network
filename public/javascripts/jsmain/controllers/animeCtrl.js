@@ -10,6 +10,11 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
     $scope.anime = anime;
     $http.get($scope.whichUrl + "/reviews/" + anime._id).success(function(reviews){
       $scope.reviews = reviews;
+      $scope.reviews.forEach(function(e) {
+        $http.get($scope.whichUrl + "/user/" + e.user).success(function(user){
+          e.user = user;
+        })
+      })
     })
   });
   $scope.genres = function() {
