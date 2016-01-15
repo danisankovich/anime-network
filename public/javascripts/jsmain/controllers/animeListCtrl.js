@@ -1,6 +1,6 @@
 app.controller('animeListCtrl', function($scope, $state, $http, $rootScope, animeService){
   // $scope.whichUrl = 'http://localhost:4000';
-  $scope.whichUrl = 'http://animenetwork.herokuapp.com';
+  $scope.whichUrl = 'https://animenetwork.herokuapp.com';
 
   animeService.getCurrentAnime().success(function(anime) {
       if(anime.length === 1) {
