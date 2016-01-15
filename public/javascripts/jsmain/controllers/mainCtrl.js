@@ -1,7 +1,7 @@
 app.controller('mainCtrl', function($scope, $state, $http, $rootScope, animeService){
   $scope.results1 = [];
   // $scope.whichUrl = 'http://localhost:4000';
-    $scope.whichUrl = 'https://animenetwork.herokuapp.com';
+    $scope.whichUrl = 'http://animenetwork.herokuapp.com';
 
   var init = function() {
     console.log('i fired');
@@ -32,7 +32,7 @@ app.controller('mainCtrl', function($scope, $state, $http, $rootScope, animeServ
   // // };
 
     // for(var i = 11600; i < 11700; i++) {
-    // $http.get("https://animenetwork.herokuapp.com/anime").success(function(err, result) {
+    // $http.get("http://animenetwork.herokuapp.com/anime").success(function(err, result) {
       // for(var i = 1; i < 11570; i++) {
       // for(var i = 1; i < 4; i++) {
       //   $http.get($scope.whichUrl + "/animeget/" + i.toString()).success(function(err, result) {
