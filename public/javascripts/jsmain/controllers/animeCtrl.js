@@ -61,7 +61,6 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
         closeOnCancel: false
       }, function(isConfirm){
         if (isConfirm) {
-          //here you will splice that title
           // $scope.completeAnime().success(function(anime) {
           //   sweetAlert("Done", "You have added  " + anime.title + " to your completed list", "success");
           //   userService.getCurrentUser().success(function(data) {
