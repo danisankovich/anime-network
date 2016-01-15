@@ -130,7 +130,7 @@ router.post('/addToWillWatch/:id', function(req, res) {
 router.post('/addLike/:id', function(req, res) {
   console.log(req.user._id);
   Anime.findByIdAndUpdate(req.params.id, {$push: {favorites: req.user._id}}, function(err, anime) {
-    User.findByIdAndUpdate(req.user.id, {$push: {likes: req.params.id}}, function(err, user) {
+    User.findByIdAndUpdate(req.user._id, {$push: {likes: req.params.id}}, function(err, user) {
       console.log(anime);
       res.send(anime);
     });
@@ -142,6 +142,19 @@ router.post('/addToCompleted/:id', function(req, res) {
     User.findByIdAndUpdate(req.user.id, {$push: {completedAnime: req.params.id}}, function(err, user) {
       res.send(anime);
     });
+  });
+});
+router.post('/transtocompleted', function(req, res) {
+  Anime.findById(req.body.anime._id, function(err, anime) {
+    var idx = anime.usersWatching.indexOf(req.user.id)
+    anime.usersWatching.splice(idx, 1)
+    anime.completedAnime.push(req.user.id)
+      anime.save()
+      User.findById(req.user.id, {$pull: {watchingAnime: req.body.anime._id}}, function(err, user) {
+        res.send(anime);
+      });
+      console.log(anime)
+      res.send(anime)
   });
 });
 
