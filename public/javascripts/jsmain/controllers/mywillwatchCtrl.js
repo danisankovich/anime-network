@@ -1,24 +1,18 @@
-app.controller('mycompletedCtrl', function($scope, $state, $http, $rootScope, animeService, userService){
+app.controller('willwatchCtrl', function($scope, $state, $http, $rootScope, animeService, userService){
   $scope.whichUrl = 'http://localhost:4000';
     // $scope.whichUrl = 'https://animenetwork.herokuapp.com';
   userService.getCurrentUser().success(function(data) {
-    $scope.completedAnime = [];
+    $scope.willWatchAnime = [];
     var check = []
     $scope.user = data;
-    data.completedAnime.forEach(function(e) {
+    data.willWatch.forEach(function(e) {
       if(check.indexOf(e) === -1) {
         check.push(e)
         $http.get($scope.whichUrl + '/myanimelists/' + e).success(function(anime) {
           anime.myRating = 'N/A'
           anime.avgRating = 0;
           anime.ratings.forEach(function(a){
-            if(a.user === data._id) {
-              anime.myRating = a.rating + "/10"
-              anime.avgRating += a.rating/(anime.ratings.length)
-            }
-            else {
-              anime.avgRating += a.rating/(anime.ratings.length)
-            }
+            anime.avgRating += a.rating/(anime.ratings.length)
           })
           if(anime.avgRating === 0) {
             anime.avgRating = 'N/A'
@@ -26,7 +20,7 @@ app.controller('mycompletedCtrl', function($scope, $state, $http, $rootScope, an
           else {
             anime.avgRating = Math.round(anime.avgRating * 10)/10 + '/10'
           }
-          $scope.completedAnime.push(anime)
+          $scope.willWatchAnime.push(anime)
         });
       }
     })

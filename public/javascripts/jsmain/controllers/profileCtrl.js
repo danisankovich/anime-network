@@ -11,4 +11,7 @@ app.controller('profileCtrl', function($scope, $state, $http, $rootScope, userSe
   $scope.completedAnime = function() {
     $state.go('myComplete')
   }
+  $scope.willWatchAnime = function() {
+    $state.go('willWatch')
+  }
 });
