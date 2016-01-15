@@ -1,6 +1,6 @@
 app.controller('animeCtrl', function($scope, $state, $http, animeService, userService){
   // $scope.whichUrl = 'http://localhost:4000';
-  $scope.whichUrl = 'https://animenetwork.herokuapp.com';
+  $scope.whichUrl = 'http://animenetwork.herokuapp.com';
 
   userService.getCurrentUser().success(function(data) {
     $scope.user = data;
