@@ -41,50 +41,53 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
       });
     }
   };
-  $scope.completeAnime = animeService.completeAnime;
-  $scope.addToCompleted = function(anime) {
-    var myWatching = []
-    $scope.user.watchingAnime.forEach(function(a) {
-      myWatching.push(a.animeId)
-    })
-    if(myWatching.indexOf(anime._id) > -1){
-      var idx = myWatching.indexOf(anime._id)
-      swal({
-        title: "Are you sure?",
-        text: "This Anime is currently in your Currently Watching section. Would you like to move it to your Completed Anime section?",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Yes, delete it!",
-        cancelButtonText: "No, cancel plx!",
-        closeOnConfirm: false,
-        closeOnCancel: false
-      }, function(isConfirm){
-        if (isConfirm) {
-          // $scope.completeAnime().success(function(anime) {
-          //   sweetAlert("Done", "You have added  " + anime.title + " to your completed list", "success");
-          //   userService.getCurrentUser().success(function(data) {
-          //     $scope.user = data;
-          //   });
-          // });
-          $scope.a = {anime: anime, a: 'message'}
-          $http.post($scope.whichUrl + '/transtocompleted', $scope.a).success(function(anime) {
-            console.log(anime)
-          })
-        } else {
-          swal("Cancelled", "OK. Nothing Will Change", "error");
-        }
-      });
-    }
-    // if($scope.user.completedAnime.indexOf(anime._id) === -1) {
-    //   $scope.completeAnime().success(function(anime) {
-    //     sweetAlert("Done", "You have added  " + anime.title + " to your completed list", "success");
-    //     userService.getCurrentUser().success(function(data) {
-    //       $scope.user = data;
-    //     });
-    //   });
-    // };
-  };
+
+// fix this before deploy. it breaks shit
+
+  // $scope.completeAnime = animeService.completeAnime;
+  // $scope.addToCompleted = function(anime) {
+  //   var myWatching = []
+  //   $scope.user.watchingAnime.forEach(function(a) {
+  //     myWatching.push(a.animeId)
+  //   })
+  //   if(myWatching.indexOf(anime._id) > -1){
+  //     var idx = myWatching.indexOf(anime._id)
+  //     swal({
+  //       title: "Are you sure?",
+  //       text: "This Anime is currently in your Currently Watching section. Would you like to move it to your Completed Anime section?",
+  //       type: "warning",
+  //       showCancelButton: true,
+  //       confirmButtonColor: "#DD6B55",
+  //       confirmButtonText: "Yes, delete it!",
+  //       cancelButtonText: "No, cancel plx!",
+  //       closeOnConfirm: false,
+  //       closeOnCancel: false
+  //     }, function(isConfirm){
+  //       if (isConfirm) {
+  //         // $scope.completeAnime().success(function(anime) {
+  //         //   sweetAlert("Done", "You have added  " + anime.title + " to your completed list", "success");
+  //         //   userService.getCurrentUser().success(function(data) {
+  //         //     $scope.user = data;
+  //         //   });
+  //         // });
+  //         $scope.a = {anime: anime, a: 'message'}
+  //         $http.post($scope.whichUrl + '/transtocompleted', $scope.a).success(function(anime) {
+  //           console.log(anime)
+  //         })
+  //       } else {
+  //         swal("Cancelled", "OK. Nothing Will Change", "error");
+  //       }
+  //     });
+  //   }
+  //   // if($scope.user.completedAnime.indexOf(anime._id) === -1) {
+  //   //   $scope.completeAnime().success(function(anime) {
+  //   //     sweetAlert("Done", "You have added  " + anime.title + " to your completed list", "success");
+  //   //     userService.getCurrentUser().success(function(data) {
+  //   //       $scope.user = data;
+  //   //     });
+  //   //   });
+  //   // };
+  // };
   $scope.watchingAnime = animeService.watchingAnime;
   $scope.addToWatching = function(anime) {
     var myWatching = []
