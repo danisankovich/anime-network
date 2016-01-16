@@ -102,8 +102,6 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
   };
   $scope.watchingAnime = animeService.watchingAnime;
   $scope.addToWatching = function(anime) {
-    console.log($scope.user.willWatch)
-    console.log($scope.anime)
     var myWatching = []
     $scope.user.watchingAnime.forEach(function(a) {
       myWatching.push(a.animeId)
@@ -122,17 +120,31 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
           closeOnCancel: true
         }, function(isConfirm){
           $http.post($scope.whichUrl + '/transtowatching/' + $scope.anime._id).success(function(anime) {
-            $scope.anime = anime
+            animeService.getOneAnime().success(function(anime) {
+              $scope.anime = anime;
+              $http.get($scope.whichUrl + "/reviews/" + anime._id).success(function(reviews){
+                $scope.reviews = reviews;
+                $scope.reviews.forEach(function(e) {
+                  if(e.body.length > 300) {
+                    e.subbody = e.body.substring(0, 300) + "....."
+                  }
+                  else {
+                    e.subbody = e.body
+                  }
+                  $http.get($scope.whichUrl + "/user/" + e.user).success(function(user){
+                    e.user = user;
+                  })
+                })
+              })
+            });
             userService.getCurrentUser().success(function(data) {
               $scope.user = data;
             });
+            sweetAlert("Done", "Success", "success");
           });
         })
-      } else {
-          swal("Cancelled", "OK. Nothing Will Change", "error");
-        }
       }
-      else{
+      else {
         $scope.watchingAnime().success(function(anime) {
           sweetAlert("Done", "You have added " + anime.title + " to your watching list", "success");
           userService.getCurrentUser().success(function(data) {
@@ -141,9 +153,10 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
         });
       }
     }
+  }
   $scope.willWatch = animeService.willWatch;
   $scope.addToWillWatch = function(anime) {
-    if($scope.user.willWatch.indexOf(anime._id) === -1) {
+    if($scope.user.willWatch.indexOf(anime._id) === -1 && $scope.anime.usersWatching.indexOf($scope.user._id) === -1 && $scope.anime.usersCompleted.indexOf($scope.user._id) === -1) {
       $scope.willWatch().success(function() {
         sweetAlert("Done", "You have added this to your will watch list", "success");
         userService.getCurrentUser().success(function(data) {
