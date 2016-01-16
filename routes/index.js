@@ -148,14 +148,20 @@ router.post('/transtocompleted', function(req, res) {
   Anime.findById(req.body.anime._id, function(err, anime) {
     var idx = anime.usersWatching.indexOf(req.user.id)
     anime.usersWatching.splice(idx, 1)
-    anime.completedAnime.push(req.user.id)
+    anime.usersCompleted.push(req.user.id)
       anime.save()
-      User.findById(req.user.id, {$pull: {watchingAnime: req.body.anime._id}}, function(err, user) {
+      User.findById(req.user.id, function(err, user) {
+        var indx = user.watchingAnime.indexOf(req.body.anime._id)
+        user.watchingAnime.forEach(function(e, i) {
+          if(e.animeId === req.body.anime._id) {
+            user.watchingAnime.splice(i, 1)
+            user.completedAnime.push(req.body.anime._id)
+            user.save()
+          }
+        })
         res.send(anime);
       });
-      console.log(anime)
-      res.send(anime)
-  });
+    });
 });
 
 router.post('/addReview/:id', function(req, res) {

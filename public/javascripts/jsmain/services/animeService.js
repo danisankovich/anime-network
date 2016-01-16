@@ -1,6 +1,6 @@
 app.service('animeService', function($http, $state) {
-  // var whichUrl = 'http://localhost:4000';
-  var whichUrl = 'http://animenetwork.herokuapp.com';
+  var whichUrl = 'http://localhost:4000';
+  // var whichUrl = 'http://animenetwork.herokuapp.com';
   this.getCurrentAnime = function() {
     return $http.post(whichUrl + '/animelist/' + $state.params.animename).success(function(anime) {
       return anime;

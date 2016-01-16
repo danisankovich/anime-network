@@ -1,7 +1,7 @@
 app.controller('mainCtrl', function($scope, $state, $http, $rootScope, animeService){
   $scope.results1 = [];
-  // $scope.whichUrl = 'http://localhost:4000';
-    $scope.whichUrl = 'https://animenetwork.herokuapp.com';
+  $scope.whichUrl = 'http://localhost:4000';
+    // $scope.whichUrl = 'https://animenetwork.herokuapp.com';
 
   var init = function() {
     console.log('i fired');
