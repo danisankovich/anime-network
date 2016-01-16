@@ -56,51 +56,91 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Yes, delete it!",
+        confirmButtonText: "Yes, Move It!",
         cancelButtonText: "No, cancel plx!",
-        closeOnConfirm: false,
-        closeOnCancel: false
+        closeOnConfirm: true,
+        closeOnCancel: true
       }, function(isConfirm){
         if (isConfirm) {
-          // $scope.completeAnime().success(function(anime) {
-          //   sweetAlert("Done", "You have added  " + anime.title + " to your completed list", "success");
-          //   userService.getCurrentUser().success(function(data) {
-          //     $scope.user = data;
-          //   });
-          // });
           $scope.a = {anime: anime, a: 'message'}
           $http.post($scope.whichUrl + '/transtocompleted', $scope.a).success(function(anime) {
-            console.log(anime)
+            sweetAlert("Done", "You have added  " + anime.title + " to your completed list", "success");
+            animeService.getOneAnime().success(function(anime) {
+              $scope.anime = anime;
+              $http.get($scope.whichUrl + "/reviews/" + anime._id).success(function(reviews){
+                $scope.reviews = reviews;
+                $scope.reviews.forEach(function(e) {
+                  if(e.body.length > 300) {
+                    e.subbody = e.body.substring(0, 300) + "....."
+                  }
+                  else {
+                    e.subbody = e.body
+                  }
+                  $http.get($scope.whichUrl + "/user/" + e.user).success(function(user){
+                    e.user = user;
+                  })
+                })
+              })
+            });
+            userService.getCurrentUser().success(function(data) {
+              $scope.user = data;
+            });
           })
         } else {
           swal("Cancelled", "OK. Nothing Will Change", "error");
         }
       });
     }
-    // if($scope.user.completedAnime.indexOf(anime._id) === -1) {
-    //   $scope.completeAnime().success(function(anime) {
-    //     sweetAlert("Done", "You have added  " + anime.title + " to your completed list", "success");
-    //     userService.getCurrentUser().success(function(data) {
-    //       $scope.user = data;
-    //     });
-    //   });
-    // };
-  };
-  $scope.watchingAnime = animeService.watchingAnime;
-  $scope.addToWatching = function(anime) {
-    var myWatching = []
-    $scope.user.watchingAnime.forEach(function(a) {
-      myWatching.push(a.animeId)
-    })
-    if(myWatching.indexOf(anime._id) === -1) {
-      $scope.watchingAnime().success(function(anime) {
-        sweetAlert("Done", "You have added " + anime.title + " to your watching list", "success");
+    if($scope.user.completedAnime.indexOf(anime._id) === -1 && myWatching.indexOf(anime._id) === -1) {
+      $scope.completeAnime().success(function(anime) {
+        sweetAlert("Done", "You have added  " + anime.title + " to your completed list", "success");
         userService.getCurrentUser().success(function(data) {
           $scope.user = data;
         });
       });
-    }
+    };
   };
+  $scope.watchingAnime = animeService.watchingAnime;
+  $scope.addToWatching = function(anime) {
+    console.log($scope.user.willWatch)
+    console.log($scope.anime)
+    var myWatching = []
+    $scope.user.watchingAnime.forEach(function(a) {
+      myWatching.push(a.animeId)
+    })
+    if(myWatching.indexOf(anime._id) === -1 && $scope.user.completedAnime.indexOf(anime._id) === -1) {
+      if($scope.user.willWatch.indexOf(anime._id) > -1) {
+        swal({
+          title: "Are you sure?",
+          text: "This Anime is currently in your Will Watch section. Would you like to move it to your Currently Watching Anime section?",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#DD6B55",
+          confirmButtonText: "Yes, Move It!",
+          cancelButtonText: "No, cancel plx!",
+          closeOnConfirm: true,
+          closeOnCancel: true
+        }, function(isConfirm){
+          $http.post($scope.whichUrl + '/transtowatching/' + $scope.anime._id).success(function(anime) {
+            $scope.anime = anime
+            userService.getCurrentUser().success(function(data) {
+              $scope.user = data;
+            });
+          });
+        })
+      } else {
+          swal("Cancelled", "OK. Nothing Will Change", "error");
+        }
+      }
+      else{
+        $scope.watchingAnime().success(function(anime) {
+          sweetAlert("Done", "You have added " + anime.title + " to your watching list", "success");
+          userService.getCurrentUser().success(function(data) {
+            $scope.user = data;
+          });
+        });
+      }
+    }
   $scope.willWatch = animeService.willWatch;
   $scope.addToWillWatch = function(anime) {
     if($scope.user.willWatch.indexOf(anime._id) === -1) {

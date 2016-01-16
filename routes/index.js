@@ -151,7 +151,6 @@ router.post('/transtocompleted', function(req, res) {
     anime.usersCompleted.push(req.user.id)
       anime.save()
       User.findById(req.user.id, function(err, user) {
-        var indx = user.watchingAnime.indexOf(req.body.anime._id)
         user.watchingAnime.forEach(function(e, i) {
           if(e.animeId === req.body.anime._id) {
             user.watchingAnime.splice(i, 1)
@@ -163,6 +162,21 @@ router.post('/transtocompleted', function(req, res) {
       });
     });
 });
+router.post('/transtowatching/:id', function(req, res) {
+  console.log('useruseruser', req.user.id)
+  console.log('ididididid', req.params.id)
+  User.findById(req.user.id, function(err, user) {
+    var idx = user.willWatch.indexOf(req.params.id)
+    user.willWatch.splice(idx, 1)
+    user.watchingAnime.push({animeId: req.params.id, episodesWatched: 0})
+    user.save()
+    Anime.findById(req.params.id, function(err, anime) {
+      anime.usersWatching.push(req.user.id)
+      anime.save()
+      res.send(anime)
+    })
+  })
+})
 
 router.post('/addReview/:id', function(req, res) {
   console.log(req.params.id);
