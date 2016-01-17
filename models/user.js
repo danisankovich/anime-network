@@ -14,7 +14,9 @@ var User = new Schema({
   blog: {
     name: String
   },
-  reviews: []
+  reviews: [],
+  eventsAttended: [],
+  eventsHosted: []
 });
 
 User.plugin(passportLocalMongoose);
