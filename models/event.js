@@ -58,3 +58,5 @@ var Event = Mongoose.schema({
   adminComments: {type: Array},
   userComments: {type: Array} //questions, reviews, asking if anyone else will be cosplaying, etc.
 });
+
+module.exports = Mongoose.model('Event', Event);
