@@ -13,6 +13,13 @@
           <li>#Episodes: {{anime.episode_count}} Episodes</li>
           <li>Episode Length: {{anime.episode_length}} Mins</li>
           <li>Rating: {{anime.age_rating}}</li>
+          <li>
+            <p> Rate: </p>
+            <form ng-submit="rateAnime(rating)">
+              Rating: <input type="number" name="rating" ng-model="rating" class="form-control" min=0 max=10>
+              <button type="submit" class="button round tiny primary">Submit</button>
+            </form>
+          </li>
           <li>Genres: <span ng-repeat="genre in anime.genres">{{genre.name}}, </span></li>
           <li ng-if="user">
             <button ng-click="likeAnime(anime)" class="button round tiny success">Like This Anime</button>

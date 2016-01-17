@@ -247,6 +247,14 @@ router.post('/addReview/:id', function(req, res) {
         res.send(reviews)
       })
     })
+    router.post('/ratings', function(req, res) {
+      console.log("req.body", req.body.rating)
+      Anime.findById(req.body.anime, function(err, anime) {
+        anime.ratings.push({rating: req.body.rating, user: req.user.id})
+        anime.save();
+      });
+    })
+
 
 
   router.get('/register', function(req, res) { });

@@ -200,8 +200,15 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
     }
     else {
       sweetAlert("Hold it!", "You Have Already submitted a review", "error");
-
     }
+  }
+  $scope.rateAnime = function(rating) {
+    var ratingObject = {}
+    ratingObject.rating = rating
+    ratingObject.anime = $scope.anime._id
+    $http.post($scope.whichUrl + '/ratings', ratingObject).success(function(anime) {
+      console.log(anime)
+    })
   }
 
 });
