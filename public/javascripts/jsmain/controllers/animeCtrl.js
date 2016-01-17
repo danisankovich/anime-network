@@ -168,9 +168,40 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
   $scope.writeReview = function(review) {
     review.show = $scope.anime._id;
     review.user = $scope.user._id;
-    $http.post($scope.whichUrl + "/animereview/" + $scope.anime._id, review).success(function(response) {
-      console.log(response)
+    var reviewIds = $scope.reviews.map(function(r) {
+      return r.user._id
     })
+    console.log(reviewIds)
+    if(reviewIds.indexOf($scope.user._id) === -1) {
+      $http.post($scope.whichUrl + "/animereview/" + $scope.anime._id, review).success(function(response) {
+        animeService.getOneAnime().success(function(anime) {
+          $scope.anime = anime;
+          $http.get($scope.whichUrl + "/reviews/" + anime._id).success(function(reviews){
+            $scope.reviews = reviews;
+            $scope.reviews.forEach(function(e) {
+              if(e.body.length > 300) {
+                e.subbody = e.body.substring(0, 300) + "....."
+              }
+              else {
+                e.subbody = e.body
+              }
+              $http.get($scope.whichUrl + "/user/" + e.user).success(function(user){
+                e.user = user;
+              })
+            })
+          })
+        });
+        userService.getCurrentUser().success(function(data) {
+          $scope.user = data;
+        });
+        sweetAlert("Done", "Your Review Has been submitted", "success");
+        $('#reviewModal').foundation('reveal', 'close');
+      })
+    }
+    else {
+      sweetAlert("Hold it!", "You Have Already submitted a review", "error");
+
+    }
   }
 
 });
