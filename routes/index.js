@@ -50,7 +50,10 @@ router.get('/user/:id', function(req, res, next) {
 router.get('/myanimelists/:id', function(req, res) {
   Anime.findById(req.params.id, function(err, anime) {
     if(err) {res.send(err)}
-    res.send(anime)
+    else {
+      res.send(anime)
+    }
+
   })
 })
 
@@ -128,10 +131,8 @@ router.post('/addToWillWatch/:id', function(req, res) {
 });
 
 router.post('/addLike/:id', function(req, res) {
-  console.log(req.user._id);
   Anime.findByIdAndUpdate(req.params.id, {$push: {favorites: req.user._id}}, function(err, anime) {
     User.findByIdAndUpdate(req.user._id, {$push: {likes: req.params.id}}, function(err, user) {
-      console.log(anime);
       res.send(anime);
     });
   });
