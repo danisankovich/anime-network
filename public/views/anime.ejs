@@ -13,19 +13,20 @@
           <li>#Episodes: {{anime.episode_count}} Episodes</li>
           <li>Episode Length: {{anime.episode_length}} Mins</li>
           <li>Rating: {{anime.age_rating}}</li>
-          <li>
-            <p> Rate: </p>
-            <form ng-submit="rateAnime(rating)">
-              Rating: <input type="number" name="rating" ng-model="rating" class="form-control" min=0 max=10>
-              <button type="submit" class="button round tiny primary">Submit</button>
-            </form>
-          </li>
           <li>Genres: <span ng-repeat="genre in anime.genres">{{genre.name}}, </span></li>
           <li ng-if="user">
             <button ng-click="likeAnime(anime)" class="button round tiny success">Like This Anime</button>
-            <button ng-click="addToCompleted(anime)" class="button round tiny primary">Completed?</button>
-            <button ng-click="addToWatching(anime)" class="button round tiny warning">Watching?</button>
-            <button ng-click="addToWillWatch(anime)" class="button round tiny danger">Will Watch?</button>
+            <button ng-click="addToCompleted(anime)" class="button round tiny primary">Have you seen this?</button>
+            <button type="button" ng-hide="showRate" ng-model="showRate" ng-click="showRate = true" name="button" class="button round tiny success">Rate Anime</button>
+              <form ng-submit="rateAnime(rating)" ng-show="showRate" ng-model="showRate">
+                <p> Rate: x/10 </p>
+                <input type="number" name="rating" ng-model="rating" class="form-control" min=0 max=10>
+                <button type="button" class="button round tiny warning" ng-model="showRate" ng-click="showRate = false">Cancel</button>
+                <button type="submit" class="button round tiny primary">Submit</button>
+                <hr>
+              </form>
+            <button ng-click="addToWatching(anime)" class="button round tiny warning"> Currently Watching?</button>
+            <button ng-click="addToWillWatch(anime)" class="button round tiny danger">Add to Watch List?</button>
           </li>
         </ul>
       </div>
@@ -38,7 +39,7 @@
         </p>
         <hr>
         <ul class="reviews">
-          <h4>Reviews <span class="pointer"><a data-reveal-id="reviewModal">(Write A Review)</a></span></h4>
+          <h4>Reviews <span class="pointer"><a data-reveal-id="reviewModal" ng-if="user">(Write A Review)</a></span></h4>
           <hr>
           <li ng-repeat="review in reviews">
             <ul>
