@@ -14,7 +14,11 @@ var User = new Schema({
   blog: {
     name: String
   },
-  reviews: []
+  reviews: {type: Array},
+  eventsAttended: {type: Array},
+  eventsHosted: {type: Array},
+  invitedTo: {type: Array}, //list of event Ids they were invited to
+  photos: {type: Array}, //array of objects. one of the properties is profilePicture. with a boolean. checks to see if it is url or an upload and acts accordingly (another boolean perhaps?)
 });
 
 User.plugin(passportLocalMongoose);
