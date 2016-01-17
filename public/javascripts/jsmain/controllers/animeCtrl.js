@@ -9,6 +9,9 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
   animeService.getOneAnime().success(function(anime) {
     $scope.anime = anime;
     $http.get($scope.whichUrl + "/reviews/" + anime._id).success(function(reviews){
+      $http.get($scope.whichUrl+"/showforum/" + anime._id).success(function(forum) {
+        $scope.forum = forum
+      })
       $scope.reviews = reviews;
       $scope.reviews.forEach(function(e) {
         if(e.body.length > 300) {

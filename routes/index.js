@@ -222,6 +222,23 @@ router.post('/addReview/:id', function(req, res) {
     //     // });
     //   });
     // });
+    // router.get('/makeforum', function(req, res) {
+    //   Anime.find({}, function(err, animes) {
+    //     animes.forEach(function(e) {
+    //       Forum.create({
+    //         showId: e._id, //===shows mongoId
+    //         slug: e.slug,  //shows slug------
+    //         title: e.title,  //shows title----these two are needed for forum search.(no need to go to show's page first)
+    //         topics: []
+    //       }, function(err, anime) {
+    //         console.log('asdfasdfasdf', err);
+    //         console.log("animeasdfsadfasd", anime);
+    //       });
+    //     })
+    //     res.send();
+    //   })
+    // })
+
     router.post('/animereview/:id', function(req, res) {
       Review.create({
         showId: req.body.show,//===shows mongoId
@@ -254,6 +271,12 @@ router.post('/addReview/:id', function(req, res) {
         anime.save();
         res.send(anime)
       });
+    })
+    router.get('/showforum/:id', function(req, res) {
+      Forum.find({showId: req.params.id}, function(err, forum) {
+        console.log(forum)
+        res.send(forum)
+      })
     })
 
 
