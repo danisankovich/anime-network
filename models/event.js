@@ -5,6 +5,7 @@ var Event = Mongoose.schema({
   creatorPhone: String, //optional
   creatorEmail: String, //optional as well. can have them contact through app as well
   attendeeId: {type: Array},
+  likes: {type: Number, default: 0},
   pendingOtherHosts: {type: Array}, //when you add people they go here first. they get a notification and have to accept from there.
   otherHosts: {type: Array}, //ID of other people involved with making the event. Picked from Friends list. if they accept, they can add their contact info if they like
   title: {type: String, required: true},
@@ -31,4 +32,6 @@ var Event = Mongoose.schema({
   venueEmail: String, //also not required
   venueName: String,
   parking: {type: Boolean},
+  adminPhotos: {type: Array}, //those added at creation or on event edit. only admin
+  userPhotos: {type: Array} //those added from the event page. anyone
 });
