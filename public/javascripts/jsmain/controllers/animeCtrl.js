@@ -203,12 +203,19 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
     }
   }
   $scope.rateAnime = function(rating) {
-    var ratingObject = {}
-    ratingObject.rating = rating
-    ratingObject.anime = $scope.anime._id
-    $http.post($scope.whichUrl + '/ratings', ratingObject).success(function(anime) {
-      console.log(anime)
+    var ratingIds = $scope.anime.ratings.map(function(r) {
+      return r.user
     })
+    console.log(ratingIds)
+    if(ratingIds.indexOf($scope.user._id) === -1) {
+      var ratingObject = {}
+      ratingObject.rating = rating
+      ratingObject.anime = $scope.anime._id
+      $http.post($scope.whichUrl + '/ratings', ratingObject).success(function(anime) {
+        sweetAlert("Success!", "You Have Submitted A Review", "success");
+        $scope.anime = anime
+      })
+    }
+    sweetAlert("Hold it!", "You Have Already submitted a rating", "error");
   }
-
 });
