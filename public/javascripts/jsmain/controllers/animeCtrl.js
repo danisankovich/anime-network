@@ -221,4 +221,7 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
     }
     sweetAlert("Hold it!", "You Have Already submitted a rating", "error");
   }
+  $scope.toForum = function(anime) {
+    $state.go('forum', {animeId: anime._id})
+  }
 });

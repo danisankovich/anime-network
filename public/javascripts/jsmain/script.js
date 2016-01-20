@@ -11,6 +11,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
   .state('myComplete', { url: '/profile/completed', templateUrl: 'views/mycompleted.ejs', controller: 'mycompletedCtrl' })
   .state('willWatch', { url: '/profile/willwatch', templateUrl: 'views/myWillWatch.ejs', controller: 'willwatchCtrl' })
   .state('anime', { url: '/anime/{animename}', templateUrl: 'views/anime.ejs', controller: 'animeCtrl' })
+  .state('forum', { url: '/forum/{animeId}', templateUrl: 'views/forum.ejs', controller: 'forumCtrl' })
   .state('animelist', { url: '/animelist/{animename}', templateUrl: 'views/animeGenre.ejs', controller: 'animeListCtrl' })
   .state('animegenre', { url: '/animegenre', templateUrl: 'views/animeGenre.ejs', controller: 'genreCtrl' });
 }]);
