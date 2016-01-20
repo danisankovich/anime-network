@@ -16,6 +16,7 @@ var User = new Schema({
   },
   reviews: {type: Array},
   forumPosts: {type: Array},
+  myTopics: {type: Array},
   eventsAttended: {type: Array},
   eventsHosted: {type: Array},
   invitedTo: {type: Array}, //list of event Ids they were invited to

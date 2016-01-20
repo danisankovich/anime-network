@@ -16,7 +16,14 @@ app.controller('forumCtrl', function($scope, $state, $http, animeService, userSe
     topic.forumId = $scope.forum._id
     topic.creatorId = $scope.user._id
     $http.post('/newtopic', topic).success(function(newtopic) {
-      console.log(newtopic)
+      $('#topicModal').foundation('reveal', 'close');
+
+      $http.get('/showforum/' + $state.params.animeId).success(function(forum) {
+        $scope.forum = forum
+        $http.get('/topics/' + forum._id).success(function(topics) {
+          $scope.topics = topics
+        })
+      })
     })
   }
 });

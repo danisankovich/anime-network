@@ -286,8 +286,15 @@ router.post('/addReview/:id', function(req, res) {
     })
     router.post('/newtopic', function(req, res) {
       Topic.create(req.body, function(err, topic) {
-        console.log(topic)
-        res.send(topic)
+        Forum.findById(topic.forumId, function(err, forum) {
+          forum.topics.push(topic.id)
+          forum.save()
+          User.findById(req.user.id, function(err, user) {
+            user.myTopics.push(topic.id)
+            user.save()
+            res.send(topic)
+          })
+        })
       })
     })
 
