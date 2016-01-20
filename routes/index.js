@@ -273,7 +273,7 @@ router.post('/addReview/:id', function(req, res) {
       });
     })
     router.get('/showforum/:id', function(req, res) {
-      Forum.find({showId: req.params.id}, function(err, forum) {
+      Forum.findOne({showId: req.params.id}, function(err, forum) {
         console.log(forum)
         res.send(forum)
       })

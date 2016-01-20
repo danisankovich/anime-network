@@ -95,3 +95,7 @@ ul.reviews li ul {
 .toRight {
   float: right;
 }
+
+.forumTable {
+  width: 100%;
+}
