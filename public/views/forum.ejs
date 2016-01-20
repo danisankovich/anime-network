@@ -1,3 +1,5 @@
+<h1>We need a general forum. Where any questions can be asked</h1>
+
 <div class="container">
   <div class="row">
     <div class="small-12 large-12 medium-12 columns">
@@ -8,6 +10,9 @@
   </div>
   <div class="row">
     <div class="small-12 large-12 medium-12 columns">
+      <div>
+        <h4>Admin Posts</h4>
+      </div>
       <table class="forumTable">
         <thead>
           <tr>
@@ -19,7 +24,7 @@
         </thead>
         <tbody>
           <tr>
-            <td><a href="">Rules</a></td>
+            <td><a href="">Rules: Please Read</a></td>
             <td>Admins</td>
             <td>0</td>
             <td>Rules by Admin</td>
@@ -30,36 +35,40 @@
   </div>
   <div class="row">
     <div class="small-12 large-12 medium-12 columns">
+      <div>
+        <h4>User Posts</h4>
+      </div>
       <table class="forumTable">
         <thead>
-          <tr>
-            <th width="200">Table Header</th>
-            <th>Table Header</th>
-            <th width="150">Table Header</th>
-            <th width="150">Table Header</th>
-          </tr>
+          <th>Topic</th>
+          <th>Author</th>
+          <th>Replies</th> <!-- number of replies -->
+          <th>Last Reply</th> <!-- last user, date, button to take you there -->
+        </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Content Goes Here</td>
-            <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
-            <td>Content Goes Here</td>
-            <td>Content Goes Here</td>
-          </tr>
-          <tr>
-            <td>Content Goes Here</td>
-            <td>This is longer Content Goes Here Donec id elit non mi porta gravida at eget metus.</td>
-            <td>Content Goes Here</td>
-            <td>Content Goes Here</td>
-          </tr>
-          <tr>
-            <td>Content Goes Here</td>
-            <td>This is longer Content Goes Here Donec id elit non mi porta gravida at eget metus.</td>
-            <td>Content Goes Here</td>
-            <td>Content Goes Here</td>
+          <tr ng-repeat="topic in topics">
+            <td>{{topic.title}}</td>
+            <td>{{topic.creatorId}}</td>
+            <td>{{topic.responses.length}}</td>
+            <td>{{topic.responses}} most recent</td>
           </tr>
         </tbody>
       </table>
+      <li><a class="button primary" data-reveal-id="topicModal">New Topic</a></li>
     </div>
   </div>
+</div>
+<div id="topicModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+<h2 id="modalTitle">Search By Genre</h2>
+<p class="lead">Choose a Maximum of 4 Genres</p>
+<form ng-submit="newTopic(topic)" ng-model="genre">
+  <input type="text" placeholder="title" ng-model="topic.title">
+  Body
+  <textarea ng-model="topic.body"></textarea>
+  <input type="radio" ng-model="topic.spoilers" value="true"> spoilers
+  <input type="radio" ng-model="topic.spoilers" value="false"> no spoilers
+  <input type="submit" value="Submit">
+</form>
+<a class="close-reveal-modal" aria-label="Close">&#215;</a>
 </div>

@@ -7,6 +7,7 @@ var Anime = require('../models/anime');
 var Forum = require('../models/forum');
 var Review = require('../models/review');
 var Topic = require('../models/topic');
+var Post = require('../models/post');
 var unirest = require('unirest');
 var mongoose = require('mongoose');
 
@@ -276,6 +277,17 @@ router.post('/addReview/:id', function(req, res) {
       Forum.findOne({showId: req.params.id}, function(err, forum) {
         console.log(forum)
         res.send(forum)
+      })
+    })
+    router.get('/topics/:id', function(req, res) {
+      Topic.find({forumId: req.params.id}, function(err, topics) {
+        res.send(topics)
+      })
+    })
+    router.post('/newtopic', function(req, res) {
+      Topic.create(req.body, function(err, topic) {
+        console.log(topic)
+        res.send(topic)
       })
     })
 
