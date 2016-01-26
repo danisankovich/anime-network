@@ -283,6 +283,12 @@ router.post('/addReview/:id', function(req, res) {
         res.send(topics)
       })
     })
+    router.get('/onetopic/:id', function(req, res) {
+      Topic.find({_id: req.params.id}, function(err, topic) {
+        console.log(topic)
+        res.send(topic)
+      })
+    })
     router.post('/newtopic', function(req, res) {
       Topic.create(req.body, function(err, topic) {
         Forum.findById(topic.forumId, function(err, forum) {

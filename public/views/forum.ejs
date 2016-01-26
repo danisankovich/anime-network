@@ -49,7 +49,7 @@
         </thead>
         <tbody>
           <tr ng-repeat="topic in topics">
-            <td><a>{{topic.title}}</a></td>
+            <td><a ng-click="toTopic(topic)">{{topic.title}}</a></td>
             <td>{{topic.user.username}}</td>
             <td>{{topic.spoilers}}</td>
             <td>{{topic.responses.length}}</td>

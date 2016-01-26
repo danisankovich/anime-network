@@ -99,3 +99,18 @@ ul.reviews li ul {
 .forumTable {
   width: 100%;
 }
+
+/*====================================
+=================TOPIC CSS===================
+====================================
+====================================*/
+#topicHeader {
+  margin-top: 10%;
+}
+.headerColor {
+  background-color: #89CBEF;
+  border: 2px solid #89CBEF;
+  border-radius: 10px;
+  padding-top: 10px;
+  height: 50px;
+}

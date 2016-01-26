@@ -1,21 +1,25 @@
 app.controller('forumCtrl', function($scope, $state, $http, animeService, userService){
   $scope.whichUrl = 'http://localhost:4000';
   // $scope.whichUrl = 'http://animenetwork.herokuapp.com';
+  userService.getCurrentUser().success(function(data) {
+    $scope.user = data;
+  });
   $http.get('/showforum/' + $state.params.animeId).success(function(forum) {
     $scope.forum = forum
     $http.get('/topics/' + forum._id).success(function(topics) {
       topics.forEach(function(topic) {
         $http.get('/user/' + topic.creatorId).success(function(user){
           topic.user = user
-          console.log(user)
         })
       })
       $scope.topics = topics
     })
   })
-  userService.getCurrentUser().success(function(data) {
-    $scope.user = data;
-  });
+
+  $scope.toTopic = function(topic) {
+    $state.go('onetopic', {topicId: topic._id})
+  }
+
 
   $scope.newTopic = function(topic) {
     topic.forumId = $scope.forum._id
@@ -29,7 +33,6 @@ app.controller('forumCtrl', function($scope, $state, $http, animeService, userSe
           topics.forEach(function(topic) {
             $http.get('/user/' + topic.creatorId).success(function(user){
               topic.user = user
-              console.log(user)
             })
           })
           $scope.topics = topics
