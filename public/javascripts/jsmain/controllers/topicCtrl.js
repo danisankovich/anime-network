@@ -11,4 +11,9 @@ app.controller('topicCtrl', function($scope, $state, $http, animeService, userSe
       $scope.topic = onetopic[0]
     })
   })
+  $scope.reply = function() {
+    var response = "hello yall"
+    console.log(response)
+    $scope.topic.responses.push(response)
+  }
 })

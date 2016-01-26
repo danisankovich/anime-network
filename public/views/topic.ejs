@@ -39,7 +39,17 @@
                     <p>{{topic.user.signature}}</p>
                   </div>
                 </div>
+                <div class="small-3 small-offset-9 columns replyDiv">
+                  <a class="replyButton">REPLY TO POST</a>
+                </div>
                 <!-- <div id="title"><p class="headerPad">RE: {{topic.title}}</p></div> -->
+              </div>
+            </div>
+            <div class="columns small-12">
+              <div class="columns small-12">
+                <div class="small-3 small-offset-9 columns replyDiv">
+                  <a class="replyButton" ng-click="reply()">REPLY TO TOPIC</a>
+                </div>
               </div>
             </div>
           </div>
@@ -48,7 +58,9 @@
     </div>
     <div class="row">
       <div id="responses">
-        <div class="small-12 columns"></div>
+        <div class="small-12 columns">
+          <p ng-repeat="response in topic.responses">{{response}}</p>
+        </div>
       </div>
     </div>
   </div>
