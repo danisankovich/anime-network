@@ -14,6 +14,7 @@ var User = new Schema({
   blog: {
     name: String
   },
+  createdAt: {type: Date, default: Date.now},
   reviews: {type: Array},
   forumPosts: {type: Array},
   myTopics: {type: Array},
