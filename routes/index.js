@@ -42,7 +42,6 @@ router.get('/user', function(req, res, next) {
   });
 });
 router.get('/user/:id', function(req, res, next) {
-  console.log(req.params.id)
   User.findById(req.params.id, function(err, user) {
     if (err) { res.send(err);}
     else { res.json(user);}

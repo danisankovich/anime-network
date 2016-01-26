@@ -4,7 +4,12 @@ app.controller('forumCtrl', function($scope, $state, $http, animeService, userSe
   $http.get('/showforum/' + $state.params.animeId).success(function(forum) {
     $scope.forum = forum
     $http.get('/topics/' + forum._id).success(function(topics) {
-      console.log(topics)
+      topics.forEach(function(topic) {
+        $http.get('/user/' + topic.creatorId).success(function(user){
+          topic.user = user
+          console.log(user)
+        })
+      })
       $scope.topics = topics
     })
   })
@@ -21,6 +26,12 @@ app.controller('forumCtrl', function($scope, $state, $http, animeService, userSe
       $http.get('/showforum/' + $state.params.animeId).success(function(forum) {
         $scope.forum = forum
         $http.get('/topics/' + forum._id).success(function(topics) {
+          topics.forEach(function(topic) {
+            $http.get('/user/' + topic.creatorId).success(function(user){
+              topic.user = user
+              console.log(user)
+            })
+          })
           $scope.topics = topics
         })
       })

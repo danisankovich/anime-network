@@ -42,14 +42,16 @@
         <thead>
           <th>Topic</th>
           <th>Author</th>
+          <th>Spoilers</th>
           <th>Replies</th> <!-- number of replies -->
           <th>Last Reply</th> <!-- last user, date, button to take you there -->
         </tr>
         </thead>
         <tbody>
           <tr ng-repeat="topic in topics">
-            <td>{{topic.title}}</td>
-            <td>{{topic.creatorId}}</td>
+            <td><a>{{topic.title}}</a></td>
+            <td>{{topic.user.username}}</td>
+            <td>{{topic.spoilers}}</td>
             <td>{{topic.responses.length}}</td>
             <td>{{topic.responses}} most recent</td>
           </tr>
