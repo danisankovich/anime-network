@@ -121,7 +121,8 @@ ul.reviews li ul {
   position: relative;
 }
 .replyDiv {
-  margin-top: 18%;
+  margin-top: 5%;
+  margin-bottom: 1%;
   right: 0;
   background-color: #89CBEF;
 }

@@ -39,18 +39,18 @@
                     <p>{{topic.user.signature}}</p>
                   </div>
                 </div>
-                <div class="small-3 small-offset-9 columns replyDiv">
+                <!-- <div class="small-3 small-offset-9 columns replyDiv">
                   <a class="replyButton">REPLY TO POST</a> <!--This will not be on th einitial post.
                     Only on subsequent posts. replying will put them in the response's array. display
                     will have them as a tree, but it only goes 1 layer deeper -->
-                </div>
+                <!-- </div> -->
                 <!-- <div id="title"><p class="headerPad">RE: {{topic.title}}</p></div> -->
               </div>
             </div>
             <div class="columns small-12">
               <div class="columns small-12">
                 <div class="small-3 small-offset-9 columns replyDiv">
-                  <a class="replyButton" ng-click="reply()">REPLY TO TOPIC</a>
+                  <a class="replyButton" ng-click="replyModal()">REPLY TO TOPIC</a>
                 </div>
               </div>
             </div>
@@ -66,4 +66,14 @@
       </div>
     </div>
   </div>
+</div>
+
+<div id="replyModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+<h2 id="modalTitle">Reply To Topic</h2>
+<p class="lead">Choose a Maximum of 4 Genres</p>
+<form ng-submit="reply(response)" ng-model="genre">
+  <textarea ng-model="response.body"></textarea>
+  <input type="submit" value="Submit">
+</form>
+<a class="close-reveal-modal" aria-label="Close">&#215;</a>
 </div>

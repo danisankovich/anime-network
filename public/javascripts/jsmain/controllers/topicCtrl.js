@@ -11,9 +11,17 @@ app.controller('topicCtrl', function($scope, $state, $http, animeService, userSe
       $scope.topic = onetopic[0]
     })
   })
-  $scope.reply = function() {
-    var response = "hello yall"
-    console.log(response)
-    $scope.topic.responses.push(response)
+  $scope.replyModal = function() {
+    $('#replyModal').foundation('reveal', 'open');
   }
+  $scope.reply = function(response) {
+    response.user = $scope.user._id
+    response.createdAt = Date.now()
+    $scope.topic.responses.push(response)
+    $http.post('/respondtopic', $scope.topic).success(function(topic) {
+      $scope.topic = topic;
+      console.log(topic)
+    })
+  }
+
 })
