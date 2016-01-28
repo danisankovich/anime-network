@@ -31,7 +31,7 @@
               </div>
               <div class="small-8 columns">
                 <div>
-                  <h6>Origin Post | Written by {{topic.user.username}} on {{topic.dateCreated | date: "MMM d, y"}}</h6>
+                  <h6>Original Post | Written by {{topic.user.username}} on {{topic.dateCreated | date: "MMM d, y"}}</h6>
                   <hr>
                   <p>{{topic.body}}</p>
                   <div ng-if="topic.user.signature">
@@ -39,27 +39,57 @@
                     <p>{{topic.user.signature}}</p>
                   </div>
                 </div>
-                <!-- <div class="small-3 small-offset-9 columns replyDiv">
-                <a class="replyButton">REPLY TO POST</a> <!--This will not be on th einitial post.
-                Only on subsequent posts. replying will put them in the response's array. display
-                will have them as a tree, but it only goes 1 layer deeper -->
-                <!-- </div> -->
-                <!-- <div id="title"><p class="headerPad">RE: {{topic.title}}</p></div> -->
               </div>
             </div>
             <div class="row">
               <div id="responses">
-                <div class="small-12 columns">
-                  <div ng-repeat="response in topic.responses">
-                    <div id="title"><p class="headerPad">RE: {{topic.title}}</p></div>
-                    <p>
-                      {{response}}
-                    </p>
-                    <div class="small-3 small-offset-9 columns replyDiv">
-                      <a class="replyButton">REPLY TO POST</a>
+                <div ng-repeat="response in topic.responses">
+                  <div class="small-12 columns contentColor">
+                    <div class="small-4 columns">
+                      <div id="authorInfo">
+                        <div id="author">
+                          <p>User: {{topic.user.username}}</p>
+                          <p>Picture: {{topic.user.profilePic}}</p>
+                          <p>Member Since: {{topic.user.createdAt | date: "MMM d, y"}}</p>
+                          <p>Message: Email | Message</p>
+                          <p>Karma: </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="small-8 columns">
+                      <div id="title"><p class="headerPad">RE: {{topic.title}}</p></div>
+                      <p>
+                        {{response.body}}
+                      </p>
+                      <div class="small-3 small-offset-9 columns replyDiv">
+                        <a class="replyButton" ng-click="replyPostModal()">REPLY TO POST</a>
+                      </div>
+                    </div>
+                    <div ng-repeat="post in response.responses">
+                  <div class="columns small-12" class='contentColor'>
+                    <div class="small-4 columns">
+                      <div id="authorInfo">
+                        <div id="author">
+                          <p>User: asdf</p>
+                          <p>Picture: asdf</p>
+                          <p>Member Since: asfaf</p>
+                          <p>Message: Email | Message</p>
+                          <p>Karma: </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="small-8 columns">
+                      <p>
+                        {{post.body}}
+                      </p>
+                      <div class="small-3 small-offset-9 columns replyDiv">
+                        <a class="replyButton" ng-click="replyPostModal()">REPLY TO POST</a>
+                      </div>
                     </div>
                   </div>
-                </div>
+                  </div>
+                  </div>
+                  </div>
                 <div class="columns small-12">
                   <div class="small-3 small-offset-9 columns replyDiv">
                     <a class="replyButton" ng-click="replyModal()">REPLY TO TOPIC</a>
@@ -67,7 +97,6 @@
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>
@@ -79,6 +108,16 @@
   <h2 id="modalTitle">Reply To Topic</h2>
   <p class="lead">Choose a Maximum of 4 Genres</p>
   <form ng-submit="reply(response)" ng-model="genre">
+    <textarea ng-model="response.body"></textarea>
+    <input type="submit" value="Submit">
+  </form>
+  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+</div>
+
+<div id="replyPostModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+  <h2 id="modalTitle">Reply To Topic</h2>
+  <p class="lead">Choose a Maximum of 4 Genres</p>
+  <form ng-submit="replyToPost(response)" ng-model="genre">
     <textarea ng-model="response.body"></textarea>
     <input type="submit" value="Submit">
   </form>

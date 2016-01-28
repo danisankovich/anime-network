@@ -14,11 +14,24 @@ app.controller('topicCtrl', function($scope, $state, $http, animeService, userSe
   $scope.replyModal = function() {
     $('#replyModal').foundation('reveal', 'open');
   }
+  $scope.replyPostModal = function() {
+    $('#replyPostModal').foundation('reveal', 'open');
+    $scope.post = this.response
+  }
   $scope.reply = function(response) {
     response.user = $scope.user._id
     response.createdAt = Date.now()
     response.responses = []
     $scope.topic.responses.push(response)
+    $http.post('/respondtopic', $scope.topic).success(function(topic) {
+      $scope.topic = topic;
+      console.log(topic)
+    })
+  }
+  $scope.replyToPost = function(post) {
+    post.user = $scope.user._id
+    post.createdAt = Date.now()
+    $scope.post.responses.push(post)
     $http.post('/respondtopic', $scope.topic).success(function(topic) {
       $scope.topic = topic;
       console.log(topic)
