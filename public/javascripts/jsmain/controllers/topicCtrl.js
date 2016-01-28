@@ -17,6 +17,7 @@ app.controller('topicCtrl', function($scope, $state, $http, animeService, userSe
   $scope.reply = function(response) {
     response.user = $scope.user._id
     response.createdAt = Date.now()
+    response.responses = []
     $scope.topic.responses.push(response)
     $http.post('/respondtopic', $scope.topic).success(function(topic) {
       $scope.topic = topic;
