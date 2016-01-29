@@ -8,8 +8,21 @@ app.controller('userCtrl', function($scope, $state, $http, $rootScope, userServi
   })
   $scope.addFriend = function(person) {
     console.log(person)
-    $http.post('/friendrequest/' + person._id).success(function(success) {
-      console.log(success)
-    })
+    var found = person.friendIds.some(function (el) {
+      return el.friendId === $scope.user._id;
+    });
+    if(found === false) {
+      $http.post('/friendrequest/' + person._id).success(function(success) {
+        console.log(success)
+      })
+    }
   }
+
+  function checkAndAdd(name) {
+  var id = arr.length + 1;
+  var found = arr.some(function (el) {
+    return el.username === name;
+  });
+  if (!found) { arr.push({ id: id, username: name }); }
+}
 });
