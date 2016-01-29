@@ -7,6 +7,13 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
     var availableTags = [];
     userService.getCurrentUser().success(function(data) {
       $rootScope.currentUser = data;
+      $rootScope.currentUser.friendList = [];
+      $rootScope.currentUser.friendIds.forEach(function(e) {
+        $http.get('/user/' + e.friendId).success(function(friend) {
+          e.username = friend.username
+          $rootScope.currentUser.friendList.push(e)
+        })
+      })
     });
 
     $('input').keyup(debounce(function(){
@@ -94,4 +101,10 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
       else { $state.go($state.current, {}, {reload: true}); }
     };
   });
+  $scope.mailModal = function() {
+    $('#mailModal').foundation('reveal', 'open');
+  }
+  $scope.message=function(newmessage) {
+    console.log(newmessage)
+  }
 });

@@ -8,6 +8,7 @@ var Forum = require('../models/forum');
 var Review = require('../models/review');
 var Topic = require('../models/topic');
 var Post = require('../models/post');
+var Post = require('../models/message');
 var unirest = require('unirest');
 var mongoose = require('mongoose');
 
@@ -312,10 +313,10 @@ router.post('/addReview/:id', function(req, res) {
     })
     router.post('/friendrequest/:id', function(req, res) {
       User.findById(req.params.id, function(err, user) {
-        user.friendIds.push({friendId: req.user._id, pending: true})
+        user.friendIds.push({friendId: req.user._id, pending: true, initiator: false})
         user.save()
         User.findById(req.user.id, function(err, currentUser) {
-          currentUser.friendIds.push({friendId: user._id, pending: true})
+          currentUser.friendIds.push({friendId: user._id, pending: true, initiator: true})
           currentUser.save()
           res.send()
         })
@@ -326,14 +327,14 @@ router.post('/addReview/:id', function(req, res) {
       User.findById(req.params.id, function(err, user) {
         user.friendIds.forEach(function(e) {
           if(e.friendId === req.user.id) {
-            e.pending = true
+            e.pending = false
             user.save()
           }
         })
         User.findById(req.user.id, function(err, currentUser) {
           currentUser.friendIds.forEach(function(f) {
             if(f.friendId === req.params.id) {
-              f.pending = true
+              f.pending = false
               currentUser.save()
             }
           })

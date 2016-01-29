@@ -8,7 +8,8 @@ var User = new Schema({
   password: String,
   friendIds: [{
     friendId: String,
-    pending: {type: Boolean, default: true}
+    pending: {type: Boolean, default: true},
+    initiator: Boolean
   }],
   likes: [],
   willWatch: [],
@@ -25,6 +26,7 @@ var User = new Schema({
   eventsHosted: {type: Array},
   invitedTo: {type: Array}, //list of event Ids they were invited to
   photos: {type: Array}, //array of objects. one of the properties is profilePicture. with a boolean. checks to see if it is url or an upload and acts accordingly (another boolean perhaps?)
+  messages: []
 });
 
 User.plugin(passportLocalMongoose);

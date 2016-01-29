@@ -62,59 +62,75 @@
           </section>
         </nav>
         <div ng-controller="autoCtrl">
-
-        <div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-        <h2 id="modalTitle">Search By Genre</h2>
-        <p class="lead">Choose a Maximum of 4 Genres</p>
-        <form ng-submit="genres(genre)" ng-model="genre">
-          <input type="checkbox" value="Demons" ng-model="genre.Demons">Demon &nbsp; | &nbsp;
-          <input type="checkbox" value="Action" ng-model="genre.Action">Action &nbsp; | &nbsp;
-          <input type="checkbox" value="Fantasy" ng-model="genre.Fantasy">Fantasy &nbsp; | &nbsp;
-          <input type="checkbox" value="Drama" ng-model="genre.Drama">Drama &nbsp; | &nbsp;
-          <input type="checkbox" value="Gender Bender" ng-model="genre.GenderBender">Gender Bender &nbsp; | &nbsp;
-          <input type="checkbox" value="Historical" ng-model="genre.Historical">Historical &nbsp; |<br>
-          <input type="checkbox" value="Kids" ng-model="genre.Kids">Kids &nbsp; | &nbsp;
-          <input type="checkbox" value="Mahou Shoujo" ng-model="genre.MahouShoujo">Mahou Shoujo &nbsp; | &nbsp;
-          <input type="checkbox" value="Martial Arts" ng-model="genre.MartialArts">Martial Arts &nbsp; | &nbsp;
-          <input type="checkbox" value="Military" ng-model="genre.Military">Military &nbsp; | &nbsp;
-          <input type="checkbox" value="Mystery" ng-model="genre.Mystery">Mystery &nbsp; | &nbsp;
-          <input type="checkbox" value="Police" ng-model="genre.Police">Police &nbsp; | &nbsp;  <br>
-          <input type="checkbox" value="Racing" ng-model="genre.Racing">Racing &nbsp; | &nbsp;
-          <input type="checkbox" value="Samurai" ng-model="genre.Samurai">Samurai &nbsp; | &nbsp;
-          <input type="checkbox" value="SciFi" ng-model="genre.SciFi">Sci-Fi &nbsp; | &nbsp;
-          <input type="checkbox" value="Shounen Ai" ng-model="genre.ShounenAi">Shounen Ai &nbsp; | &nbsp;
-          <input type="checkbox" value="Space" ng-model="genre.Space">Space &nbsp; | &nbsp;
-          <input type="checkbox" value="Supernatural" ng-model="genre.Supernatural">Supernatural &nbsp; | &nbsp;  <br>
-          <input type="checkbox" value="Thriller" ng-model="genre.Thriller">Thriller &nbsp; | &nbsp;
-          <input type="checkbox" value="Adventure" ng-model="genre.Adventure">Adventure &nbsp; | &nbsp;
-          <input type="checkbox" value="Comedy" ng-model="genre.Comedy">Comedy &nbsp; | &nbsp;
-          <input type="checkbox" value="Dementia" ng-model="genre.Dementia">Dementia &nbsp; | &nbsp;
-          <input type="checkbox" value="Doujinshi" ng-model="genre.Doujinshi">Doujinshi &nbsp; | &nbsp;
-          <input type="checkbox" value="Ecchi" ng-model="genre.Ecchi">Ecchi &nbsp; | &nbsp;  <br>
-          <input type="checkbox" value="Hentai" ng-model="genre.Hentai">Hentai &nbsp; | &nbsp;
-          <input type="checkbox" value="Game" ng-model="genre.Game">Game &nbsp; | &nbsp;
-          <input type="checkbox" value="Harem" ng-model="genre.Harem">Harem &nbsp; | &nbsp;
-          <input type="checkbox" value="Horror" ng-model="genre.Horror">Horror &nbsp; | &nbsp;
-          <input type="checkbox" value="Magic" ng-model="genre.Magic">Magic &nbsp; | &nbsp;
-          <input type="checkbox" value="Mahou Shounen" ng-model="genre.MahouShounen">Mahou Shounen &nbsp; | &nbsp;  <br>
-          <input type="checkbox" value="Mecha" ng-model="genre.Mecha">Mecha &nbsp; | &nbsp;
-          <input type="checkbox" value="Music" ng-model="genre.Music">Music &nbsp; | &nbsp;
-          <input type="checkbox" value="Parody" ng-model="genre.Parody">Parody &nbsp; | &nbsp;
-          <input type="checkbox" value="Psychological" ng-model="genre.Psychology">Psychological &nbsp; | &nbsp;
-          <input type="checkbox" value="Romance" ng-model="genre.Romance">Romance &nbsp; | &nbsp;
-          <input type="checkbox" value="School" ng-model="genre.School">School &nbsp; | &nbsp;  <br>
-          <input type="checkbox" value="Shoujo Ai" ng-model="genre.ShoujoAi">Shoujo Ai &nbsp; | &nbsp;
-          <input type="checkbox" value="Slice of Life" ng-model="genre.SliceofLife">Slice of Life &nbsp; | &nbsp;
-          <input type="checkbox" value="Sports" ng-model="genre.Sports">Sports &nbsp; | &nbsp;
-          <input type="checkbox" value="Super Power" ng-model="genre.SuperPower">Super Power &nbsp; | &nbsp;
-          <input type="checkbox" value="Vampire" ng-model="genre.Vampire">Vampire &nbsp; | &nbsp;  <br>
-          <input type="submit" value="Submit">
-        </form>
-        <a class="close-reveal-modal" aria-label="Close">&#215;</a>
-      </div>
-      </div>
+          <div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+            <h2 id="modalTitle">Search By Genre</h2>
+            <p class="lead">Choose a Maximum of 4 Genres</p>
+            <form ng-submit="genres(genre)" ng-model="genre">
+              <input type="checkbox" value="Demons" ng-model="genre.Demons">Demon &nbsp; | &nbsp;
+              <input type="checkbox" value="Action" ng-model="genre.Action">Action &nbsp; | &nbsp;
+              <input type="checkbox" value="Fantasy" ng-model="genre.Fantasy">Fantasy &nbsp; | &nbsp;
+              <input type="checkbox" value="Drama" ng-model="genre.Drama">Drama &nbsp; | &nbsp;
+              <input type="checkbox" value="Gender Bender" ng-model="genre.GenderBender">Gender Bender &nbsp; | &nbsp;
+              <input type="checkbox" value="Historical" ng-model="genre.Historical">Historical &nbsp; |<br>
+              <input type="checkbox" value="Kids" ng-model="genre.Kids">Kids &nbsp; | &nbsp;
+              <input type="checkbox" value="Mahou Shoujo" ng-model="genre.MahouShoujo">Mahou Shoujo &nbsp; | &nbsp;
+              <input type="checkbox" value="Martial Arts" ng-model="genre.MartialArts">Martial Arts &nbsp; | &nbsp;
+              <input type="checkbox" value="Military" ng-model="genre.Military">Military &nbsp; | &nbsp;
+              <input type="checkbox" value="Mystery" ng-model="genre.Mystery">Mystery &nbsp; | &nbsp;
+              <input type="checkbox" value="Police" ng-model="genre.Police">Police &nbsp; | &nbsp;  <br>
+              <input type="checkbox" value="Racing" ng-model="genre.Racing">Racing &nbsp; | &nbsp;
+              <input type="checkbox" value="Samurai" ng-model="genre.Samurai">Samurai &nbsp; | &nbsp;
+              <input type="checkbox" value="SciFi" ng-model="genre.SciFi">Sci-Fi &nbsp; | &nbsp;
+              <input type="checkbox" value="Shounen Ai" ng-model="genre.ShounenAi">Shounen Ai &nbsp; | &nbsp;
+              <input type="checkbox" value="Space" ng-model="genre.Space">Space &nbsp; | &nbsp;
+              <input type="checkbox" value="Supernatural" ng-model="genre.Supernatural">Supernatural &nbsp; | &nbsp;  <br>
+              <input type="checkbox" value="Thriller" ng-model="genre.Thriller">Thriller &nbsp; | &nbsp;
+              <input type="checkbox" value="Adventure" ng-model="genre.Adventure">Adventure &nbsp; | &nbsp;
+              <input type="checkbox" value="Comedy" ng-model="genre.Comedy">Comedy &nbsp; | &nbsp;
+              <input type="checkbox" value="Dementia" ng-model="genre.Dementia">Dementia &nbsp; | &nbsp;
+              <input type="checkbox" value="Doujinshi" ng-model="genre.Doujinshi">Doujinshi &nbsp; | &nbsp;
+              <input type="checkbox" value="Ecchi" ng-model="genre.Ecchi">Ecchi &nbsp; | &nbsp;  <br>
+              <input type="checkbox" value="Hentai" ng-model="genre.Hentai">Hentai &nbsp; | &nbsp;
+              <input type="checkbox" value="Game" ng-model="genre.Game">Game &nbsp; | &nbsp;
+              <input type="checkbox" value="Harem" ng-model="genre.Harem">Harem &nbsp; | &nbsp;
+              <input type="checkbox" value="Horror" ng-model="genre.Horror">Horror &nbsp; | &nbsp;
+              <input type="checkbox" value="Magic" ng-model="genre.Magic">Magic &nbsp; | &nbsp;
+              <input type="checkbox" value="Mahou Shounen" ng-model="genre.MahouShounen">Mahou Shounen &nbsp; | &nbsp;  <br>
+              <input type="checkbox" value="Mecha" ng-model="genre.Mecha">Mecha &nbsp; | &nbsp;
+              <input type="checkbox" value="Music" ng-model="genre.Music">Music &nbsp; | &nbsp;
+              <input type="checkbox" value="Parody" ng-model="genre.Parody">Parody &nbsp; | &nbsp;
+              <input type="checkbox" value="Psychological" ng-model="genre.Psychology">Psychological &nbsp; | &nbsp;
+              <input type="checkbox" value="Romance" ng-model="genre.Romance">Romance &nbsp; | &nbsp;
+              <input type="checkbox" value="School" ng-model="genre.School">School &nbsp; | &nbsp;  <br>
+              <input type="checkbox" value="Shoujo Ai" ng-model="genre.ShoujoAi">Shoujo Ai &nbsp; | &nbsp;
+              <input type="checkbox" value="Slice of Life" ng-model="genre.SliceofLife">Slice of Life &nbsp; | &nbsp;
+              <input type="checkbox" value="Sports" ng-model="genre.Sports">Sports &nbsp; | &nbsp;
+              <input type="checkbox" value="Super Power" ng-model="genre.SuperPower">Super Power &nbsp; | &nbsp;
+              <input type="checkbox" value="Vampire" ng-model="genre.Vampire">Vampire &nbsp; | &nbsp;  <br>
+              <input type="submit" value="Submit">
+            </form>
+            <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+          </div>
+        </div>
         <div ui-view></div>
-
+        <div ng-controller="autoCtrl">
+          <a class="mailButton" ng-click="mailModal()">REPLY TO TOPIC</a>
+          <div id="mailModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+            <h2 id="modalTitle">New Message</h2>
+            <p class="lead">Choose a Friend</p>
+            <div>
+              <ul> Friends
+                <li ng-repeat="friend in currentUser.friendList" ng-hide="friend.pending">{{friend.username}}  <a ng-click="choose(friend)">Choose</a></li>
+              </ul>
+            </div>
+            <form ng-submit="message(newmessage)">
+              <input type="text" placeholder="Subject" ng-model='newmessage.subject'>
+              <textarea ng-model="newmessage.body"></textarea>
+              <input type="submit" value="Submit">
+            </form>
+            <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+          </div>
+        </div>
         <hr>
 
         <footer>
@@ -122,6 +138,7 @@
           <h6>Github: github.com/mikesankovich</h6>
           <h6>website: michaelsankovich.com</h6>
         </footer>
+
       </body>
       <!-- <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script> -->
       <!-- <script src="/javascripts/js/vendor/jquery.js"></script> -->
@@ -129,7 +146,7 @@
       <script src="/javascripts/js/vendor/modernizr.js"></script>
       <script src="/javascripts/js/foundation.min.js"></script>
       <script>
-        $(document).foundation();
+      $(document).foundation();
       </script>
       <script src="/stylesheets/sweetalert-master/dist/sweetalert.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
