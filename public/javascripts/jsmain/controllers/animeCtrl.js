@@ -224,4 +224,8 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
   $scope.toForum = function(anime) {
     $state.go('forum', {animeId: anime._id})
   }
+  $scope.toUser = function(review) {
+    $state.go('user', {userId: review.user._id})
+  }
+
 });

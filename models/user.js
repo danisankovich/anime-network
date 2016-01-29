@@ -6,7 +6,10 @@ var User = new Schema({
   username: String,
   email: String,
   password: String,
-  friendIds: [],
+  friendIds: [{
+    friendId: String,
+    pending: {type: Boolean, default: true}
+  }],
   likes: [],
   willWatch: [],
   watchingAnime: [],

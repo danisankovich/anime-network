@@ -19,6 +19,9 @@ app.controller('forumCtrl', function($scope, $state, $http, animeService, userSe
   $scope.toTopic = function(topic) {
     $state.go('onetopic', {topicId: topic._id})
   }
+  $scope.toUser = function(topic) {
+    $state.go('user', {userId: topic.user._id})
+  }
 
 
   $scope.newTopic = function(topic) {

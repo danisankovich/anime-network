@@ -310,6 +310,17 @@ router.post('/addReview/:id', function(req, res) {
         })
       })
     })
+    router.post('/friendrequest/:id', function(req, res) {
+      User.findById(req.params.id, function(err, user) {
+        user.friendIds.push({friendId: req.user._id, pending: false})
+        user.save()
+        User.findById(req.user.id, function(err, currentUser) {
+          currentUser.friendIds.push({friendId: user._id, pending: false})
+          currentUser.save()
+          res.send()
+        })
+      })
+    })
 
 
 

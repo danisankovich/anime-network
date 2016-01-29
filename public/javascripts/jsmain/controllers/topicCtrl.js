@@ -38,4 +38,9 @@ app.controller('topicCtrl', function($scope, $state, $http, animeService, userSe
     })
   }
 
+  $scope.toUser = function(topic) {
+    $state.go('user', {userId: topic.user._id})
+  }
+
+
 })

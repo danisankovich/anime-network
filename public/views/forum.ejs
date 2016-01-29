@@ -50,7 +50,7 @@
         <tbody>
           <tr ng-repeat="topic in topics">
             <td><a ng-click="toTopic(topic)">{{topic.title}}</a></td>
-            <td>{{topic.user.username}}</td>
+            <td><a ng-click="toUser(topic)">{{topic.user.username}}</a></td>
             <td>{{topic.spoilers}}</td>
             <td>{{topic.responses.length}}</td>
             <td>{{topic.responses}} most recent</td>

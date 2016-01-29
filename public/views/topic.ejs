@@ -1,3 +1,29 @@
+
+=================================
+=================================
+=================================
+=================================
+=================================
+=================================
+=================================
+=================================
+=================================
+===================================
+===================================
+===================================
+===================================
+===================================
+===================================
+===================================
+===================================
+===================================
+If they are not logged in, the buttons pop up a modal for them to log in from
+
+
+
+
+
+
 <div class='layout'>
   <div class="container">
     <div class="row">
@@ -21,7 +47,7 @@
               <div class="small-4 columns">
                 <div id="authorInfo">
                   <div id="author">
-                    <p>User: {{topic.user.username}}</p>
+                    <p>User: <a ng-click="toUser(topic)">{{topic.user.username}}</a></p>
                     <p>Picture: {{topic.user.profilePic}}</p>
                     <p>Member Since: {{topic.user.createdAt | date: "MMM d, y"}}</p>
                     <p>Message: Email | Message</p>
@@ -41,8 +67,8 @@
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div id="responses">
+            <!-- <div class="row"> -->
+              <!-- <div id="responses"> -->
                 <div ng-repeat="response in topic.responses">
                   <div class="small-12 columns contentColor">
                     <div class="small-4 columns">
@@ -66,7 +92,7 @@
                       </div>
                     </div>
                     <div ng-repeat="post in response.responses">
-                  <div class="columns small-12" class='contentColor'>
+                  <div class="columns small-11 small-offset-1 contentColor">
                     <div class="small-4 columns">
                       <div id="authorInfo">
                         <div id="author">
@@ -88,15 +114,16 @@
                     </div>
                   </div>
                   </div>
-                  </div>
-                  </div>
+                  <!-- </div>
+                  </div> -->
+                </div>
+              </div>
+
                 <div class="columns small-12">
                   <div class="small-3 small-offset-9 columns replyDiv">
                     <a class="replyButton" ng-click="replyModal()">REPLY TO TOPIC</a>
                   </div>
                 </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>

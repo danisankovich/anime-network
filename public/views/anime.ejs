@@ -45,7 +45,7 @@
           <hr>
           <li ng-repeat="review in reviews">
             <ul>
-              <li>Written by <a>{{review.user.username}}</a> on {{review.date | date: "MMM d, y"}} <span class="toRight">Rating: {{review.userRating}} / 10</span></li>
+              <li>Written by <a ng-click="toUser(review)">{{review.user.username}}</a> on {{review.date | date: "MMM d, y"}} <span class="toRight">Rating: {{review.userRating}} / 10</span></li>
               <li class="helpfulCount">xxx people found this review helpful.</li>
               <li><a class="helpfulCount">Other reviews by this user...</a></li>
               <li><hr></li>
