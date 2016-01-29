@@ -312,12 +312,31 @@ router.post('/addReview/:id', function(req, res) {
     })
     router.post('/friendrequest/:id', function(req, res) {
       User.findById(req.params.id, function(err, user) {
-        user.friendIds.push({friendId: req.user._id, pending: false})
+        user.friendIds.push({friendId: req.user._id, pending: true})
         user.save()
         User.findById(req.user.id, function(err, currentUser) {
-          currentUser.friendIds.push({friendId: user._id, pending: false})
+          currentUser.friendIds.push({friendId: user._id, pending: true})
           currentUser.save()
           res.send()
+        })
+      })
+    })
+    router.post('/acceptfriend/:id', function(req, res) {
+      console.log(req.params.id)
+      User.findById(req.params.id, function(err, user) {
+        user.friendIds.forEach(function(e) {
+          if(e.friendId === req.user.id) {
+            e.pending = true
+            user.save()
+          }
+        })
+        User.findById(req.user.id, function(err, currentUser) {
+          currentUser.friendIds.forEach(function(f) {
+            if(f.friendId === req.params.id) {
+              f.pending = true
+              currentUser.save()
+            }
+          })
         })
       })
     })

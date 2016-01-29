@@ -21,4 +21,9 @@ app.controller('profileCtrl', function($scope, $state, $http, $rootScope, userSe
   $scope.willWatchAnime = function() {
     $state.go('willWatch')
   }
+  $scope.accept=function(friend) {
+    $http.post('/acceptfriend/' + friend.friendId).success(function(success) {
+      console.log(success)
+    })
+  }
 });
