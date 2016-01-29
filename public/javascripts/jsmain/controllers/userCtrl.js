@@ -7,7 +7,6 @@ app.controller('userCtrl', function($scope, $state, $http, $rootScope, userServi
     $scope.person = person
   })
   $scope.addFriend = function(person) {
-    console.log(person)
     var found = person.friendIds.some(function (el) {
       return el.friendId === $scope.user._id;
     });
@@ -17,12 +16,4 @@ app.controller('userCtrl', function($scope, $state, $http, $rootScope, userServi
       })
     }
   }
-
-  function checkAndAdd(name) {
-  var id = arr.length + 1;
-  var found = arr.some(function (el) {
-    return el.username === name;
-  });
-  if (!found) { arr.push({ id: id, username: name }); }
-}
 });
