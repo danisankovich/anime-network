@@ -7,11 +7,12 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
     var availableTags = [];
     userService.getCurrentUser().success(function(data) {
       $rootScope.currentUser = data;
-      $rootScope.currentUser.friendList = [];
+      $scope.friendList = [];
       $rootScope.currentUser.friendIds.forEach(function(e) {
         $http.get('/user/' + e.friendId).success(function(friend) {
           e.username = friend.username
-          $rootScope.currentUser.friendList.push(e)
+          $scope.friendList.push(e)
+          console.log($scope.friendList)
         })
       })
     });
@@ -104,7 +105,11 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
   $scope.mailModal = function() {
     $('#mailModal').foundation('reveal', 'open');
   }
+  $scope.choose=function(friend) {
+    $scope.friend = friend
+  }
   $scope.message=function(newmessage) {
+    newmessage.friend = $scope.friend._id
     console.log(newmessage)
   }
 });

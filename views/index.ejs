@@ -114,13 +114,13 @@
         </div>
         <div ui-view></div>
         <div ng-controller="autoCtrl">
-          <a class="mailButton" ng-click="mailModal()">REPLY TO TOPIC</a>
+          <a class="mailButton" ng-click="mailModal()">Message A Friend</a>
           <div id="mailModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
             <h2 id="modalTitle">New Message</h2>
             <p class="lead">Choose a Friend</p>
             <div>
               <ul> Friends
-                <li ng-repeat="friend in currentUser.friendList" ng-hide="friend.pending">{{friend.username}}  <a ng-click="choose(friend)">Choose</a></li>
+                <li ng-repeat="friend in friendList" ng-hide="friend.pending">{{friend.username}}  <a ng-click="choose(friend)">Choose</a></li>
               </ul>
             </div>
             <form ng-submit="message(newmessage)">
