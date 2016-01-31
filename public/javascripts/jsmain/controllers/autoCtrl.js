@@ -12,7 +12,6 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
         $http.get('/user/' + e.friendId).success(function(friend) {
           e.username = friend.username
           $scope.friendList.push(e)
-          console.log($scope.friendList)
         })
       })
     });
@@ -110,6 +109,10 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
   }
   $scope.message=function(newmessage) {
     newmessage.friend = $scope.friend._id
-    console.log(newmessage)
+    var theMessage = {to: $scope.friend.friendId, toName: $scope.friend.username, from: $rootScope.currentUser._id, subject: newmessage.subject, body: newmessage.body, createdAt: Date.now()}
+    console.log(theMessage) //goes into the array within the friendlist item for both users.
+    $http.post('/newmessage', theMessage).success(function(success) {
+      console.log(success)
+    })
   }
 });

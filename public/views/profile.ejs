@@ -13,7 +13,7 @@
 
     <div>
       <ul> Pending
-        <li ng-repeat="friend in user.friendList" ng-show="friend.pending && !friend.initiator">{{friend.username}} <a ng-click="accept(friend)">Accept</a></li>
+        <li ng-repeat="friend in user.friendList" ng-show="friend.pending">{{friend.username}} <a ng-click="accept(friend)" ng-show="!friend.initiator">Accept</a></li>
       </ul>
       <ul> Friends
         <li ng-repeat="friend in user.friendList" ng-hide="friend.pending">{{friend.username}}</li>

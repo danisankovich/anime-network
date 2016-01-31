@@ -9,7 +9,8 @@ var User = new Schema({
   friendIds: [{
     friendId: String,
     pending: {type: Boolean, default: true},
-    initiator: Boolean
+    initiator: Boolean,
+    messages: {type: Array, default: []}
   }],
   likes: [],
   willWatch: [],
