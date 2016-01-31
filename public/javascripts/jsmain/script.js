@@ -9,6 +9,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
   .state('register', { url: '/register', templateUrl: 'views/register.ejs', controller: 'registerCtrl' })
   .state('profile', { url: '/profile', templateUrl: 'views/profile.ejs', controller: 'profileCtrl' })
   .state('messages', { url: '/messages', templateUrl: 'views/messages.ejs', controller: 'messageCtrl' })
+  .state('chatroom', { url: '/chatroom', templateUrl: 'views/chatroom.ejs', controller: 'chatroomCtrl' })
   .state('user', { url: '/user/{userId}', templateUrl: 'views/user.ejs', controller: 'userCtrl' })
   .state('myComplete', { url: '/profile/completed', templateUrl: 'views/mycompleted.ejs', controller: 'mycompletedCtrl' })
   .state('willWatch', { url: '/profile/willwatch', templateUrl: 'views/myWillWatch.ejs', controller: 'willwatchCtrl' })

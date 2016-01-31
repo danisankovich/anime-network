@@ -46,7 +46,7 @@
       </li>
       <% if (user) { %>
         <li><a ui-sref="#">Link 1</a></li>
-        <li><a ui-sref="#">Link 2</a></li>
+        <li><a ui-sref="chatroom">Chatroom</a></li>
         <li><a ui-sref="messages">Messages</a></li>
         <% } else { %>
           <% } %>
@@ -133,15 +133,10 @@
         </div>
         <hr>
 
-        <footer>
-          <h6>Template by Michael Sankovich:</h6>
-          <h6>Github: github.com/mikesankovich</h6>
-          <h6>website: michaelsankovich.com</h6>
-        </footer>
-
       </body>
       <!-- <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script> -->
       <!-- <script src="/javascripts/js/vendor/jquery.js"></script> -->
+      <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
       <script src="/javascripts/js/vendor/modernizr.js"></script>
       <script src="/javascripts/js/foundation.min.js"></script>
@@ -160,6 +155,7 @@
       <script type="text/javascript" src="/javascripts/jsmain/controllers/mainCtrl.js"></script>
       <script type="text/javascript" src="/javascripts/jsmain/controllers/profileCtrl.js"></script>
       <script type="text/javascript" src="/javascripts/jsmain/controllers/messageCtrl.js"></script>
+      <script type="text/javascript" src="/javascripts/jsmain/controllers/chatroomCtrl.js"></script>
       <script type="text/javascript" src="/javascripts/jsmain/controllers/userCtrl.js"></script>
       <script type="text/javascript" src="/javascripts/jsmain/controllers/mycompletedCtrl.js"></script>
       <script type="text/javascript" src="/javascripts/jsmain/controllers/mywillwatchCtrl.js"></script>

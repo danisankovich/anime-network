@@ -8,11 +8,62 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var flash = require('connect-flash');
+var http = require('http');
+var debug = require('debug')('Cthulhu:server');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-
 var app = express();
+
+var server = http.createServer(app);
+var port = normalizePort(process.env.PORT || '4000');
+app.set('port', port);
+// var server = require('http').Server(app);
+var io = require('socket.io').listen(server);
+server.listen(port);
+server.on('Error:', onError);
+server.on('listening', onListening);
+
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) { return val; }
+  if (port >= 0) { return port; }
+
+  return false;
+}
+
+function onError(error) {
+  if (error.syscall !== 'listen') { throw error; }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+  console.log('Your Anime app is gainaxing on port ', port);
+}
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -90,6 +141,23 @@ app.use(function(err, req, res, next) {
   //   message: err.message,
   //   error: {}
   // });
+});
+io.on('connection', function(socket){
+  socket.on('chat message', function(msg){
+    io.emit('chat message', msg);
+  });
+  socket.on('user enter', function(msg) {
+    io.emit('user enter', msg);
+    console.log("someone\'s entered")
+  });
+  socket.on('user leave', function(msg) {
+    io.emit('user leave', msg);
+    console.log('user disconnected');
+  });
+  socket.on('user typing', function(msg) {
+    io.emit('user typing', msg);
+    console.log('typing')
+  });
 });
 
 
