@@ -109,10 +109,11 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
   }
   $scope.message=function(newmessage) {
     newmessage.friend = $scope.friend._id
-    var theMessage = {to: $scope.friend.friendId, toName: $scope.friend.username, from: $rootScope.currentUser._id, subject: newmessage.subject, body: newmessage.body, createdAt: Date.now()}
-    console.log(theMessage) //goes into the array within the friendlist item for both users.
+    var theMessage = {to: $scope.friend.friendId, toName: $scope.friend.username, from: $rootScope.currentUser._id, body: newmessage.body, createdAt: Date.now()}
+    console.log(theMessage)
     $http.post('/newmessage', theMessage).success(function(success) {
-      console.log(success)
+      $scope.newmessage = {}
+      newmessage = {}
     })
   }
 });

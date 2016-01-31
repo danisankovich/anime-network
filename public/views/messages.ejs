@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div class="columns small-10 small-offset-1">
+      <div class="columns small-3">
+        <ul>
+          <li ng-repeat="friend in user.friendIds" ng-click="showMessages(friend)">{{friend.username}}</li>
+        </ul>
+      </div>
+      <div>
+        <div class="columns small-9">
+          <p ng-repeat="message in thisFriendsMessages" class="message-{{message.position}}">{{message.body}}</p>
+          <div ng-show="friend">
+          <form ng-model="newmessage" ng-submit="sendMessage(newmessage)">
+            <input type="text" placeholder="Subject" ng-model='newmessage.subject'>
+            <textarea ng-model="newmessage.body"></textarea>
+            <input type="submit" value="Submit">
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

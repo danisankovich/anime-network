@@ -140,3 +140,16 @@ ul.reviews li ul {
 .replyButton:hover {
   color: red;
 }
+
+.message-mine {
+  border: 1px black solid;
+  border-radius: 10px;
+  width: 51%;
+  float: right;
+}
+.message-theirs {
+  border: 1px black solid;
+  border-radius: 10px;
+  width: 51%;
+  float: left;
+}

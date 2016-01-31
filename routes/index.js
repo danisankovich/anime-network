@@ -346,7 +346,6 @@ router.post('/addReview/:id', function(req, res) {
         user1.friendIds.forEach(function(e) {
           if(e.friendId === req.body.from) {
             e.messages.push(req.body)
-            console.log("eeEEEEEEEEEEEEEEEEE",e.messages)
             user1.save()
           }
         })
@@ -355,7 +354,6 @@ router.post('/addReview/:id', function(req, res) {
         user2.friendIds.forEach(function(f) {
           if(f.friendId === req.body.to) {
             f.messages.push(req.body)
-            console.log("FFFFFFFFF", f.messages)
             user2.save()
           }
         })
