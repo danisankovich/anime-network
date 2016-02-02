@@ -3,7 +3,10 @@
     <div class="columns small-10 small-offset-1">
       <div class="columns small-3">
         <ul>
-          <li ng-repeat="friend in user.friendIds" ng-click="showMessages(friend)">{{friend.username}}</li>
+          <li>Click on a friend To see all messages from them</li>
+          <li ng-repeat="friend in user.friendIds" ng-click="showMessages(friend)">{{friend.username}}
+            <span ng-show="friend.isLoggedIn"><p class="circleOnline"> </p></span>
+          </li>
         </ul>
       </div>
       <div>

@@ -11,11 +11,13 @@ app.controller('messageCtrl', function($scope, $state, $http, $rootScope, userSe
     $scope.user.friendIds.forEach(function(e) {
       $http.get('/user/' + e.friendId).success(function(friend) {
         e.username = friend.username
+        e.isLoggedIn = friend.isLoggedIn
         $scope.user.friendList.push(e)
       })
     })
   });
   $scope.showMessages = function(friend) {
+    friend.isLoggedIn = true
     $scope.friend = friend
     friend.messages.forEach(function(e) {
       if(e.from === $scope.user._id) {
