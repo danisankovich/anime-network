@@ -1,19 +1,34 @@
 <div class="container">
   <div class="row">
-    <header>
-      <p>Welcome</p>
-      <h1>Sockets</h1>
-      <p ng-repeat="user in currentUserList">{{user.name}}</p>
-    </header>
-    <main>
-      <ul id="messages"></ul>
-      <div>
-        <p ng-repeat="message in messages">{{message}}</p>
+    <div class="columns small-12">
+      <div class="columns small-4 small-offset-4">
+        <h1>ChatRoom: Please Keep It Civil</h1>
       </div>
-      <form ng-submit="chatMessage(sent)">
-        <input id="m" autocomplete="off" ng-model="sent">
-        <button type="submit">Send</button>
-      </form>
-    </main>
+    </div>
+  </div>
+  <div class="row">
+    <div class="columns small-12">
+      <div class="columns small-3">
+        <ul>
+          <li>Users Currently Here: </li>
+          <li class="chatUser" ng-repeat="user in currentUserList" ng-click="toUser(user)"><a>{{user.name}}</a></li>
+        </ul>
+      </div>
+      <div class="columns small-9">
+        <p ng-repeat="message in messages"><a ng-click="toUser(user)">{{message.user.toUpperCase()}}</a> : {{message.message}}</p>
+      </div>
+      <div class="columns small-9 small-offset-3">
+        <form ng-submit="chatMessage(sent)">
+          <div class="columns small-9">
+            <input id="m" type="text" autocomplete="off" ng-model="sent">
+          </div>
+          <div class="columns small-3">
+            <button type="submit" class="button small round">Send</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+
   </div>
 </div>

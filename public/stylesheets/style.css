@@ -153,3 +153,16 @@ ul.reviews li ul {
   width: 51%;
   float: left;
 }
+
+/*====================================
+=================Chatroom CSS===================
+====================================
+====================================*/
+
+.chatUser:hover {
+  background-color: lightgrey;
+}
+.chatUser {
+  padding: 2px 2px 2px 15px;
+  list-style: none;
+}

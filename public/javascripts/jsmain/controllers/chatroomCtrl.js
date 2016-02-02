@@ -10,6 +10,9 @@ app.controller('chatroomCtrl', function($scope, $state, $http, $rootScope, userS
         $scope.currentUserList = currentUserList
       })
     });
+    $scope.toUser = function(user) {
+      $state.go('user', {userId: user._id})
+    }
   // var socket = io.connect('http://localhost');
     var socket = io();
   var $username = $('#username');
@@ -30,8 +33,9 @@ app.controller('chatroomCtrl', function($scope, $state, $http, $rootScope, userS
   // }
   // $('form').submit(function(event){
   //   event.preventDefault();
+    var chat = {user: $rootScope.currentUser.username, message: sent};
     if (sent.length > 0) {
-      socket.emit('chat message', $rootScope.currentUser.username + ': ' + sent);
+      socket.emit('chat message', chat);
       $scope.sent = '';
     }
   };
