@@ -1,21 +1,17 @@
 <div class="container">
   <div class="row">
-    <footer>
-      <h6>Template by Michael Sankovich:</h6>
-      <h6>Github: github.com/mikesankovich</h6>
-      <h6>website: michaelsankovich.com</h6>
-    </footer>
     <header>
       <p>Welcome</p>
       <h1>Sockets</h1>
+      <p ng-repeat="user in currentUserList">{{user.name}}</p>
     </header>
     <main>
       <ul id="messages"></ul>
       <div>
         <p ng-repeat="message in messages">{{message}}</p>
       </div>
-      <form>
-        <input id="m" autocomplete="off">
+      <form ng-submit="chatMessage(sent)">
+        <input id="m" autocomplete="off" ng-model="sent">
         <button type="submit">Send</button>
       </form>
     </main>

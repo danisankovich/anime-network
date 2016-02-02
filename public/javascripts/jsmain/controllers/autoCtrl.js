@@ -88,7 +88,7 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
         socket.emit('user enter', $scope.user.username);
       });
       var socket = io();
-    $scope.messages = []
+    // $scope.messages = []
     // socket.on('user enter', function(msg) {
     //       // if ($scope.signedIn) {
     //   //   $('#messages').append($('<li>').text('USER: ' + msg + ' just entered the chat room.'));

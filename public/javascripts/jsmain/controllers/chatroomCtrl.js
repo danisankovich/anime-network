@@ -25,30 +25,20 @@ app.controller('chatroomCtrl', function($scope, $state, $http, $rootScope, userS
       console.log($scope.currentUserList)
     })
   });
-  $('form').submit(function(event){
-    event.preventDefault();
-    var $msg = $('#m');
-    if ($msg.val().length > 0) {
-      socket.emit('chat message', $rootScope.currentUser.username + ': ' + $msg.val());
-      $msg.val('');
-      // var dateObj = new Date();
-      // var month = dateObj.getUTCMonth() + 1; //months from 1-12
-      // var day = dateObj.getUTCDate();
-      // var year = dateObj.getUTCFullYear();
-      // var hour = dateObj.getUTCHours() - 5;
-      // if(hour < 12) {
-      //   var piece = 'AM'
-      // }
-      // else {
-      //   piece = "PM"
-      // }
-      // var minute = dateObj.getUTCMinutes();
-      // $message.text('Last Message On ' + month+ "/" +day + "/" + year + " | " + hour + ":" + minute + " " + piece);
+  $scope.chatMessage = function(sent) {
+  //   console.log(sent)
+  // }
+  // $('form').submit(function(event){
+  //   event.preventDefault();
+    if (sent.length > 0) {
+      socket.emit('chat message', $rootScope.currentUser.username + ': ' + sent);
+      $scope.sent = '';
     }
-  });
+  };
   socket.on('chat message', function(msg){
-    console.log('msg')
-    $scope.messages.push(msg)
+    $scope.$apply(function () {
+      $scope.messages.push(msg)
+    });
   });
 });
 })
