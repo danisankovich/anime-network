@@ -1,12 +1,17 @@
 app.controller('chatroomCtrl', function($scope, $state, $http, $rootScope, userService){
-
+  $scope.signedIn = false;
   $(function() {
+    userService.getCurrentUser().success(function(data) {
+      $scope.user = data;
+      $scope.messageText = 'Welcome to the room, ' + $scope.user.username + '!';
+      socket.emit('user enter', $scope.user.username);
+      $scope.signedIn = true;
+    });
   // var socket = io.connect('http://localhost');
     var socket = io();
   var $username = $('#username');
   var $usernameButton = $('header button[name="addUsername"]');
   var $message = $('header p');
-  var signedIn = false;
   $('header button[name="addUsername"]').click(function(event) {
     if ($username.val().length > 0) {
       console.log('aasfassf')
@@ -20,7 +25,7 @@ app.controller('chatroomCtrl', function($scope, $state, $http, $rootScope, userS
   });
   socket.on('user enter', function(msg) {
     console.log('asf')
-    if (signedIn) {
+    if ($scope.signedIn) {
       $('#messages').append($('<li>').text('USER: ' + msg + ' just entered the chat room.'));
     }
   });

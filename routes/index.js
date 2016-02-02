@@ -39,7 +39,21 @@ router.post('/', function(req, res) {
 router.get('/user', function(req, res, next) {
   User.findById(req.user.id, function(err, user) {
     if (err) { res.send(err);}
-    else { res.json(req.user);}
+    else {
+      user.isLoggedIn = true;
+      user.save()
+      res.json(req.user);
+    }
+  });
+});
+router.get('/userleave/:id', function(req, res, next) {
+  User.findById(req.params.id, function(err, user) {
+    if (err) { res.send(err);}
+    else {
+      user.isLoggedIn = false;
+      user.save()
+      res.json(req.user);
+    }
   });
 });
 router.get('/user/:id', function(req, res, next) {
@@ -54,7 +68,6 @@ router.get('/myanimelists/:id', function(req, res) {
     else {
       res.send(anime)
     }
-
   })
 })
 
@@ -116,7 +129,6 @@ router.post('/genres', function(req, res) {
 });
 
 router.post('/addToWatching/:id', function(req, res) {
-  console.log(req.params.id);
   Anime.findByIdAndUpdate(req.params.id, {$push: {usersWatching: req.user._id}}, function(err, anime) {
     User.findByIdAndUpdate(req.user.id, {$push: {watchingAnime: {animeId: req.params.id, episodesWatched: 0}}}, function(err, user) {
       res.send(anime);
@@ -125,7 +137,6 @@ router.post('/addToWatching/:id', function(req, res) {
 });
 
 router.post('/addToWillWatch/:id', function(req, res) {
-  console.log(req.params.id);
   User.findByIdAndUpdate(req.user.id, {$push: {willWatch: req.params.id}}, function(err, user) {
     res.send(user);
   });
@@ -165,8 +176,6 @@ router.post('/transtocompleted', function(req, res) {
     });
 });
 router.post('/transtowatching/:id', function(req, res) {
-  console.log('useruseruser', req.user.id)
-  console.log('ididididid', req.params.id)
   User.findById(req.user.id, function(err, user) {
     var idx = user.willWatch.indexOf(req.params.id)
     user.willWatch.splice(idx, 1)
@@ -181,7 +190,6 @@ router.post('/transtowatching/:id', function(req, res) {
 })
 
 router.post('/addReview/:id', function(req, res) {
-  console.log(req.params.id);
   Anime.findByIdAndUpdate(req.params.id, {$push: {reviews:
     {
       title: req.body.title,
@@ -196,7 +204,6 @@ router.post('/addReview/:id', function(req, res) {
           body: req.body.body,
           rating: req.body.rating
         }}}, function(err, user) {
-          console.log(user);
           res.send(anime);
         });
       });
@@ -266,7 +273,6 @@ router.post('/addReview/:id', function(req, res) {
       })
     })
     router.post('/ratings', function(req, res) {
-      console.log("req.body", req.body.rating)
       Anime.findById(req.body.anime, function(err, anime) {
         anime.ratings.push({rating: req.body.rating, user: req.user.id})
         anime.save();
@@ -275,7 +281,6 @@ router.post('/addReview/:id', function(req, res) {
     })
     router.get('/showforum/:id', function(req, res) {
       Forum.findOne({showId: req.params.id}, function(err, forum) {
-        console.log(forum)
         res.send(forum)
       })
     })
@@ -286,7 +291,6 @@ router.post('/addReview/:id', function(req, res) {
     })
     router.get('/onetopic/:id', function(req, res) {
       Topic.find({_id: req.params.id}, function(err, topic) {
-        console.log(topic)
         res.send(topic)
       })
     })
@@ -294,7 +298,6 @@ router.post('/addReview/:id', function(req, res) {
       Topic.findById(req.body._id, function(err, topic) {
         topic.responses = req.body.responses
         topic.save()
-        console.log(topic)
         res.send(topic)
       })
     })
@@ -323,7 +326,6 @@ router.post('/addReview/:id', function(req, res) {
       })
     })
     router.post('/acceptfriend/:id', function(req, res) {
-      console.log(req.params.id)
       User.findById(req.params.id, function(err, user) {
         user.friendIds.forEach(function(e) {
           if(e.friendId === req.user.id) {

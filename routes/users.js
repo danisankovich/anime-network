@@ -1,8 +1,17 @@
 var express = require('express');
 var router = express.Router();
+var User = require('../models/user');
 
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+router.get('/allloggedin', function(req, res, next) {
+  var currentUserList = []
+  User.find({isLoggedIn: true}, function(err, users) {
+    users.forEach(function(e) {
+      var name = e.username
+      var _id = e._id
+      currentUserList.push({name, _id})
+    })
+    console.log('currentUserList', currentUserList)
+  })
 });
 
 module.exports = router;
