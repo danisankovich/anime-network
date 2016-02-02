@@ -6,14 +6,14 @@
       <h6>website: michaelsankovich.com</h6>
     </footer>
     <header>
-      <button type="button" name="addUsername">Create</button>
-      <input type="text" name="username" id="username" placeholder="USERNAME">
-      <label for="username">Username:</label>
       <p>Welcome</p>
       <h1>Sockets</h1>
     </header>
     <main>
       <ul id="messages"></ul>
+      <div>
+        <p ng-repeat="message in messages">{{message}}</p>
+      </div>
       <form>
         <input id="m" autocomplete="off">
         <button type="submit">Send</button>

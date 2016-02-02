@@ -62,6 +62,17 @@ router.get('/user/:id', function(req, res, next) {
     else { res.json(user);}
   });
 });
+router.get('/username/:id', function(req, res, next) {
+  User.find({username: req.params.id}, function(err, user) {
+    if (err) { res.send(err);}
+    else {
+      var newUser = {}
+      newUser.username = user[0].username
+      newUser._id = user[0]._id
+      res.send(newUser);
+    }
+  });
+});
 router.get('/myanimelists/:id', function(req, res) {
   Anime.findById(req.params.id, function(err, anime) {
     if(err) {res.send(err)}

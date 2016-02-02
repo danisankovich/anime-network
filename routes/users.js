@@ -10,7 +10,7 @@ router.get('/allloggedin', function(req, res, next) {
       var _id = e._id
       currentUserList.push({name, _id})
     })
-    console.log('currentUserList', currentUserList)
+    res.send(currentUserList)
   })
 });
 
