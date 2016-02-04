@@ -14,9 +14,11 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
   .state('myComplete', { url: '/profile/completed', templateUrl: 'views/mycompleted.ejs', controller: 'mycompletedCtrl' })
   .state('willWatch', { url: '/profile/willwatch', templateUrl: 'views/myWillWatch.ejs', controller: 'willwatchCtrl' })
   .state('favorited', { url: '/profile/favorited', templateUrl: 'views/myFavorited.ejs', controller: 'myFavoritedCtrl' })
+  .state('watching', { url: '/profile/watching', templateUrl: 'views/myWatching.ejs', controller: 'myWatchingCtrl' })
   .state('anime', { url: '/anime/{animename}', templateUrl: 'views/anime.ejs', controller: 'animeCtrl' })
   .state('forum', { url: '/forum/{animeId}', templateUrl: 'views/forum.ejs', controller: 'forumCtrl' })
   .state('onetopic', { url: '/onetopic/{topicId}', templateUrl: 'views/topic.ejs', controller: 'topicCtrl' })
   .state('animelist', { url: '/animelist/{animename}', templateUrl: 'views/animeGenre.ejs', controller: 'animeListCtrl' })
   .state('animegenre', { url: '/animegenre', templateUrl: 'views/animeGenre.ejs', controller: 'genreCtrl' });
+  //viewing another persons lists: all one page, collapsible
 }]);

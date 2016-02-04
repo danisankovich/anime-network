@@ -24,6 +24,9 @@ app.controller('profileCtrl', function($scope, $state, $http, $rootScope, userSe
   $scope.favoritedAnime = function() {
     $state.go('favorited')
   }
+  $scope.watchingAnime = function() {
+    $state.go('watching')
+  }
   $scope.accept=function(friend) {
     $http.post('/acceptfriend/' + friend.friendId).success(function(success) {
       console.log(success)
