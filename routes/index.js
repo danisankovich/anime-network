@@ -389,10 +389,13 @@ router.post('/addReview/:id', function(req, res) {
   router.get('/login', function(req, res) {
   });
 
-  router.post('/login', passport.authenticate('local', { failureRedirect: '/#/loginerror' }), function(req, res, next) {
+  router.post('/login', passport.authenticate('local'), function(req, res, next) {
+  // router.post('/login', passport.authenticate('local', { failureRedirect: '/#/loginerror' }), function(req, res, next) {
+    console.log(req.body)
     req.session.save(function (err) {
       if (err) { return next(err); }
-      res.redirect('/#');
+      // res.redirect('/#');
+      res.send()
     });
   });
 

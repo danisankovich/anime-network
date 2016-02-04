@@ -1,4 +1,4 @@
-app.controller('mainCtrl', function($scope, $state, $http, $rootScope, animeService){
+app.controller('mainCtrl', function($scope, $state, $http, $rootScope, animeService, userService){
   $scope.results1 = [];
   $scope.whichUrl = 'http://localhost:4000';
     // $scope.whichUrl = 'https://animenetwork.herokuapp.com';
@@ -47,6 +47,25 @@ app.controller('mainCtrl', function($scope, $state, $http, $rootScope, animeServ
     // $http.get($scope.whichUrl + "/makeforum").success(function(anime) {
     //   console.log(anime)
     // })
+    $scope.login = function(user) {
+      console.log(user)
+      $http.post('/login', user).success(function(){
+        $state.go('/')
+        location.reload();
+      })
+        // console.log("success")
+        // userService.getCurrentUser().success(function(data) {
+        //   $rootScope.currentUser = data;
+        //   $scope.friendList = [];
+        //   $rootScope.currentUser.friendIds.forEach(function(e) {
+        //     $http.get('/user/' + e.friendId).success(function(friend) {
+        //       e.username = friend.username
+        //       $scope.friendList.push(e)
+        //     })
+        //   })
+        // });
+      // })
+    }
   $scope.register = function(newUser) {
     $scope.newUser = newUser;
     $http.post($scope.whichUrl + '/register', $scope.newUser).success(function(err, data) {
