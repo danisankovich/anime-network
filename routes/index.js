@@ -396,4 +396,15 @@ router.post('/addReview/:id', function(req, res) {
     });
   });
 
+  router.post('/updateuser', function(req, res, next) {
+    User.findById(req.user.id, function(err, user) {
+      if (err) { res.send(err);}
+      else {
+        user.watchingAnime = req.body.watchingAnime;
+        user.save()
+        res.json(user);
+      }
+    });
+  });
+
   module.exports = router;
