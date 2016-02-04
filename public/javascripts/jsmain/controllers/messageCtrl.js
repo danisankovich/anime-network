@@ -17,7 +17,6 @@ app.controller('messageCtrl', function($scope, $state, $http, $rootScope, userSe
     })
   });
   $scope.showMessages = function(friend) {
-    friend.isLoggedIn = true
     $scope.friend = friend
     friend.messages.forEach(function(e) {
       if(e.from === $scope.user._id) {
