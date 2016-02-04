@@ -13,6 +13,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
   .state('user', { url: '/user/{userId}', templateUrl: 'views/user.ejs', controller: 'userCtrl' })
   .state('myComplete', { url: '/profile/completed', templateUrl: 'views/mycompleted.ejs', controller: 'mycompletedCtrl' })
   .state('willWatch', { url: '/profile/willwatch', templateUrl: 'views/myWillWatch.ejs', controller: 'willwatchCtrl' })
+  .state('favorited', { url: '/profile/favorited', templateUrl: 'views/myFavorited.ejs', controller: 'myFavoritedCtrl' })
   .state('anime', { url: '/anime/{animename}', templateUrl: 'views/anime.ejs', controller: 'animeCtrl' })
   .state('forum', { url: '/forum/{animeId}', templateUrl: 'views/forum.ejs', controller: 'forumCtrl' })
   .state('onetopic', { url: '/onetopic/{topicId}', templateUrl: 'views/topic.ejs', controller: 'topicCtrl' })
