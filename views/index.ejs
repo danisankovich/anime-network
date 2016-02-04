@@ -114,7 +114,10 @@
         </div>
         <div ui-view></div>
         <div ng-controller="autoCtrl">
-          <a class="mailButton" ng-click="mailModal()">Message A Friend</a>
+          <div class="stuckBottom" ng-if="user">
+            <!-- User List Will Go Here. Only Friends. Friends logged in at top -->
+            <a class="mailButton" ng-click="mailModal()">Message A Friend</a>
+          </div>
           <div id="mailModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
             <h2 id="modalTitle">New Message</h2>
             <p class="lead">Choose a Friend</p>
