@@ -24,7 +24,7 @@
         </thead>
         <tbody>
           <tr>
-            <td><a href="">Rules: Please Read</a></td>
+            <td><a data-reveal-id="rulesModal">Rules: Please Read</a></td>
             <td>Admins</td>
             <td>0</td>
             <td>Rules by Admin</td>
@@ -53,7 +53,7 @@
             <td><a ng-click="toUser(topic)">{{topic.user.username}}</a></td>
             <td>{{topic.spoilers}}</td>
             <td>{{topic.responses.length}}</td>
-            <td>{{topic.responses}} most recent</td>
+            <td><a ng-click="toUserTwo(topic)">{{topic.mostRecentUser}}</a></td>
           </tr>
         </tbody>
       </table>
@@ -73,4 +73,28 @@
   <input type="submit" value="Submit">
 </form>
 <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+</div>
+
+<div id="rulesModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+  <h2 id="modalTitle">Rules Of The Forum</h2>
+  <ul>
+    <li>
+      Be Civil
+    </li>
+    <li>
+      No racist, sexist, homophobic, transphobic, etc. remarks. By all means, be controversial, but at least make it in good taste.
+    </li>
+    <li>
+      Do not reveal or seek to reveal the location of any persons or persons through this forum
+    </li>
+    <li>
+      No revealing of another's personal information
+    </li>
+    <li>
+      Have Fun
+    </li>
+  </ul>
+
+
+  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
 </div>
