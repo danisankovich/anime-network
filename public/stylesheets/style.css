@@ -1,6 +1,9 @@
 #anime {
   text-align: center;
 }
+.thoseForms {
+  height: 385px !important;
+}
 .stuckBottom {
   position: fixed;
   bottom: 0;

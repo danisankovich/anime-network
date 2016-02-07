@@ -1,7 +1,5 @@
 app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location, userService){
   $(document).ready(function() {
-    $scope.whichUrl = 'http://localhost:4000';
-    // $scope.whichUrl = 'https://animenetwork.herokuapp.com';
 
     $scope.hideGenre = false;
     var availableTags = [];
@@ -19,7 +17,7 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
 
     $('input').keyup(debounce(function(){
         $scope.n = $(".autocomplete").val();
-        $http.post($scope.whichUrl + '/anime/' + $scope.n).success(function(anime) {
+        $http.post('/anime/' + $scope.n).success(function(anime) {
           anime.forEach(function(e) {
             if(e.title !== undefined && availableTags.indexOf(e.title) === -1) {
               availableTags.push(e.title);
@@ -122,11 +120,6 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
     console.log(user)
     $http.post('/login', user).success(function(user){
       console.log(user)
-      // $scope.$apply(function () {
-      //   $scope.user = user
-      // });        // $state.go('/')
-      // location.reload();
-      // console.log("success")
       userService.getCurrentUser().success(function(data) {
         $rootScope.currentUser = data;
         $scope.user = $rootScope.currentUser
@@ -137,10 +130,39 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
             $scope.friendList.push(e)
           })
         })
+        $('#loginModal').foundation('reveal', 'close');
       });
     })
   }
-
+  $scope.register = function(newUser) {
+    $scope.newUser = newUser;
+    $http.post('/register', $scope.newUser).success(function(err, data) {
+      if(err.hasOwnProperty('name') === true) {
+        sweetAlert("Uh Oh  ", err.message, "error");
+        return;
+      }
+      else if(err.hasOwnProperty('errmsg')) {
+        sweetAlert("Uh Oh ", newUser.email + " is already registered", "error");
+        return;
+      }
+      else {
+        userService.getCurrentUser().success(function(data) {
+          $rootScope.currentUser = data;
+          $scope.friendList = [];
+          $rootScope.currentUser.friendIds.forEach(function(e) {
+            $http.get('/user/' + e.friendId).success(function(friend) {
+              e.username = friend.username
+              $scope.friendList.push(e)
+            })
+          })
+          $('#loginModal').foundation('reveal', 'close');
+        });
+      }
+    });
+  };
+  $scope.closeLogin = function() {
+    $('#loginModal').foundation('reveal', 'close');
+  }
 
   });
   $scope.loginModal = function() {
