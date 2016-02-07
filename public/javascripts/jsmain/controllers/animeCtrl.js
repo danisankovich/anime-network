@@ -143,8 +143,6 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
         }
       });
     }
-
-
     if($scope.user.completedAnime.indexOf(anime._id) === -1 && myWatching.indexOf(anime._id) === -1 && myWillWatch.indexOf(anime._id) === -1) {
       $scope.completeAnime().success(function(anime) {
         sweetAlert("Done", "You have added  " + anime.title + " to your completed list", "success");
@@ -210,7 +208,9 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
   }
   $scope.willWatch = animeService.willWatch;
   $scope.addToWillWatch = function(anime) {
-    if($scope.user.willWatch.indexOf(anime._id) === -1 && $scope.anime.usersWatching.indexOf($scope.user._id) === -1 && $scope.anime.usersCompleted.indexOf($scope.user._id) === -1) {
+    if($scope.user.willWatch.indexOf(anime._id) === -1
+    && $scope.anime.usersWatching.indexOf($scope.user._id) === -1
+    && $scope.user.completedAnime.indexOf(anime._id) === -1) {
       $scope.willWatch().success(function() {
         sweetAlert("Done", "You have added this to your will watch list", "success");
         userService.getCurrentUser().success(function(data) {
@@ -278,5 +278,4 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
   $scope.toUser = function(review) {
     $state.go('user', {userId: review.user._id})
   }
-
 });
