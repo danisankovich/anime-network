@@ -323,6 +323,7 @@ router.post('/addReview/:id', function(req, res) {
     router.post('/respondtopic', function(req, res) {
       Topic.findById(req.body._id, function(err, topic) {
         topic.responses = req.body.responses
+        topic.mostRecentUser = req.user.id
         topic.save()
         res.send(topic)
       })

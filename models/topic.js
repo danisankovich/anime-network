@@ -9,6 +9,7 @@ var Topic = Mongoose.Schema({
   viewCount: {type: Number, default: 0},
   likes: {type: Number, default: 0},
   body: String,
+  mostRecentUser: String,
   responses: {type: Array, default: []}
 });
 

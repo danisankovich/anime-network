@@ -10,7 +10,7 @@ app.controller('forumCtrl', function($scope, $state, $http, animeService, userSe
       topics.forEach(function(topic) {
         $http.get('/user/' + topic.creatorId).success(function(user){
           topic.user = user
-          $http.get('/user/' + topic.responses[topic.responses.length -1].user).success(function(lastUser) {
+          $http.get('/user/' + topic.mostRecentUser).success(function(lastUser) {
             topic.mostRecentUser = lastUser.username
           })
         })
