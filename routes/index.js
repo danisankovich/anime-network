@@ -391,8 +391,7 @@ router.post('/addReview/:id', function(req, res) {
 
   router.post('/login', passport.authenticate('local'), function(req, res, next) {
   // router.post('/login', passport.authenticate('local', { failureRedirect: '/#/loginerror' }), function(req, res, next) {
-    console.log(req.body)
-    req.session.save(function (err) {
+    req.session.save(function (err, user) {
       if (err) { return next(err); }
       // res.redirect('/#');
       res.send()
