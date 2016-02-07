@@ -199,6 +199,21 @@ router.post('/transtowatching/:id', function(req, res) {
     })
   })
 })
+router.post('/transfromtowatch/:id', function(req, res) {
+  User.findById(req.user.id, function(err, user) {
+    var idx = user.willWatch.indexOf(req.params.id)
+    user.willWatch.splice(idx, 1)
+    console.log('req', req.params.id)
+    console.log(user.willWatch)
+    user.completedAnime.push(req.params.id)
+    user.save()
+    Anime.findById(req.params.id, function(err, anime) {
+      anime.usersCompleted.push(req.user.id)
+      anime.save()
+      res.send(anime)
+    })
+  })
+})
 
 router.post('/addReview/:id', function(req, res) {
   Anime.findByIdAndUpdate(req.params.id, {$push: {reviews:
