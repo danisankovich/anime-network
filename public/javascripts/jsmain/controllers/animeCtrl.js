@@ -1,15 +1,9 @@
-app.controller('animeCtrl', function($scope, $state, $http, animeService, userService){
-  $scope.whichUrl = 'http://localhost:4000';
-  // $scope.whichUrl = 'http://animenetwork.herokuapp.com';
-
-  userService.getCurrentUser().success(function(data) {
-    $scope.user = data;
-  });
+app.controller('animeCtrl', function($scope, $state, $http, animeService, userService, $rootScope){
 
   animeService.getOneAnime().success(function(anime) {
     $scope.anime = anime;
-    $http.get($scope.whichUrl + "/reviews/" + anime._id).success(function(reviews){
-      $http.get($scope.whichUrl+"/showforum/" + anime._id).success(function(forum) {
+    $http.get( "/reviews/" + anime._id).success(function(reviews){
+      $http.get("/showforum/" + anime._id).success(function(forum) {
         $scope.forum = forum
       })
       $scope.reviews = reviews;
@@ -20,7 +14,7 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
         else {
           e.subbody = e.body
         }
-        $http.get($scope.whichUrl + "/user/" + e.user).success(function(user){
+        $http.get( "/user/" + e.user).success(function(user){
           e.user = user;
         })
       })
@@ -28,18 +22,18 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
   });
   $scope.genres = function() {
     console.log('es');
-    $http.get($scope.whichUrl + '/genres').success(function(episodes) {
+    $http.get( '/genres').success(function(episodes) {
       console.log(episodes);
     });
   };
 
   $scope.like = animeService.likeAnime;
   $scope.likeAnime = function(anime) {
-    if($scope.user.likes.indexOf(anime._id) === -1) {
+    if($rootScope.currentUser.likes.indexOf(anime._id) === -1) {
       $scope.like().success(function(anime) {
         sweetAlert("Done", "You have Liked " + anime.title, "success");
         userService.getCurrentUser().success(function(data) {
-          $scope.user = data;
+          $rootScope.currentUser = data;
         });
       });
     }
@@ -49,10 +43,10 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
   $scope.addToCompleted = function(anime) {
     var myWatching = []
     var myWillWatch = []
-    $scope.user.watchingAnime.forEach(function(a) {
+    $rootScope.currentUser.watchingAnime.forEach(function(a) {
       myWatching.push(a.animeId)
     })
-    $scope.user.willWatch.forEach(function(w) {
+    $rootScope.currentUser.willWatch.forEach(function(w) {
       myWillWatch.push(w)
     })
     if(myWatching.indexOf(anime._id) > -1){
@@ -70,11 +64,11 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
       }, function(isConfirm){
         if (isConfirm) {
           $scope.a = {anime: anime, a: 'message'}
-          $http.post($scope.whichUrl + '/transtocompleted', $scope.a).success(function(anime) {
+          $http.post( '/transtocompleted', $scope.a).success(function(anime) {
             sweetAlert("Done", "You have added  " + anime.title + " to your completed list", "success");
             animeService.getOneAnime().success(function(anime) {
               $scope.anime = anime;
-              $http.get($scope.whichUrl + "/reviews/" + anime._id).success(function(reviews){
+              $http.get( "/reviews/" + anime._id).success(function(reviews){
                 $scope.reviews = reviews;
                 $scope.reviews.forEach(function(e) {
                   if(e.body.length > 300) {
@@ -83,14 +77,14 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
                   else {
                     e.subbody = e.body
                   }
-                  $http.get($scope.whichUrl + "/user/" + e.user).success(function(user){
+                  $http.get( "/user/" + e.user).success(function(user){
                     e.user = user;
                   })
                 })
               })
             });
             userService.getCurrentUser().success(function(data) {
-              $scope.user = data;
+              $rootScope.currentUser = data;
             });
           })
         } else {
@@ -115,11 +109,11 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
       }, function(isConfirm){
         if (isConfirm) {
           $scope.a = {anime: anime, a: 'message'}
-          $http.post($scope.whichUrl + '/transfromtowatch/' + anime._id).success(function(anime) {
+          $http.post( '/transfromtowatch/' + anime._id).success(function(anime) {
             sweetAlert("Done", "You have added  " + anime.title + " to your completed list", "success");
             animeService.getOneAnime().success(function(anime) {
               $scope.anime = anime;
-              $http.get($scope.whichUrl + "/reviews/" + anime._id).success(function(reviews){
+              $http.get( "/reviews/" + anime._id).success(function(reviews){
                 $scope.reviews = reviews;
                 $scope.reviews.forEach(function(e) {
                   if(e.body.length > 300) {
@@ -128,14 +122,14 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
                   else {
                     e.subbody = e.body
                   }
-                  $http.get($scope.whichUrl + "/user/" + e.user).success(function(user){
+                  $http.get( "/user/" + e.user).success(function(user){
                     e.user = user;
                   })
                 })
               })
             });
             userService.getCurrentUser().success(function(data) {
-              $scope.user = data;
+              $rootScope.currentUser = data;
             });
           })
         } else {
@@ -143,11 +137,11 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
         }
       });
     }
-    if($scope.user.completedAnime.indexOf(anime._id) === -1 && myWatching.indexOf(anime._id) === -1 && myWillWatch.indexOf(anime._id) === -1) {
+    if($rootScope.currentUser.completedAnime.indexOf(anime._id) === -1 && myWatching.indexOf(anime._id) === -1 && myWillWatch.indexOf(anime._id) === -1) {
       $scope.completeAnime().success(function(anime) {
         sweetAlert("Done", "You have added  " + anime.title + " to your completed list", "success");
         userService.getCurrentUser().success(function(data) {
-          $scope.user = data;
+          $rootScope.currentUser = data;
         });
       });
     };
@@ -155,11 +149,11 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
   $scope.watchingAnime = animeService.watchingAnime;
   $scope.addToWatching = function(anime) {
     var myWatching = []
-    $scope.user.watchingAnime.forEach(function(a) {
+    $rootScope.currentUser.watchingAnime.forEach(function(a) {
       myWatching.push(a.animeId)
     })
-    if(myWatching.indexOf(anime._id) === -1 && $scope.user.completedAnime.indexOf(anime._id) === -1) {
-      if($scope.user.willWatch.indexOf(anime._id) > -1) {
+    if(myWatching.indexOf(anime._id) === -1 && $rootScope.currentUser.completedAnime.indexOf(anime._id) === -1) {
+      if($rootScope.currentUser.willWatch.indexOf(anime._id) > -1) {
         swal({
           title: "Are you sure?",
           text: "This Anime is currently in your Will Watch section. Would you like to move it to your Currently Watching Anime section?",
@@ -171,10 +165,10 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
           closeOnConfirm: true,
           closeOnCancel: true
         }, function(isConfirm){
-          $http.post($scope.whichUrl + '/transtowatching/' + $scope.anime._id).success(function(anime) {
+          $http.post( '/transtowatching/' + $scope.anime._id).success(function(anime) {
             animeService.getOneAnime().success(function(anime) {
               $scope.anime = anime;
-              $http.get($scope.whichUrl + "/reviews/" + anime._id).success(function(reviews){
+              $http.get( "/reviews/" + anime._id).success(function(reviews){
                 $scope.reviews = reviews;
                 $scope.reviews.forEach(function(e) {
                   if(e.body.length > 300) {
@@ -183,14 +177,14 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
                   else {
                     e.subbody = e.body
                   }
-                  $http.get($scope.whichUrl + "/user/" + e.user).success(function(user){
+                  $http.get( "/user/" + e.user).success(function(user){
                     e.user = user;
                   })
                 })
               })
             });
             userService.getCurrentUser().success(function(data) {
-              $scope.user = data;
+              $rootScope.currentUser = data;
             });
             sweetAlert("Done", "Success", "success");
           });
@@ -200,7 +194,7 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
         $scope.watchingAnime().success(function(anime) {
           sweetAlert("Done", "You have added " + anime.title + " to your watching list", "success");
           userService.getCurrentUser().success(function(data) {
-            $scope.user = data;
+            $rootScope.currentUser = data;
           });
         });
       }
@@ -208,29 +202,29 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
   }
   $scope.willWatch = animeService.willWatch;
   $scope.addToWillWatch = function(anime) {
-    if($scope.user.willWatch.indexOf(anime._id) === -1
-    && $scope.anime.usersWatching.indexOf($scope.user._id) === -1
-    && $scope.user.completedAnime.indexOf(anime._id) === -1) {
+    if($rootScope.currentUser.willWatch.indexOf(anime._id) === -1
+    && $scope.anime.usersWatching.indexOf($rootScope.currentUser._id) === -1
+    && $rootScope.currentUser.completedAnime.indexOf(anime._id) === -1) {
       $scope.willWatch().success(function() {
         sweetAlert("Done", "You have added this to your will watch list", "success");
         userService.getCurrentUser().success(function(data) {
-          $scope.user = data;
+          $rootScope.currentUser = data;
         });
       });
     }
   };
   $scope.writeReview = function(review) {
     review.show = $scope.anime._id;
-    review.user = $scope.user._id;
+    review.user = $rootScope.currentUser._id;
     var reviewIds = $scope.reviews.map(function(r) {
       return r.user._id
     })
     console.log(reviewIds)
-    if(reviewIds.indexOf($scope.user._id) === -1) {
-      $http.post($scope.whichUrl + "/animereview/" + $scope.anime._id, review).success(function(response) {
+    if(reviewIds.indexOf($rootScope.currentUser._id) === -1) {
+      $http.post( "/animereview/" + $scope.anime._id, review).success(function(response) {
         animeService.getOneAnime().success(function(anime) {
           $scope.anime = anime;
-          $http.get($scope.whichUrl + "/reviews/" + anime._id).success(function(reviews){
+          $http.get( "/reviews/" + anime._id).success(function(reviews){
             $scope.reviews = reviews;
             $scope.reviews.forEach(function(e) {
               if(e.body.length > 300) {
@@ -239,14 +233,14 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
               else {
                 e.subbody = e.body
               }
-              $http.get($scope.whichUrl + "/user/" + e.user).success(function(user){
+              $http.get( "/user/" + e.user).success(function(user){
                 e.user = user;
               })
             })
           })
         });
         userService.getCurrentUser().success(function(data) {
-          $scope.user = data;
+          $rootScope.currentUser = data;
         });
         sweetAlert("Done", "Your Review Has been submitted", "success");
         $('#reviewModal').foundation('reveal', 'close');
@@ -261,11 +255,11 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
       return r.user
     })
     console.log(ratingIds)
-    if(ratingIds.indexOf($scope.user._id) === -1) {
+    if(ratingIds.indexOf($rootScope.currentUser._id) === -1) {
       var ratingObject = {}
       ratingObject.rating = rating
       ratingObject.anime = $scope.anime._id
-      $http.post($scope.whichUrl + '/ratings', ratingObject).success(function(anime) {
+      $http.post( '/ratings', ratingObject).success(function(anime) {
         sweetAlert("Success!", "You Have Submitted A Review", "success");
         $scope.anime = anime
       })

@@ -118,10 +118,34 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
     });
   });
 
-
+  $scope.login = function(user) {
+    console.log(user)
+    $http.post('/login', user).success(function(user){
+      console.log(user)
+      // $scope.$apply(function () {
+      //   $scope.user = user
+      // });        // $state.go('/')
+      // location.reload();
+      // console.log("success")
+      userService.getCurrentUser().success(function(data) {
+        $rootScope.currentUser = data;
+        $scope.user = $rootScope.currentUser
+        $scope.friendList = [];
+        $rootScope.currentUser.friendIds.forEach(function(e) {
+          $http.get('/user/' + e.friendId).success(function(friend) {
+            e.username = friend.username
+            $scope.friendList.push(e)
+          })
+        })
+      });
+    })
+  }
 
 
   });
+  $scope.loginModal = function() {
+    $('#loginModal').foundation('reveal', 'open');
+  }
   $scope.mailModal = function() {
     $('#mailModal').foundation('reveal', 'open');
   }
