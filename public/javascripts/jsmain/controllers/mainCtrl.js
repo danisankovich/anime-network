@@ -1,16 +1,16 @@
 app.controller('mainCtrl', function($scope, $state, $http, $rootScope, animeService, userService){
   $scope.results1 = [];
 
-  // var init = function() {
-  //   console.log('i fired');
-  //   animeService.getRandAnime().success(function(randAnime) {
-  //     $scope.frontAnime = randAnime;
-  //   }).error(function(err) {
-  //     console.log(err);
-  //   });
-  // };
-  // init();
-  // $scope.toShow = animeService.showOneRandAnime;
+  var init = function() {
+    console.log('i fired');
+    animeService.getRandAnime().success(function(randAnime) {
+      $scope.frontAnime = randAnime;
+    }).error(function(err) {
+      console.log(err);
+    });
+  };
+  init();
+  $scope.toShow = animeService.showOneRandAnime;
 
 
   //
