@@ -5,6 +5,8 @@ app.service('userService', function($http) {
         if(user) {
           return user;
         }
+      }).error(function(err) {
+        console.log(err)
       });
   };
 });

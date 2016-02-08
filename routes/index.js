@@ -241,7 +241,7 @@ router.post('/addReview/:id', function(req, res) {
         })
       })
     })
-    
+
     router.post('/newmessage', function(req, res) {
       User.findById(req.body.to, function(err, user1) {
         user1.friendIds.forEach(function(e) {

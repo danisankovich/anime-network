@@ -15,7 +15,7 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
     });
 
 
-    $('input').keyup(debounce(function(){
+    $('.searchinput').keyup(debounce(function(){
         $scope.n = $(".autocomplete").val();
         $http.post('/anime/' + $scope.n).success(function(anime) {
           anime.forEach(function(e) {
