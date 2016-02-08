@@ -241,35 +241,7 @@ router.post('/addReview/:id', function(req, res) {
         })
       })
     })
-    router.post('/friendrequest/:id', function(req, res) {
-      User.findById(req.params.id, function(err, user) {
-        user.friendIds.push({friendId: req.user._id, pending: true, initiator: false})
-        user.save()
-        User.findById(req.user.id, function(err, currentUser) {
-          currentUser.friendIds.push({friendId: user._id, pending: true, initiator: true})
-          currentUser.save()
-          res.send()
-        })
-      })
-    })
-    router.post('/acceptfriend/:id', function(req, res) {
-      User.findById(req.params.id, function(err, user) {
-        user.friendIds.forEach(function(e) {
-          if(e.friendId === req.user.id) {
-            e.pending = false
-            user.save()
-          }
-        })
-        User.findById(req.user.id, function(err, currentUser) {
-          currentUser.friendIds.forEach(function(f) {
-            if(f.friendId === req.params.id) {
-              f.pending = false
-              currentUser.save()
-            }
-          })
-        })
-      })
-    })
+    
     router.post('/newmessage', function(req, res) {
       User.findById(req.body.to, function(err, user1) {
         user1.friendIds.forEach(function(e) {

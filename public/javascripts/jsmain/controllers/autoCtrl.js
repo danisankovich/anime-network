@@ -118,6 +118,8 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
         })
         $('#loginModal').foundation('reveal', 'close');
       });
+    }).error(function(err) {
+      $scope.loginMessage = "Incorrect Username/Password Combination"
     })
   }
   $scope.register = function(newUser) {

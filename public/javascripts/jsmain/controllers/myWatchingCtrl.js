@@ -1,6 +1,5 @@
 app.controller('myWatchingCtrl', function($scope, $state, $http, $rootScope, animeService, userService){
-  // $scope.whichUrl = 'http://localhost:4000';
-    // $scope.whichUrl = 'https://animenetwork.herokuapp.com';
+
   userService.getCurrentUser().success(function(data) {
     $scope.watchingAnime = [];
     var check = []
@@ -34,7 +33,6 @@ app.controller('myWatchingCtrl', function($scope, $state, $http, $rootScope, ani
     })
   });
   $scope.upOne=function(anime) {
-    console.log(anime._id)
     $scope.user.watchingAnime.forEach(function(e) {
       if(e.animeId === anime._id) {
         e.episodesWatched += 1
@@ -76,7 +74,6 @@ app.controller('myWatchingCtrl', function($scope, $state, $http, $rootScope, ani
     })
   }
   $scope.downOne=function(anime) {
-    console.log(anime._id)
     $scope.user.watchingAnime.forEach(function(e) {
       if(e.animeId === anime._id) {
         e.episodesWatched -= 1

@@ -1,9 +1,7 @@
 app.service('userService', function($http) {
-  var whichUrl = 'http://localhost:4000';
-  // var whichUrl = 'http://animenetwork.herokuapp.com';
 
   this.getCurrentUser = function() {
-    return $http.get(whichUrl + '/users').success(function(user) {
+    return $http.get('/users').success(function(user) {
         if(user) {
           return user;
         }

@@ -1,6 +1,5 @@
 app.controller('willwatchCtrl', function($scope, $state, $http, $rootScope, animeService, userService){
-  $scope.whichUrl = 'http://localhost:4000';
-    // $scope.whichUrl = 'https://animenetwork.herokuapp.com';
+
   userService.getCurrentUser().success(function(data) {
     $scope.willWatchAnime = [];
     var check = []
@@ -8,7 +7,7 @@ app.controller('willwatchCtrl', function($scope, $state, $http, $rootScope, anim
     data.willWatch.forEach(function(e) {
       if(check.indexOf(e) === -1) {
         check.push(e)
-        $http.get($scope.whichUrl + '/myanimelists/' + e).success(function(anime) {
+        $http.get('/myanimelists/' + e).success(function(anime) {
           anime.myRating = 'N/A'
           anime.avgRating = 0;
           anime.ratings.forEach(function(a){

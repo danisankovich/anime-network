@@ -1,6 +1,5 @@
 app.controller('myFavoritedCtrl', function($scope, $state, $http, $rootScope, animeService, userService){
-  // $scope.whichUrl = 'http://localhost:4000';
-    // $scope.whichUrl = 'https://animenetwork.herokuapp.com';
+
   userService.getCurrentUser().success(function(data) {
     $scope.favoritedAnime = [];
     var check = []

@@ -43,9 +43,6 @@ router.post('/newavatar', function(req, res) {
   })
 })
 
-
-
-
 router.post('/addToWatching/:id', function(req, res) {
   Anime.findByIdAndUpdate(req.params.id, {$push: {usersWatching: req.user._id}}, function(err, anime) {
     User.findByIdAndUpdate(req.user.id, {$push: {watchingAnime: {animeId: req.params.id, episodesWatched: 0}}}, function(err, user) {
@@ -110,14 +107,42 @@ router.post('/transfromtowatch/:id', function(req, res) {
   User.findById(req.user.id, function(err, user) {
     var idx = user.willWatch.indexOf(req.params.id)
     user.willWatch.splice(idx, 1)
-    // console.log('req', req.params.id)
-    // console.log(user.willWatch)
     user.completedAnime.push(req.params.id)
     user.save()
     Anime.findById(req.params.id, function(err, anime) {
       anime.usersCompleted.push(req.user.id)
       anime.save()
       res.send(anime)
+    })
+  })
+})
+
+router.post('/friendrequest/:id', function(req, res) {
+  User.findById(req.params.id, function(err, user) {
+    user.friendIds.push({friendId: req.user._id, pending: true, initiator: false})
+    user.save()
+    User.findById(req.user.id, function(err, currentUser) {
+      currentUser.friendIds.push({friendId: user._id, pending: true, initiator: true})
+      currentUser.save()
+      res.send()
+    })
+  })
+})
+router.post('/acceptfriend/:id', function(req, res) {
+  User.findById(req.params.id, function(err, user) {
+    user.friendIds.forEach(function(e) {
+      if(e.friendId === req.user.id) {
+        e.pending = false
+        user.save()
+      }
+    })
+    User.findById(req.user.id, function(err, currentUser) {
+      currentUser.friendIds.forEach(function(f) {
+        if(f.friendId === req.params.id) {
+          f.pending = false
+          currentUser.save()
+        }
+      })
     })
   })
 })
@@ -135,7 +160,6 @@ router.post('/register', function(req, res) {
 router.post('/login', passport.authenticate('local'), function(req, res, next) {
   req.session.save(function (err, user) {
     if (err) { res.send(err); }
-    // if (err) { return next(err); }
     res.send()
   });
 });

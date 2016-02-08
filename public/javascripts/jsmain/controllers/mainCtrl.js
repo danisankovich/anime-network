@@ -1,8 +1,6 @@
 app.controller('mainCtrl', function($scope, $state, $http, $rootScope, animeService, userService){
   $scope.results1 = [];
-  $scope.whichUrl = 'http://localhost:4000';
-    // $scope.whichUrl = 'https://animenetwork.herokuapp.com';
-  //
+
   var init = function() {
     console.log('i fired');
     animeService.getRandAnime().success(function(randAnime) {
@@ -23,7 +21,7 @@ app.controller('mainCtrl', function($scope, $state, $http, $rootScope, animeServ
   // // for(var i = 0; i <= 0; i++) {
   // //   $http.get('http://hummingbird.me/api/v1/anime/' + i).then(function(anime) {
   // //     console.log(anime.data);
-  // // $http.post($scope.whichUrl + '/', anime.data).then(function(err, response){
+  // // $http.post('/', anime.data).then(function(err, response){
   // //   console.log("err", err);
   // //   console.log("response", response);
   // // });
@@ -37,14 +35,14 @@ app.controller('mainCtrl', function($scope, $state, $http, $rootScope, animeServ
     // $http.get("https://animenetwork.herokuapp.com/anime").success(function(err, result) {
       // for(var i = 1; i < 11570; i++) {
       // for(var i = 1; i < 4; i++) {
-      //   $http.get($scope.whichUrl + "/animeget/" + i.toString()).success(function(err, result) {
+      //   $http.get("/animeget/" + i.toString()).success(function(err, result) {
       //     console.log(result);
       //     console.log(err);
       //   });
       // }
     // });
   //
-    // $http.get($scope.whichUrl + "/makeforum").success(function(anime) {
+    // $http.get("/makeforum").success(function(anime) {
     //   console.log(anime)
     // })
     $scope.login = function(user) {
@@ -72,7 +70,7 @@ app.controller('mainCtrl', function($scope, $state, $http, $rootScope, animeServ
     }
   $scope.register = function(newUser) {
     $scope.newUser = newUser;
-    $http.post($scope.whichUrl + '/register', $scope.newUser).success(function(err, data) {
+    $http.post('/register', $scope.newUser).success(function(err, data) {
       if(err.hasOwnProperty('name') === true) {
         sweetAlert("Uh Oh  ", err.message, "error");
         return;

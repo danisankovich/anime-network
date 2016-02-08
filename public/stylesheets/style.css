@@ -59,7 +59,7 @@ footer {
   margin-left: 2px;
 }
 
-.failureLogin {
+.loginError {
   color: red;
 }
 .heightFix {

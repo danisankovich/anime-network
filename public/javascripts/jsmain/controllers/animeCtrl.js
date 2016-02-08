@@ -20,13 +20,6 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
       })
     })
   });
-  $scope.genres = function() {
-    console.log('es');
-    $http.get( '/genres').success(function(episodes) {
-      console.log(episodes);
-    });
-  };
-
   $scope.like = animeService.likeAnime;
   $scope.likeAnime = function(anime) {
     if($rootScope.currentUser.likes.indexOf(anime._id) === -1) {
@@ -36,6 +29,9 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
           $rootScope.currentUser = data;
         });
       });
+    }
+    else {
+      sweetAlert("Error", "You have Already Liked " + anime.title, "error");
     }
   };
 
@@ -92,8 +88,6 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
         }
       });
     }
-
-
     if(myWillWatch.indexOf(anime._id) > -1){
       var idx = myWillWatch.indexOf(anime._id)
       swal({
@@ -219,7 +213,6 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
     var reviewIds = $scope.reviews.map(function(r) {
       return r.user._id
     })
-    console.log(reviewIds)
     if(reviewIds.indexOf($rootScope.currentUser._id) === -1) {
       $http.post( "/animereview/" + $scope.anime._id, review).success(function(response) {
         animeService.getOneAnime().success(function(anime) {
@@ -254,7 +247,6 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
     var ratingIds = $scope.anime.ratings.map(function(r) {
       return r.user
     })
-    console.log(ratingIds)
     if(ratingIds.indexOf($rootScope.currentUser._id) === -1) {
       var ratingObject = {}
       ratingObject.rating = rating

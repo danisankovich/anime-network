@@ -10,8 +10,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  <script>
-  </script>
 </head>
 <body ng-app="Anime">
 
@@ -43,8 +41,6 @@
         <li ng-show="currentUser"><a ui-sref="profile">{{currentUser.username}}</a></li>
         <li ng-show="currentUser"><a href='/logout'>Logout <span class="glyphicon glyphicon-log-in"></span></a></li>
         <li ng-hide="currentUser"><a data-reveal-id="loginModal">Login/Register</a></li>
-        <!-- <li ng-hide="currentUser"><a ui-sref="login">Login</a></li> -->
-        <!-- <li ng-hide="currentUser"><a ui-sref="register">Register</a></li> -->
       </ul>
       <div id="loginModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
 
@@ -52,11 +48,10 @@
           <div class="row">
             <div class="columns small-12">
               <div class="columns small-6">
-                <h2 id="modalTitle">Login</h2>
                 <form role="form" ng-submit="login(user)" class="loginForm">
                   <fieldset class="thoseForms">
                     <div class="col-lg-10 col-lg-offset-2">
-                      <legend>Log In</legend>
+                      <legend>Log In<span class="loginError" ng-if="loginMessage">: {{loginMessage}}</span></legend>
                     </div>
                     <div class="form-group">
                       <label for="username" class="col-lg-2 col-lg-offset-1 control-label">Username</label>
@@ -65,7 +60,6 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <!-- <input type="password" name="password" ng-model="user.password" placeholder="Password" class="form-control"/> -->
                       <label for="password" class="col-lg-2 col-lg-offset-1 control-label">Password</label>
                       <div class="col-lg-7">
                         <input type="password" id="password" name="password" placeholder="Enter Password" ng-model="user.password" class="form-control"/>
@@ -82,7 +76,6 @@
                 </form>
               </div>
               <div class="columns small-6">
-                <h2 id="modalTitle">Register</h2>
                 <form role="form" ng-submit="register(newUser)" class="loginForm">
                   <fieldset class="thoseForms">
                     <div class="col-lg-10 col-lg-offset-2">
@@ -118,12 +111,9 @@
               </div>
             </div>
           </div>
-
         </div>
-
         <a class="close-reveal-modal" aria-label="Close">&#215;</a>
       </div>
-
     </section>
   </nav>
   <div ng-controller="autoCtrl">
@@ -207,8 +197,6 @@
   </footer>
 
 </body>
-<!-- <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script> -->
-<!-- <script src="/javascripts/js/vendor/jquery.js"></script> -->
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
 <script src='http://cdnjs.cloudflare.com/ajax/libs/ng-flow/2.5.1/ng-flow-standalone.min.js'></script>
@@ -235,7 +223,6 @@ $(document).foundation();
 <script type="text/javascript" src="/javascripts/jsmain/controllers/mywillwatchCtrl.js"></script>
 <script type="text/javascript" src="/javascripts/jsmain/controllers/myFavoritedCtrl.js"></script>
 <script type="text/javascript" src="/javascripts/jsmain/controllers/myWatchingCtrl.js"></script>
-<script type="text/javascript" src="/javascripts/jsmain/controllers/registerCtrl.js"></script>
 <script type="text/javascript" src="/javascripts/jsmain/services/animeService.js"></script>
 <script type="text/javascript" src="/javascripts/jsmain/services/userServices.js"></script>
 <!-- <script src="/dist/bundle.js"></script> -->
