@@ -105,17 +105,8 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
   $scope.login = function(user) {
     console.log(user)
     $http.post('/users/login', user).success(function(user){
-      console.log(user)
       userService.getCurrentUser().success(function(data) {
         $rootScope.currentUser = data;
-        $scope.user = $rootScope.currentUser
-        $scope.friendList = [];
-        $rootScope.currentUser.friendIds.forEach(function(e) {
-          $http.get('/users/' + e.friendId).success(function(friend) {
-            e.username = friend.username
-            $scope.friendList.push(e)
-          })
-        })
         $('#loginModal').foundation('reveal', 'close');
       });
     }).error(function(err) {
