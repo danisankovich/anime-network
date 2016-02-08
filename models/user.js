@@ -28,6 +28,7 @@ var User = new Schema({
   invitedTo: {type: Array}, //list of event Ids they were invited to
   photos: {type: Array}, //array of objects. one of the properties is profilePicture. with a boolean. checks to see if it is url or an upload and acts accordingly (another boolean perhaps?)
   messages: [],
+  avatar: {type: String},
   isLoggedIn: {type: Boolean, default: false}
 })
 

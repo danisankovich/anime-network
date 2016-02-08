@@ -1,6 +1,10 @@
 #anime {
   text-align: center;
 }
+.avatar {
+  height: 400px;
+  max-width: 400px;
+}
 .thoseForms {
   height: 385px !important;
 }

@@ -14,4 +14,13 @@ router.get('/allloggedin', function(req, res, next) {
   })
 });
 
+router.post('/newavatar', function(req, res) {
+  console.log(req.body[0])
+  User.findById(req.user.id, function(err, user) {
+    user.avatar = req.body[0]
+    user.save()
+    res.send(user)
+  })
+})
+
 module.exports = router;

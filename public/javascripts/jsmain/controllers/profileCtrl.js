@@ -32,4 +32,24 @@ app.controller('profileCtrl', function($scope, $state, $http, $rootScope, userSe
       console.log(success)
     })
   }
+
+
+  $scope.avatar = [];
+  $scope.processFiles = function(files){
+    angular.forEach(files, function(flowFile, i){
+       var fileReader = new FileReader();
+          fileReader.onload = function (event) {
+            var uri = event.target.result;
+              $scope.avatar[0] = uri;
+              console.log($scope.avatar)
+          };
+          fileReader.readAsDataURL(flowFile.file);
+    });
+  };
+  $scope.uploadImage = function() {
+    $http.post('/users/newavatar', $scope.avatar).success(function(user) {
+      $scope.user.avatar = user.avatar
+    })
+  }
+
 });

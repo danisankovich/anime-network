@@ -86,8 +86,9 @@ else {
 // uncomment after placing your favicon in /public
 // app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({limit: '5mb'}));
+app.use(bodyParser.urlencoded({ extended: false, limit: '5mb' }));
+// app.use(bodyParser({limit: '50mb'}))
 app.use(cookieParser());
 app.use(flash());
 app.use(require('express-session')({

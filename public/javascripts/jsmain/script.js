@@ -1,4 +1,4 @@
-var app = angular.module('Anime', ['ui.router']);
+var app = angular.module('Anime', ['ui.router', 'flow']);
 
 app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/');

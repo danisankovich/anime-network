@@ -8,15 +8,28 @@
     </div>
     <div class="small-9 medium-9 large-9 columns">
       {{user.username}}
+      <img class="avatar" ng-src="{{user.avatar}}" alt="">
     </div>
   </div>
 
-    <div>
-      <ul> Pending
-        <li ng-repeat="friend in user.friendList" ng-show="friend.pending">{{friend.username}} <a ng-click="accept(friend)" ng-show="!friend.initiator">Accept</a></li>
-      </ul>
-      <ul> Friends
-        <li ng-repeat="friend in user.friendList" ng-hide="friend.pending">{{friend.username}}</li>
-      </ul>
-    </div>
+  <div>
+    <ul> Pending
+      <li ng-repeat="friend in user.friendList" ng-show="friend.pending">{{friend.username}} <a ng-click="accept(friend)" ng-show="!friend.initiator">Accept</a></li>
+    </ul>
+    <ul> Friends
+      <li ng-repeat="friend in user.friendList" ng-hide="friend.pending">{{friend.username}}</li>
+    </ul>
+  </div>
+  <form>
+    <div flow-init
+    flow-name="uploader.flow"
+    flow-files-added="processFiles($files)">
+    <button flow-btn type="file">Upload Images</button>
+    <!-- <div ng-repeat="image in uploader.flow.files track by $index"> -->
+      <!-- <span class="text">Blob image displayed with "flow-img"</span><img class="preview" flow-img="image"/><br>
+      <span class="text">Base64 image displayed with "ng-src"</span> <img class="preview" ng-src="{{imageStrings[$index]}}"/> -->
+    <!-- </div> -->
+  </div>
+  <button ng-click="uploadImage()">Submit</button>
+  </form>
 </div>
