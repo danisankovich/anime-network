@@ -117,7 +117,6 @@ app.controller('myWatchingCtrl', function($scope, $state, $http, $rootScope, ani
       }
     })
   }
-
   $scope.showOne = function(anime) {
     $state.go('anime', {animename: anime.title})
   }
