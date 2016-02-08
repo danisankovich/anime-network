@@ -1,16 +1,16 @@
 app.controller('mainCtrl', function($scope, $state, $http, $rootScope, animeService, userService){
   $scope.results1 = [];
 
-  var init = function() {
-    console.log('i fired');
-    animeService.getRandAnime().success(function(randAnime) {
-      $scope.frontAnime = randAnime;
-    }).error(function(err) {
-      console.log(err);
-    });
-  };
-  init();
-  $scope.toShow = animeService.showOneRandAnime;
+  // var init = function() {
+  //   console.log('i fired');
+  //   animeService.getRandAnime().success(function(randAnime) {
+  //     $scope.frontAnime = randAnime;
+  //   }).error(function(err) {
+  //     console.log(err);
+  //   });
+  // };
+  // init();
+  // $scope.toShow = animeService.showOneRandAnime;
 
 
   //
@@ -46,14 +46,7 @@ app.controller('mainCtrl', function($scope, $state, $http, $rootScope, animeServ
     //   console.log(anime)
     // })
     $scope.login = function(user) {
-      console.log(user)
       $http.post('/login', user).success(function(user){
-        console.log(user)
-        // $scope.$apply(function () {
-        //   $scope.user = user
-        // });        // $state.go('/')
-        // location.reload();
-        // console.log("success")
         userService.getCurrentUser().success(function(data) {
           $rootScope.currentUser = data;
           $scope.user = $rootScope.currentUser
@@ -65,7 +58,6 @@ app.controller('mainCtrl', function($scope, $state, $http, $rootScope, animeServ
             })
           })
         });
-      // })
       })
     }
   $scope.register = function(newUser) {
