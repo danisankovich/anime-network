@@ -7,7 +7,7 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
       $rootScope.currentUser = data;
       $scope.friendList = [];
       $rootScope.currentUser.friendIds.forEach(function(e) {
-        $http.get('/user/' + e.friendId).success(function(friend) {
+        $http.get('/users/' + e.friendId).success(function(friend) {
           e.username = friend.username
           $scope.friendList.push(e)
         })
@@ -86,31 +86,17 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
         socket.emit('user enter', $scope.user.username);
       });
       var socket = io();
-    // $scope.messages = []
-    // socket.on('user enter', function(msg) {
-    //       // if ($scope.signedIn) {
-    //   //   $('#messages').append($('<li>').text('USER: ' + msg + ' just entered the chat room.'));
-    //   // }
-    //   $http.get('/username/' + msg).success(function(newUser) {
-    //     $scope.messages.push("USER: ", newUser.username + " has entered the chatroom")
-    //   })
-    //   $http.get('/users/allloggedin').success(function(currentUserList) {
-    //     $scope.currentUserList = currentUserList
-    //     console.log($scope.currentUserList)
-    //   })
-    // });
-      // }
 
     $(window).bind("beforeunload", function() {
       socket.emit('user leave', $scope.user._id);
     });
 
     socket.on('user leave', function(msg) {
-        $http.get('/userleave/' + msg).success(function() {
+        $http.get('/users/userleave/' + msg).success(function() {
           console.log('e')
-          $http.get('/users/allloggedin').success(function(currentUserList) {
-            $scope.currentUserList = currentUserList
-            console.log($scope.currentUserList)
+          $http.get('/allloggedin').success(function(currentUserList) {
+            $rootScope.currentUserList = currentUserList
+            console.log($rootScope.currentUserList)
           })
         })
     });
@@ -125,7 +111,7 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
         $scope.user = $rootScope.currentUser
         $scope.friendList = [];
         $rootScope.currentUser.friendIds.forEach(function(e) {
-          $http.get('/user/' + e.friendId).success(function(friend) {
+          $http.get('/users/' + e.friendId).success(function(friend) {
             e.username = friend.username
             $scope.friendList.push(e)
           })
@@ -150,7 +136,7 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
           $rootScope.currentUser = data;
           $scope.friendList = [];
           $rootScope.currentUser.friendIds.forEach(function(e) {
-            $http.get('/user/' + e.friendId).success(function(friend) {
+            $http.get('/users/' + e.friendId).success(function(friend) {
               e.username = friend.username
               $scope.friendList.push(e)
             })
@@ -183,7 +169,4 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
       newmessage = {}
     })
   }
-  // $(function() {
-  // var socket = io.connect('http://localhost');
-    // });
 });

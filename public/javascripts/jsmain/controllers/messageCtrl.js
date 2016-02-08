@@ -9,7 +9,7 @@ app.controller('messageCtrl', function($scope, $state, $http, $rootScope, userSe
     $scope.favoritedLength = $scope.user.likes.length
     $scope.watchingLength = $scope.user.watchingAnime.length
     $scope.user.friendIds.forEach(function(e) {
-      $http.get('/user/' + e.friendId).success(function(friend) {
+      $http.get('/users/' + e.friendId).success(function(friend) {
         e.username = friend.username
         e.isLoggedIn = friend.isLoggedIn
         $scope.user.friendList.push(e)

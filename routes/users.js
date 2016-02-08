@@ -3,17 +3,34 @@ var router = express.Router();
 var User = require('../models/user');
 var passport = require('passport');
 
+router.get('/', function(req, res, next) {
+  User.findById(req.user.id, function(err, user) {
+    if (err) { res.send(err);}
+    else {
+      user.isLoggedIn = true;
+      user.save()
+      res.json(req.user);
+    }
+  });
+});
 
-router.get('/allloggedin', function(req, res, next) {
-  var currentUserList = []
-  User.find({isLoggedIn: true}, function(err, users) {
-    users.forEach(function(e) {
-      var name = e.username
-      var _id = e._id
-      currentUserList.push({name, _id})
-    })
-    res.send(currentUserList)
-  })
+router.get('/:id', function(req, res, next) {
+  User.findById(req.params.id, function(err, user) {
+    if (err) { res.send(err);}
+    else { res.json(user);}
+  });
+});
+
+router.get('/username/:id', function(req, res, next) {
+  User.find({username: req.params.id}, function(err, user) {
+    if (err) { res.send(err);}
+    else {
+      var newUser = {}
+      newUser.username = user[0].username
+      newUser._id = user[0]._id
+      res.send(newUser);
+    }
+  });
 });
 
 router.post('/newavatar', function(req, res) {
@@ -40,6 +57,16 @@ router.post('/login', passport.authenticate('local'), function(req, res, next) {
     if (err) { res.send(err); }
     // if (err) { return next(err); }
     res.send()
+  });
+});
+router.get('/userleave/:id', function(req, res, next) {
+  User.findById(req.params.id, function(err, user) {
+    if (err) { res.send(err);}
+    else {
+      user.isLoggedIn = false;
+      user.save()
+      res.json(req.user);
+    }
   });
 });
 

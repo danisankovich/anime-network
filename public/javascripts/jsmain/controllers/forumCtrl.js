@@ -8,9 +8,9 @@ app.controller('forumCtrl', function($scope, $state, $http, animeService, userSe
     $scope.forum = forum
     $http.get('/topics/' + forum._id).success(function(topics) {
       topics.forEach(function(topic) {
-        $http.get('/user/' + topic.creatorId).success(function(user){
+        $http.get('/users/' + topic.creatorId).success(function(user){
           topic.user = user
-          $http.get('/user/' + topic.mostRecentUser).success(function(lastUser) {
+          $http.get('/users/' + topic.mostRecentUser).success(function(lastUser) {
             topic.mostRecentUser = lastUser.username
           })
         })
@@ -40,7 +40,7 @@ app.controller('forumCtrl', function($scope, $state, $http, animeService, userSe
         $scope.forum = forum
         $http.get('/topics/' + forum._id).success(function(topics) {
           topics.forEach(function(topic) {
-            $http.get('/user/' + topic.creatorId).success(function(user){
+            $http.get('/users/' + topic.creatorId).success(function(user){
               topic.user = user
             })
           })

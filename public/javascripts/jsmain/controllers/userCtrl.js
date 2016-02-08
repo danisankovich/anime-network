@@ -3,10 +3,12 @@ app.controller('userCtrl', function($scope, $state, $http, $rootScope, userServi
   userService.getCurrentUser().success(function(data) {
     $scope.user = data;
   });
-  $http.get('/user/' + $state.params.userId).success(function(person) {
+  $http.get('/users/' + $state.params.userId).success(function(person) {
     $scope.person = person
+    console.log($scope.person)
   })
   $scope.addFriend = function(person) {
+    // console.log(this)
     var found = person.friendIds.some(function (el) {
       return el.friendId === $scope.user._id;
     });

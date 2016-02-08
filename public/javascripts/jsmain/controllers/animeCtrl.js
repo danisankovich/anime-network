@@ -14,7 +14,7 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
         else {
           e.subbody = e.body
         }
-        $http.get( "/user/" + e.user).success(function(user){
+        $http.get( "/users/" + e.user).success(function(user){
           e.user = user;
         })
       })
@@ -77,7 +77,7 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
                   else {
                     e.subbody = e.body
                   }
-                  $http.get( "/user/" + e.user).success(function(user){
+                  $http.get( "/users/" + e.user).success(function(user){
                     e.user = user;
                   })
                 })
@@ -122,7 +122,7 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
                   else {
                     e.subbody = e.body
                   }
-                  $http.get( "/user/" + e.user).success(function(user){
+                  $http.get( "/users/" + e.user).success(function(user){
                     e.user = user;
                   })
                 })
@@ -177,7 +177,7 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
                   else {
                     e.subbody = e.body
                   }
-                  $http.get( "/user/" + e.user).success(function(user){
+                  $http.get( "/users/" + e.user).success(function(user){
                     e.user = user;
                   })
                 })
@@ -233,7 +233,7 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
               else {
                 e.subbody = e.body
               }
-              $http.get( "/user/" + e.user).success(function(user){
+              $http.get( "/users/" + e.user).success(function(user){
                 e.user = user;
               })
             })

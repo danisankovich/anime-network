@@ -61,7 +61,7 @@ app.controller('mainCtrl', function($scope, $state, $http, $rootScope, animeServ
           $scope.user = $rootScope.currentUser
           $scope.friendList = [];
           $rootScope.currentUser.friendIds.forEach(function(e) {
-            $http.get('/user/' + e.friendId).success(function(friend) {
+            $http.get('/users/' + e.friendId).success(function(friend) {
               e.username = friend.username
               $scope.friendList.push(e)
             })

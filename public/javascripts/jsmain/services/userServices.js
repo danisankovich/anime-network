@@ -3,7 +3,7 @@ app.service('userService', function($http) {
   // var whichUrl = 'http://animenetwork.herokuapp.com';
 
   this.getCurrentUser = function() {
-    return $http.get(whichUrl + '/user').success(function(user) {
+    return $http.get(whichUrl + '/users').success(function(user) {
         if(user) {
           return user;
         }

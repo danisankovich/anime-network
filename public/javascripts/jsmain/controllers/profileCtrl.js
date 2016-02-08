@@ -9,7 +9,7 @@ app.controller('profileCtrl', function($scope, $state, $http, $rootScope, userSe
     $scope.favoritedLength = $scope.user.likes.length
     $scope.watchingLength = $scope.user.watchingAnime.length
     $scope.user.friendIds.forEach(function(e) {
-      $http.get('/user/' + e.friendId).success(function(friend) {
+      $http.get('/users/' + e.friendId).success(function(friend) {
         e.username = friend.username
         $scope.user.friendList.push(e)
       })
@@ -32,8 +32,6 @@ app.controller('profileCtrl', function($scope, $state, $http, $rootScope, userSe
       console.log(success)
     })
   }
-
-
   $scope.avatar = [];
   $scope.processFiles = function(files){
     angular.forEach(files, function(flowFile, i){

@@ -16,7 +16,20 @@ router.get('/', function(req, res, next) {
   res.render('index', { user: req.user });
   res.send();
 });
-
+router.get('/allloggedin', function(req, res, next) {
+  console.log('yes')
+  var currentUserList = []
+  User.find({isLoggedIn: true}, function(err, users) {
+    users.forEach(function(e) {
+      console.log(e.username)
+      var name = e.username
+      var _id = e._id
+      currentUserList.push({name: name, _id: _id})
+      console.log("this", currentUserList)
+    })
+    res.send(currentUserList)
+  })
+});
 router.post('/', function(req, res) {
   var randAnime = [];
   for(var i = 0; i < 6; i++) {
@@ -36,43 +49,13 @@ router.post('/', function(req, res) {
   }
 });
 
-router.get('/user', function(req, res, next) {
-  User.findById(req.user.id, function(err, user) {
-    if (err) { res.send(err);}
-    else {
-      user.isLoggedIn = true;
-      user.save()
-      res.json(req.user);
-    }
-  });
-});
-router.get('/userleave/:id', function(req, res, next) {
-  User.findById(req.params.id, function(err, user) {
-    if (err) { res.send(err);}
-    else {
-      user.isLoggedIn = false;
-      user.save()
-      res.json(req.user);
-    }
-  });
-});
-router.get('/user/:id', function(req, res, next) {
-  User.findById(req.params.id, function(err, user) {
-    if (err) { res.send(err);}
-    else { res.json(user);}
-  });
-});
-router.get('/username/:id', function(req, res, next) {
-  User.find({username: req.params.id}, function(err, user) {
-    if (err) { res.send(err);}
-    else {
-      var newUser = {}
-      newUser.username = user[0].username
-      newUser._id = user[0]._id
-      res.send(newUser);
-    }
-  });
-});
+// router.get('/user/:id', function(req, res, next) {
+//   User.findById(req.params.id, function(err, user) {
+//     if (err) { res.send(err);}
+//     else { res.json(user);}
+//   });
+// });
+
 router.get('/myanimelists/:id', function(req, res) {
   Anime.findById(req.params.id, function(err, anime) {
     if(err) {res.send(err)}
@@ -203,8 +186,8 @@ router.post('/transfromtowatch/:id', function(req, res) {
   User.findById(req.user.id, function(err, user) {
     var idx = user.willWatch.indexOf(req.params.id)
     user.willWatch.splice(idx, 1)
-    console.log('req', req.params.id)
-    console.log(user.willWatch)
+    // console.log('req', req.params.id)
+    // console.log(user.willWatch)
     user.completedAnime.push(req.params.id)
     user.save()
     Anime.findById(req.params.id, function(err, anime) {

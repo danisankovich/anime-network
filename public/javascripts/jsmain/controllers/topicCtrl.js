@@ -6,7 +6,7 @@ app.controller('topicCtrl', function($scope, $state, $http, animeService, userSe
   });
 
   $http.get('/onetopic/' + $state.params.topicId).success(function(onetopic) {
-    $http.get('/user/' + onetopic[0].creatorId).success(function(user){
+    $http.get('/users/' + onetopic[0].creatorId).success(function(user){
       onetopic[0].user = user
       $scope.topic = onetopic[0]
     })
