@@ -390,30 +390,6 @@ router.post('/addReview/:id', function(req, res) {
       res.send("success")
     })
 
-
-
-  router.get('/register', function(req, res) { });
-
-  router.post('/register', function(req, res) {
-    User.register(new User({ username: req.body.username, email: req.body.email}),
-    req.body.password, function(err, user) {
-      if (err) { res.send(err); }
-      passport.authenticate('local')(req, res, function() { res.redirect('/#/'); });
-    });
-  });
-
-  router.get('/login', function(req, res) {
-  });
-
-  router.post('/login', passport.authenticate('local'), function(req, res, next) {
-  // router.post('/login', passport.authenticate('local', { failureRedirect: '/#/loginerror' }), function(req, res, next) {
-    req.session.save(function (err, user) {
-      if (err) { return next(err); }
-      // res.redirect('/#');
-      res.send()
-    });
-  });
-
   router.post('/updateuser', function(req, res, next) {
     User.findById(req.user.id, function(err, user) {
       if (err) { res.send(err);}

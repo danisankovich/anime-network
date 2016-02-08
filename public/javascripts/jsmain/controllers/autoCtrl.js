@@ -118,7 +118,7 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
 
   $scope.login = function(user) {
     console.log(user)
-    $http.post('/login', user).success(function(user){
+    $http.post('/users/login', user).success(function(user){
       console.log(user)
       userService.getCurrentUser().success(function(data) {
         $rootScope.currentUser = data;
@@ -136,7 +136,7 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
   }
   $scope.register = function(newUser) {
     $scope.newUser = newUser;
-    $http.post('/register', $scope.newUser).success(function(err, data) {
+    $http.post('/users/register', $scope.newUser).success(function(err, data) {
       if(err.hasOwnProperty('name') === true) {
         sweetAlert("Uh Oh  ", err.message, "error");
         return;

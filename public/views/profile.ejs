@@ -1,15 +1,21 @@
 <div class="container">
   <div class="row">
+    <div class="small-6 medium-3 large-3 columns">
+      <img class="avatar" ng-src="{{user.avatar}}" alt="">
+    </div>
+    <div class="small-2 medium-2 large-2 columns">
+      <p>{{user.username}}</p>
+    </div>
+  </div>
+
+  <div class="row">
     <div class="small-3 medium-3 large-3 columns borderbar">
       Anime Completed: {{completedLength}} <a ng-click="completedAnime()">(View)</a><br>
       Anime Watching: {{watchingLength}} <a ng-click="watchingAnime()">(View)</a><br>
       Anime Favorited: {{favoritedLength}} <a ng-click="favoritedAnime()">(View)</a><br>
       Anime To Watch: {{willWatchLength}} <a ng-click="willWatchAnime()">(View)</a><br>
     </div>
-    <div class="small-9 medium-9 large-9 columns">
-      {{user.username}}
-      <img class="avatar" ng-src="{{user.avatar}}" alt="">
-    </div>
+
   </div>
 
   <div>
