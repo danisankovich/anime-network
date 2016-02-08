@@ -64,7 +64,7 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
       }, function(isConfirm){
         if (isConfirm) {
           $scope.a = {anime: anime, a: 'message'}
-          $http.post( '/transtocompleted', $scope.a).success(function(anime) {
+          $http.post( '/users/transtocompleted', $scope.a).success(function(anime) {
             sweetAlert("Done", "You have added  " + anime.title + " to your completed list", "success");
             animeService.getOneAnime().success(function(anime) {
               $scope.anime = anime;
@@ -109,7 +109,7 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
       }, function(isConfirm){
         if (isConfirm) {
           $scope.a = {anime: anime, a: 'message'}
-          $http.post( '/transfromtowatch/' + anime._id).success(function(anime) {
+          $http.post( '/users/transfromtowatch/' + anime._id).success(function(anime) {
             sweetAlert("Done", "You have added  " + anime.title + " to your completed list", "success");
             animeService.getOneAnime().success(function(anime) {
               $scope.anime = anime;
@@ -165,7 +165,7 @@ app.controller('animeCtrl', function($scope, $state, $http, animeService, userSe
           closeOnConfirm: true,
           closeOnCancel: true
         }, function(isConfirm){
-          $http.post( '/transtowatching/' + $scope.anime._id).success(function(anime) {
+          $http.post( '/users/transtowatching/' + $scope.anime._id).success(function(anime) {
             animeService.getOneAnime().success(function(anime) {
               $scope.anime = anime;
               $http.get( "/reviews/" + anime._id).success(function(reviews){

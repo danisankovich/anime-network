@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
+var Anime = require('../models/anime');
 var passport = require('passport');
 
 router.get('/', function(req, res, next) {
@@ -39,6 +40,85 @@ router.post('/newavatar', function(req, res) {
     user.avatar = req.body[0]
     user.save()
     res.send(user)
+  })
+})
+
+
+
+
+router.post('/addToWatching/:id', function(req, res) {
+  Anime.findByIdAndUpdate(req.params.id, {$push: {usersWatching: req.user._id}}, function(err, anime) {
+    User.findByIdAndUpdate(req.user.id, {$push: {watchingAnime: {animeId: req.params.id, episodesWatched: 0}}}, function(err, user) {
+      res.send(anime);
+    });
+  });
+});
+
+router.post('/addToWillWatch/:id', function(req, res) {
+  User.findByIdAndUpdate(req.user.id, {$push: {willWatch: req.params.id}}, function(err, user) {
+    res.send(user);
+  });
+});
+
+router.post('/addLike/:id', function(req, res) {
+  Anime.findByIdAndUpdate(req.params.id, {$push: {favorites: req.user._id}}, function(err, anime) {
+    User.findByIdAndUpdate(req.user._id, {$push: {likes: req.params.id}}, function(err, user) {
+      res.send(anime);
+    });
+  });
+});
+
+router.post('/addToCompleted/:id', function(req, res) {
+  Anime.findByIdAndUpdate(req.params.id, {$push: {usersCompleted: req.user._id}}, function(err, anime) {
+    User.findByIdAndUpdate(req.user.id, {$push: {completedAnime: req.params.id}}, function(err, user) {
+      res.send(anime);
+    });
+  });
+});
+router.post('/transtocompleted', function(req, res) {
+  Anime.findById(req.body.anime._id, function(err, anime) {
+    var idx = anime.usersWatching.indexOf(req.user.id)
+    anime.usersWatching.splice(idx, 1)
+    anime.usersCompleted.push(req.user.id)
+      anime.save()
+      User.findById(req.user.id, function(err, user) {
+        user.watchingAnime.forEach(function(e, i) {
+          if(e.animeId === req.body.anime._id) {
+            user.watchingAnime.splice(i, 1)
+            user.completedAnime.push(req.body.anime._id)
+            user.save()
+          }
+        })
+        res.send(anime);
+      });
+    });
+});
+router.post('/transtowatching/:id', function(req, res) {
+  User.findById(req.user.id, function(err, user) {
+    var idx = user.willWatch.indexOf(req.params.id)
+    user.willWatch.splice(idx, 1)
+    user.watchingAnime.push({animeId: req.params.id, episodesWatched: 0})
+    user.save()
+    Anime.findById(req.params.id, function(err, anime) {
+      anime.usersWatching.push(req.user.id)
+      anime.save()
+      res.send(anime)
+    })
+  })
+})
+router.post('/transfromtowatch/:id', function(req, res) {
+  User.findById(req.user.id, function(err, user) {
+    var idx = user.willWatch.indexOf(req.params.id)
+    user.willWatch.splice(idx, 1)
+    // console.log('req', req.params.id)
+    // console.log(user.willWatch)
+    user.completedAnime.push(req.params.id)
+    user.save()
+    Anime.findById(req.params.id, function(err, anime) {
+      anime.usersCompleted.push(req.user.id)
+      anime.save()
+      res.send(anime)
+    })
   })
 })
 
