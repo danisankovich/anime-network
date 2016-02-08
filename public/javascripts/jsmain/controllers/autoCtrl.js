@@ -119,17 +119,8 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
         return;
       }
       else {
-        userService.getCurrentUser().success(function(data) {
-          $rootScope.currentUser = data;
-          $scope.friendList = [];
-          $rootScope.currentUser.friendIds.forEach(function(e) {
-            $http.get('/users/' + e.friendId).success(function(friend) {
-              e.username = friend.username
-              $scope.friendList.push(e)
-            })
-          })
-          $('#loginModal').foundation('reveal', 'close');
-        });
+        $rootScope.currentUser = err;
+        $('#loginModal').foundation('reveal', 'close');
       }
     });
   };
