@@ -15,6 +15,7 @@
         </ul>
       </div>
       <div class="columns small-9">
+        <p ng-repeat="chat in chats"><a ng-click="toUserSaved(chat)">{{chat.userName.toUpperCase()}}</a> : {{chat.message}}</p>
         <p ng-repeat="message in messages"><a ng-click="toUser(user)">{{message.user.toUpperCase()}}</a> : {{message.message}}</p>
       </div>
       <div class="columns small-9 small-offset-3">
