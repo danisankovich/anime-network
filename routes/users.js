@@ -160,7 +160,8 @@ router.post('/register', function(req, res) {
 router.post('/login', passport.authenticate('local'), function(req, res, next) {
   req.session.save(function (err, user) {
     if (err) { res.send(err); }
-    res.send()
+    console.log(req.user)
+    res.send(req.user)
   });
 });
 router.get('/userleave/:id', function(req, res, next) {

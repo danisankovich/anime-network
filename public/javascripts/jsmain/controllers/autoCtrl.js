@@ -5,13 +5,6 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
     var availableTags = [];
     userService.getCurrentUser().success(function(data) {
       $rootScope.currentUser = data;
-      $scope.friendList = [];
-      $rootScope.currentUser.friendIds.forEach(function(e) {
-        $http.get('/users/' + e.friendId).success(function(friend) {
-          e.username = friend.username
-          $scope.friendList.push(e)
-        })
-      })
     });
 
 
@@ -105,10 +98,11 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
   $scope.login = function(user) {
     console.log(user)
     $http.post('/users/login', user).success(function(user){
-      userService.getCurrentUser().success(function(data) {
-        $rootScope.currentUser = data;
+      // userService.getCurrentUser().success(function(data) {
+        $rootScope.currentUser = user;
+        console.log($rootScope.currentUser)
         $('#loginModal').foundation('reveal', 'close');
-      });
+      // });
     }).error(function(err) {
       $scope.loginMessage = "Incorrect Username/Password Combination"
     })
