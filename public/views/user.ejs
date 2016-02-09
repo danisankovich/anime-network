@@ -1,8 +1,65 @@
 <div class="container">
   <div class="row">
-    <div class="small-9 medium-9 large-9 columns">
-      {{person.username}}
-      <a ng-click="addFriend(person)">Send Friend Request</a>
+    <div class="small-9 medium-9 large-9 columns profileSpace">
+      <div class="small-4 medium-4 large-4 columns">
+        <img class="avatar" ng-src="{{person.avatar}}" alt="">
+        <form>
+          <div flow-init flow-name="uploader.flow" flow-files-added="processFiles($files)">
+            <button flow-btn type="file" class="tiny button">Upload Images</button>
+            <button class="tiny button" ng-click="uploadImage()">Submit</button>
+          </div>
+        </form>
+      </div>
+      <div class="small-6 medium-6 large-6 columns">
+        <h3>Username: {{person.username}} </h3> <a ng-click="addFriend(person)">Send Friend Request</a>
+        <h5>Email: {{person.email}}</h5>
+        <h6>User Since: {{person.createdAt | date : 'MMM d, y'}}</h6>
+      </div>
+      <div class="row">
+        <div class="small-12 medium-12 large-12 columns">
+          <div class="small-4 medium-4 large-4 columns borderbar">
+            <h2>Their Lists</h2>
+            Anime Completed: {{completedLength}} <a ng-click="completedAnime()">(View)</a><br>
+            Anime Watching: {{watchingLength}} <a ng-click="watchingAnime()">(View)</a><br>
+            Anime Favorited: {{favoritedLength}} <a ng-click="favoritedAnime()">(View)</a><br>
+            Anime To Watch: {{willWatchLength}} <a ng-click="willWatchAnime()">(View)</a><br>
+          </div>
+          <div class="small-7 small-offset-1 medium-7 medium-offset-1 large-7 large-offset-1 columns">
+            <h2>Their Reviews</h2>
+            <input type="text" id="searchBox" ng-model="searchBox">
+            <div class="reviewScroll">
+                <table>
+                  <thead>
+                    <tr>
+                      <th class="mylist">Review Title</th>
+                      <th class="mylist">Show</th>
+                      <th class="mylist">Their Rating</th>
+                      <th class="mylist">Review Rating</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="review in reviews | filter: searchBox">
+                      <td class="mylist"><a ng-click="">{{review.title}}</a></td>
+                      <td class="mylist"><a ng-click="showOneAnime(review)">{{review.showTitle}}</a></td>
+                      <td class="mylist">{{review.userRating}}/10</td>
+                      <td class="mylist">How others rated me</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- scroll box. Only titles, rating,show its for, etc. clicking on them pops up a modal -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="small-3 medium-3 large-3 columns profileSpace">
+      <h4>Friends List</h4>
+      <ul> 
+        <button class="tiny button" ng-click="friendCollapse = false" ng-show="friendCollapse">Hide</button>
+        <button class="tiny button" ng-click="friendCollapse = true" ng-show="!friendCollapse">Show</button>
+        <li ng-repeat="friend in person.friendList" ng-show="!friend.pending && friendCollapse"><a ng-click="toUser(friend)">{{friend.username}}</a></li>
+      </ul>
     </div>
   </div>
 </div>
