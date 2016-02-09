@@ -33,7 +33,6 @@ app.controller('messageCtrl', function($scope, $state, $http, $rootScope, userSe
     $http.post('/newmessage', theMessage).success(function(success) {
       theMessage.position = 'mine';
       $scope.thisFriendsMessages.push(theMessage)
-      console.log($scope.newmessage)
       $scope.newmessage = {}
       newmessage = {}
     })

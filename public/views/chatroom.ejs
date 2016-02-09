@@ -11,12 +11,20 @@
       <div class="columns small-3">
         <ul>
           <li>Users Currently Here: </li>
-          <li class="chatUser" ng-repeat="user in currentUserList" ng-click="toUser(user)"><a>{{user.name}}</a></li>
+          <li>
+            <div class="reviewScroll">
+              <ul>
+                <li class="chatUser" ng-repeat="user in currentUserList" ng-click="toUser(user)"><a>{{user.name}}</a></li>
+              </ul>
+            </div>
+          </li>
         </ul>
       </div>
       <div class="columns small-9">
-        <p ng-repeat="chat in chats"><a ng-click="toUserSaved(chat)">{{chat.userName.toUpperCase()}}</a> : {{chat.message}}</p>
-        <p ng-repeat="message in messages"><a ng-click="toUser(user)">{{message.user.toUpperCase()}}</a> : {{message.message}}</p>
+        <div class="reviewScroll">
+          <p ng-repeat="chat in chats"><a ng-click="toUserSaved(chat)">{{chat.userName.toUpperCase()}}</a> : {{chat.message}}</p>
+          <p ng-repeat="message in messages"><a ng-click="toUser(user)">{{message.user.toUpperCase()}}</a> : {{message.message}}</p>
+        </div>
       </div>
       <div class="columns small-9 small-offset-3">
         <form ng-submit="chatMessage(sent)">

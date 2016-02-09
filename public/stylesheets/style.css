@@ -5,6 +5,9 @@
   height: 200px;
   max-width: 200px;
 }
+.messageImg {
+  height: 10px;
+}
 .profileSpace {
   margin-top: 5%;
 }
@@ -168,12 +171,16 @@ ul.reviews li ul {
   border-radius: 10px;
   width: 51%;
   float: right;
+  background-color: #E0FFFF;
+  padding: 5px 5px 5px 5px;
 }
 .message-theirs {
   border: 1px black solid;
   border-radius: 10px;
   width: 51%;
   float: left;
+  background-color: white;
+  padding: 5px 10px 5px 10px;
 }
 .circleOnline {
   height: 10px;

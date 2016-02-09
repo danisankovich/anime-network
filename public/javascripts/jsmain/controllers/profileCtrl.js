@@ -8,9 +8,7 @@ app.controller('profileCtrl', function($scope, $state, $http, $rootScope, userSe
     $scope.willWatchLength = $scope.user.willWatch.length
     $scope.favoritedLength = $scope.user.likes.length
     $scope.watchingLength = $scope.user.watchingAnime.length
-    console.log($scope.user.reviews)
     $http.post('/users/reviews', $scope.user.reviews).success(function(reviews) {
-      console.log(reviews)
       $scope.reviews = reviews
       $scope.reviews.forEach(function(a) {
         $http.get('/users/anime/' + a.showId).success(function(anime) {
@@ -60,13 +58,13 @@ app.controller('profileCtrl', function($scope, $state, $http, $rootScope, userSe
   $scope.avatar = [];
   $scope.processFiles = function(files){
     angular.forEach(files, function(flowFile, i){
-       var fileReader = new FileReader();
-          fileReader.onload = function (event) {
-            var uri = event.target.result;
-              $scope.avatar[0] = uri;
-              console.log($scope.avatar)
-          };
-          fileReader.readAsDataURL(flowFile.file);
+      var fileReader = new FileReader();
+      fileReader.onload = function (event) {
+        var uri = event.target.result;
+        $scope.avatar[0] = uri;
+        console.log($scope.avatar)
+      };
+      fileReader.readAsDataURL(flowFile.file);
     });
   };
   $scope.uploadImage = function() {
@@ -74,12 +72,6 @@ app.controller('profileCtrl', function($scope, $state, $http, $rootScope, userSe
       $scope.user.avatar = user.avatar
       $scope.avatar = [];
     })
-  }
-  $scope.hideFriends = function() {
-    console.log(this)
-  }
-  $scope.hidePending = function() {
-    console.log(this)
   }
   $scope.toUser = function(friend) {
     $state.go('user', {userId: friend.friendId})
