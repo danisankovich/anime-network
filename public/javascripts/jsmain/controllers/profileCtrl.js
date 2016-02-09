@@ -60,7 +60,17 @@ app.controller('profileCtrl', function($scope, $state, $http, $rootScope, userSe
   $scope.uploadImage = function() {
     $http.post('/users/newavatar', $scope.avatar).success(function(user) {
       $scope.user.avatar = user.avatar
+      $scope.avatar = [];
     })
+  }
+  $scope.hideFriends = function() {
+    console.log(this)
+  }
+  $scope.hidePending = function() {
+    console.log(this)
+  }
+  $scope.toUser = function(friend) {
+    $state.go('user', {userId: friend.friendId})
   }
 
 });

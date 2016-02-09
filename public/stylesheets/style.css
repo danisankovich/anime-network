@@ -5,6 +5,9 @@
   height: 200px;
   max-width: 200px;
 }
+.profileSpace {
+  margin-top: 5%;
+}
 .thoseForms {
   height: 385px !important;
 }
