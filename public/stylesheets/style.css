@@ -47,6 +47,10 @@ ul.synopsis li {
   height:80px;
   overflow:auto;
 }
+.reviewScroll {
+  height:200px;
+  overflow:auto;
+}
 
 .genreBox {
   border: 1px black solid;

@@ -3,16 +3,28 @@ app.controller('profileCtrl', function($scope, $state, $http, $rootScope, userSe
   userService.getCurrentUser().success(function(data) {
     $scope.user = data;
     $scope.user.friendList = []
+    $scope.reviews = []
     $scope.completedLength = $scope.user.completedAnime.length
     $scope.willWatchLength = $scope.user.willWatch.length
     $scope.favoritedLength = $scope.user.likes.length
     $scope.watchingLength = $scope.user.watchingAnime.length
+    console.log($scope.user.reviews)
+    $http.post('/users/reviews', $scope.user.reviews).success(function(reviews) {
+      console.log(reviews)
+      $scope.reviews = reviews
+      $scope.reviews.forEach(function(a) {
+        $http.get('/users/anime/' + a.showId).success(function(anime) {
+          a.showTitle = anime.title
+        })
+      })
+    })
     $scope.user.friendIds.forEach(function(e) {
       $http.get('/users/' + e.friendId).success(function(friend) {
         e.username = friend.username
         $scope.user.friendList.push(e)
       })
     })
+
   });
   $scope.completedAnime = function() {
     $state.go('myComplete')
@@ -72,5 +84,8 @@ app.controller('profileCtrl', function($scope, $state, $http, $rootScope, userSe
   $scope.toUser = function(friend) {
     $state.go('user', {userId: friend.friendId})
   }
+  $scope.showOneAnime = function(review) {
+    $state.go('anime', {animename: review.showTitle});
+  };
 
 });

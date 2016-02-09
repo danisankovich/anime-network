@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
 var Anime = require('../models/anime');
+var Review = require('../models/review');
 var passport = require('passport');
 
 router.get('/', function(req, res, next) {
@@ -33,6 +34,26 @@ router.get('/username/:id', function(req, res, next) {
     }
   });
 });
+router.post('/reviews', function(req, res) {
+  var reviewIds = req.body
+  var reviews = []
+  reviewIds.forEach(function(e) {
+    Review.findById(e, function(err, review) {
+      reviews.push(review)
+      if(reviews.length === reviewIds.length) {
+        res.send(reviews)
+      }
+    })
+  })
+});
+router.get('/anime/:id', function(req, res) {
+  console.log(req.params.id)
+  Anime.findById(req.params.id, function(err, anime) {
+    console.log(anime)
+    res.send(anime)
+  })
+});
+
 
 router.post('/newavatar', function(req, res) {
   console.log(req.body[0])
@@ -155,7 +176,7 @@ router.post('/register', function(req, res) {
     if (err) { res.send(err); }
     passport.authenticate('local')(req, res, function() {
       console.log(req.user)
-      res.send(req.user); 
+      res.send(req.user);
     });
   });
 });
