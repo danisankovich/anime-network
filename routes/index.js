@@ -198,7 +198,7 @@ router.post('/addReview/:id', function(req, res) {
         res.send(reviews)
       })
     })
-    
+
     router.post('/ratings', function(req, res) {
       Anime.findById(req.body.anime, function(err, anime) {
         anime.ratings.push({rating: req.body.rating, user: req.user.id})
@@ -208,6 +208,7 @@ router.post('/addReview/:id', function(req, res) {
     })
     router.get('/showforum/:id', function(req, res) {
       Forum.findOne({showId: req.params.id}, function(err, forum) {
+        console.log(forum)
         res.send(forum)
       })
     })

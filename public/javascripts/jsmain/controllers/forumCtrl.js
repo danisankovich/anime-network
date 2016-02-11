@@ -1,4 +1,4 @@
-app.controller('forumCtrl', function($scope, $state, $http, animeService, userService){
+app.controller('forumCtrl', function($scope, $state, $http, animeService, userService, forumService){
 
   userService.getCurrentUser().success(function(data) {
     $scope.user = data;
@@ -17,6 +17,9 @@ app.controller('forumCtrl', function($scope, $state, $http, animeService, userSe
       $scope.topics = topics
     })
   })
+  // forumService.getForum().success(function(forum) {
+  //   console.log(forum);
+  // });
 
   $scope.toTopic = function(topic) {
     $state.go('onetopic', {topicId: topic._id})

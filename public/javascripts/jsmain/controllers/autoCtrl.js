@@ -1,13 +1,10 @@
 app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location, userService){
   $(document).ready(function() {
-
     $scope.hideGenre = false;
     var availableTags = [];
     userService.getCurrentUser().success(function(data) {
       $rootScope.currentUser = data;
     });
-
-
     $('.searchinput').keyup(debounce(function(){
         $scope.n = $(".autocomplete").val();
         $http.post('/anime/' + $scope.n).success(function(anime) {
@@ -85,13 +82,13 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
     });
 
     socket.on('user leave', function(msg) {
-        $http.get('/users/userleave/' + msg).success(function() {
-          console.log('e')
-          $http.get('/allloggedin').success(function(currentUserList) {
-            $rootScope.currentUserList = currentUserList
-            console.log($rootScope.currentUserList)
-          })
+      $http.get('/users/userleave/' + msg).success(function() {
+        console.log('e')
+        $http.get('/allloggedin').success(function(currentUserList) {
+          $rootScope.currentUserList = currentUserList
+          console.log($rootScope.currentUserList)
         })
+      })
     });
   });
 
