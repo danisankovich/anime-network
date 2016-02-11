@@ -11,7 +11,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="anime in willWatchAnime">
+          <tr ng-repeat="anime in user.willWatchAnime">
             <td class="mylist"><a ng-click="showOne(anime)">{{anime.title}}</a></td>
             <td class="mylist">{{anime.episode_count}}</td>
             <td class="mylist">{{anime.avgRating}}</td>

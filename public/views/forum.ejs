@@ -48,12 +48,12 @@
         </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="topic in topics">
+          <tr ng-repeat="topic in forum.topicsList">
             <td><a ng-click="toTopic(topic)">{{topic.title}}</a></td>
             <td><a ng-click="toUser(topic)">{{topic.user.username}}</a></td>
             <td>{{topic.spoilers}}</td>
             <td>{{topic.responses.length}}</td>
-            <td><a ng-click="toUserTwo(topic)">{{topic.mostRecentUser}}</a></td>
+            <td><a ng-click="toRecentUser(topic)">{{topic.mostRecentUser.username}}</a></td>
           </tr>
         </tbody>
       </table>

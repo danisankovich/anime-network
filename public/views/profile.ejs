@@ -19,14 +19,13 @@
         <div class="small-12 medium-12 large-12 columns">
           <div class="small-4 medium-4 large-4 columns borderbar">
             <h2>My Lists</h2>
-            Anime Completed: {{completedLength}} <a ng-click="completedAnime()">(View)</a><br>
-            Anime Watching: {{watchingLength}} <a ng-click="watchingAnime()">(View)</a><br>
-            Anime Favorited: {{favoritedLength}} <a ng-click="favoritedAnime()">(View)</a><br>
-            Anime To Watch: {{willWatchLength}} <a ng-click="willWatchAnime()">(View)</a><br>
+            <h5><a ng-click="completedAnime()">Anime Completed: ({{completedLength}})</a></h5><hr>
+            <h5><a ng-click="watchingAnime()">Anime Watching: ({{watchingLength}})</a></h45><hr>
+            <h5><a ng-click="favoritedAnime()">Anime Favorited: ({{favoritedLength}})</a></h5><hr>
+            <h5><a ng-click="willWatchAnime()">Anime To Watch: ({{willWatchLength}})</a></h5><hr>
           </div>
           <div class="small-7 small-offset-1 medium-7 medium-offset-1 large-7 large-offset-1 columns">
-            <h2>My Reviews</h2>
-            <input type="text" id="searchBox" ng-model="searchBox">
+            <h2>My Reviews <input type="text" id="searchBox" ng-model="searchBox" placeholder="Filter Reviews"></h2>
             <div class="reviewScroll">
                 <table>
                   <thead>

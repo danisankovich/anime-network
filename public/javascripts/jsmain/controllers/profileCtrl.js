@@ -1,8 +1,16 @@
 app.controller('profileCtrl', function($scope, $state, $http, $rootScope, userService){
-
+  function getFriends() {
+    $scope.user.friendIds.forEach(function(e) {
+      $http.get('/users/' + e.friendId).success(function(friend) {
+        e.username = friend.username
+        $scope.user.friendList.push(e)
+      })
+    })
+  }
   userService.getCurrentUser().success(function(data) {
     $scope.user = data;
     $scope.user.friendList = []
+    getFriends()
     $scope.reviews = []
     $scope.completedLength = $scope.user.completedAnime.length
     $scope.willWatchLength = $scope.user.willWatch.length
@@ -16,13 +24,6 @@ app.controller('profileCtrl', function($scope, $state, $http, $rootScope, userSe
         })
       })
     })
-    $scope.user.friendIds.forEach(function(e) {
-      $http.get('/users/' + e.friendId).success(function(friend) {
-        e.username = friend.username
-        $scope.user.friendList.push(e)
-      })
-    })
-
   });
   $scope.completedAnime = function() {
     $state.go('myComplete')
@@ -42,16 +43,11 @@ app.controller('profileCtrl', function($scope, $state, $http, $rootScope, userSe
       userService.getCurrentUser().success(function(data) {
         $scope.user = data;
         $scope.user.friendList = []
+        getFriends();
         $scope.completedLength = $scope.user.completedAnime.length
         $scope.willWatchLength = $scope.user.willWatch.length
         $scope.favoritedLength = $scope.user.likes.length
         $scope.watchingLength = $scope.user.watchingAnime.length
-        $scope.user.friendIds.forEach(function(e) {
-          $http.get('/users/' + e.friendId).success(function(friend) {
-            e.username = friend.username
-            $scope.user.friendList.push(e)
-          })
-        })
       });
     })
   }

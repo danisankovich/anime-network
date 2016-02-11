@@ -54,8 +54,8 @@
       </div>
     </div>
     <div class="small-3 medium-3 large-3 columns profileSpace">
-      <h4>Friends List</h4>
-      <ul> 
+      <h4>Friends List</h4> <!-- only viewable when friends with them -->
+      <ul>
         <button class="tiny button" ng-click="friendCollapse = false" ng-show="friendCollapse">Hide</button>
         <button class="tiny button" ng-click="friendCollapse = true" ng-show="!friendCollapse">Show</button>
         <li ng-repeat="friend in person.friendList" ng-show="!friend.pending && friendCollapse"><a ng-click="toUser(friend)">{{friend.username}}</a></li>

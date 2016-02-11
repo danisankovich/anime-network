@@ -12,10 +12,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="anime in completedAnime">
+          <tr ng-repeat="anime in user.mycompletedAnime">
             <td class="mylist"><a ng-click="showOne(anime)">{{anime.title}}</a></td>
             <td class="mylist">{{anime.episode_count}}</td>
-            <td class="mylist">{{anime.myRating}}</td>
+            <td class="mylist">{{anime.myRating || "N/A"}}</td>
             <td class="mylist">{{anime.avgRating}}</td>
           </tr>
         </tbody>

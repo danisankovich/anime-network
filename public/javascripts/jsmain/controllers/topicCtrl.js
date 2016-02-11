@@ -1,4 +1,4 @@
-app.controller('topicCtrl', function($scope, $state, $http, animeService, userService){
+app.controller('topicCtrl', function($scope, $state, $http, animeService, userService, forumService){
 
   userService.getCurrentUser().success(function(data) {
     $scope.user = data;
@@ -10,6 +10,28 @@ app.controller('topicCtrl', function($scope, $state, $http, animeService, userSe
       $scope.topic = onetopic[0]
     })
   })
+  $scope.reply = function(response) { //reply to main topic
+    response.user = $scope.user._id
+    response.createdAt = Date.now()
+    response.responses = []
+    $scope.topic.responses.push(response)
+    var rTopic = $scope.topic
+    forumService.topicResponse(rTopic).success(function(topic) {
+      $scope.topic=topic
+    })
+  }
+  $scope.replyToPost = function(post) { //reply to a reply
+    post.user = $scope.user._id
+    post.createdAt = Date.now()
+    $scope.post.responses.push(post)
+    var rTopic = $scope.topic
+    forumService.topicResponse(rTopic).success(function(topic) {
+      $scope.topic=topic
+    })
+  }
+  $scope.toUser = function(topic) {
+    $state.go('user', {userId: topic.user._id})
+  }
   $scope.replyModal = function() {
     $('#replyModal').foundation('reveal', 'open');
   }
@@ -17,29 +39,4 @@ app.controller('topicCtrl', function($scope, $state, $http, animeService, userSe
     $('#replyPostModal').foundation('reveal', 'open');
     $scope.post = this.response
   }
-  $scope.reply = function(response) {
-    response.user = $scope.user._id
-    response.createdAt = Date.now()
-    response.responses = []
-    $scope.topic.responses.push(response)
-    $http.post('/respondtopic', $scope.topic).success(function(topic) {
-      $scope.topic = topic;
-      console.log(topic)
-    })
-  }
-  $scope.replyToPost = function(post) {
-    post.user = $scope.user._id
-    post.createdAt = Date.now()
-    $scope.post.responses.push(post)
-    $http.post('/respondtopic', $scope.topic).success(function(topic) {
-      $scope.topic = topic;
-      console.log(topic)
-    })
-  }
-
-  $scope.toUser = function(topic) {
-    $state.go('user', {userId: topic.user._id})
-  }
-
-
 })
