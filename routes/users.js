@@ -194,6 +194,7 @@ router.get('/userleave/:id', function(req, res, next) {
     else {
       user.isLoggedIn = false;
       user.save()
+      console.log('userleft', {user: user.username, loggedin: user.isLoggedIn})
       res.json(req.user);
     }
   });

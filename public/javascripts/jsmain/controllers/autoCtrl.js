@@ -83,21 +83,17 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
 
     socket.on('user leave', function(msg) {
       $http.get('/users/userleave/' + msg).success(function() {
-        console.log('e')
         $http.get('/allloggedin').success(function(currentUserList) {
           $rootScope.currentUserList = currentUserList
-          console.log($rootScope.currentUserList)
         })
       })
     });
   });
 
   $scope.login = function(user) {
-    console.log(user)
     $http.post('/users/login', user).success(function(user){
       // userService.getCurrentUser().success(function(data) {
         $rootScope.currentUser = user;
-        console.log($rootScope.currentUser)
         $('#loginModal').foundation('reveal', 'close');
       // });
     }).error(function(err) {

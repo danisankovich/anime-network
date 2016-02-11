@@ -25,18 +25,7 @@ app.controller('profileCtrl', function($scope, $state, $http, $rootScope, userSe
       })
     })
   });
-  $scope.completedAnime = function() {
-    $state.go('myComplete')
-  }
-  $scope.willWatchAnime = function() {
-    $state.go('willWatch')
-  }
-  $scope.favoritedAnime = function() {
-    $state.go('favorited')
-  }
-  $scope.watchingAnime = function() {
-    $state.go('watching')
-  }
+
   $scope.accept=function(friend) {
     $http.post('/users/acceptfriend/' + friend.friendId).success(function(success) {
       swal("Congrats", "You have Accepted " + friend.username + "\'s friend request", "success");
@@ -78,6 +67,18 @@ app.controller('profileCtrl', function($scope, $state, $http, $rootScope, userSe
   $scope.showReview = function(review) {
     $scope.review = review
     $('#reviewModal').foundation('reveal', 'open');
+  }
+  $scope.completedAnime = function() {
+    $state.go('myComplete')
+  }
+  $scope.willWatchAnime = function() {
+    $state.go('willWatch')
+  }
+  $scope.favoritedAnime = function() {
+    $state.go('favorited')
+  }
+  $scope.watchingAnime = function() {
+    $state.go('watching')
   }
 
 });

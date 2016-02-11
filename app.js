@@ -115,14 +115,6 @@ passport.deserializeUser(User.deserializeUser());
 // mongoose.connect(process.env.MONGOLAB_URI);
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/animenetwork');
 
-var logout = function(req, res){
-  if (req.isAuthenticated()){
-    req.logout();
-  }
-  res.redirect('/');
-};
-app.get('/logout', logout);
-
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;

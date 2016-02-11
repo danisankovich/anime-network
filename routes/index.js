@@ -275,4 +275,16 @@ router.post('/addReview/:id', function(req, res) {
     });
   });
 
+  var logout = function(req, res){
+    if (req.isAuthenticated()){
+      User.findById(req.user.id, function(err, user) {
+        user.isLoggedIn = false
+        user.save()
+        req.logout();
+        res.redirect('/');
+      })
+    }
+  };
+  router.get('/logout', logout);
+
   module.exports = router;
