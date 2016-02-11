@@ -75,5 +75,9 @@ app.controller('profileCtrl', function($scope, $state, $http, $rootScope, userSe
   $scope.showOneAnime = function(review) {
     $state.go('anime', {animename: review.showTitle});
   };
+  $scope.showReview = function(review) {
+    $scope.review = review
+    $('#reviewModal').foundation('reveal', 'open');
+  }
 
 });

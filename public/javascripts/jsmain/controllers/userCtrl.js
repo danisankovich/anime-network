@@ -37,4 +37,7 @@ app.controller('userCtrl', function($scope, $state, $http, $rootScope, userServi
       })
     }
   }
+  $scope.showOneAnime = function(review) {
+    $state.go('anime', {animename: review.showTitle});
+  };
 });
