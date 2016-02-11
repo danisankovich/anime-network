@@ -1,4 +1,4 @@
-app.service('animeService', function($http, $state) {
+app.service('animeService', function($http, $state, userService) {
 
   this.getCurrentAnime = function() {
     return $http.post('/animelist/' + $state.params.animename).success(function(anime) {
@@ -41,4 +41,40 @@ app.service('animeService', function($http, $state) {
       return result;
     });
   };
+  this.myWatching = function() {
+    return userService.getCurrentUser().success(function(data) {
+      var check = []
+      data.mywatchingAnime = [];
+      data.watchingAnime.forEach(function(e) {
+        if(check.indexOf(e) === -1) {
+          check.push(e)
+          $http.get('/myanimelists/' + e.animeId).success(function(anime) {
+            anime.episodesWatched = e.episodesWatched
+            anime.avgRating = 0;
+            if (anime.ratings) {
+              anime.ratings.forEach(function(a){
+                if(a.user === data._id) {
+                  anime.myRating = a.rating + "/10"
+                  anime.avgRating += a.rating/(anime.ratings.length)
+                }
+                else {
+                  anime.avgRating += a.rating/(anime.ratings.length)
+                }
+              })
+              if(anime.avgRating === 0) {
+                anime.avgRating = 'N/A'
+              }
+              else {
+                anime.avgRating = Math.round(anime.avgRating * 10)/10 + '/10'
+              }
+              data.mywatchingAnime.push(anime)
+              console.log(data.mywatchingAnime)
+            }
+          });
+        }
+      })
+      console.log(data)
+      return data;
+    });
+  }
 });

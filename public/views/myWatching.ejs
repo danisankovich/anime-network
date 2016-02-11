@@ -12,7 +12,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="anime in watchingAnime">
+          <tr ng-repeat="anime in user.mywatchingAnime" ng-cloak>
             <td class="mylist"><a ng-click="showOne(anime)">{{anime.title}}</a></td>
             <td class="mylist"><a ng-click="downOne(anime)"> - </a> {{anime.episodesWatched}} <a ng-click="upOne(anime)"> + </a> </td>
             <td class="mylist">{{anime.episode_count}}</td>
