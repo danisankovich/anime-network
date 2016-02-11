@@ -19,7 +19,11 @@
   bottom: 0;
   right: 0;
   padding: 5px 10px 5px 10px;
-  background-color: lightgrey;
+  background-color: #efefef;
+  width: 400px;
+}
+.stuckBottom:hover {
+  background-color: #e3e3e3;
 }
 ul.synopsis li {
   list-style: none;
@@ -189,7 +193,10 @@ ul.reviews li ul {
   border-radius: 999px;
   background-color: lightgreen;
 }
-
+.inline {
+  /*float: left;*/
+  display: inline-block;
+}
 /*====================================
 =================Chatroom CSS===================
 ====================================

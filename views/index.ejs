@@ -169,20 +169,23 @@
   </div>
   <div ui-view></div>
   <div ng-controller="autoCtrl">
-    <div class="stuckBottom" ng-if="user">
+    <div class="stuckBottom" ng-if="currentUser">
       <!-- User List Will Go Here. Only Friends. Friends logged in at top -->
-      <a class="mailButton" ng-click="mailModal()">Message A Friend</a>
+      <!-- <a class="mailButton" ng-click="mailModal()">Message A Friend</a> -->
+      <ul class="accordion" data-accordion>
+        <li class="accordion-navigation">
+          <div id="panel1a" class="content">
+            <ul>
+              <li ng-repeat="friend in currentUser.friendIds" ng-click="mailModal(friend)"><div class="inline">{{friend.username}} <span class="inline" ng-show="friend.isLoggedIn"><div class="circleOnline"> </div></span></div></li>
+            </ul>
+          </div>
+          <a href="#panel1a">Friends</a>
+        </li>
+      </ul>
     </div>
     <div id="mailModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-      <h2 id="modalTitle">New Message</h2>
-      <p class="lead">Choose a Friend</p>
-      <div>
-        <ul> Friends
-          <li ng-repeat="friend in friendList" ng-hide="friend.pending">{{friend.username}}  <a ng-click="choose(friend)">Choose</a></li>
-        </ul>
-      </div>
+      <h2 id="modalTitle">Message {{friend.username}}</h2>
       <form ng-submit="message(newmessage)">
-        <input type="text" placeholder="Subject" ng-model='newmessage.subject'>
         <textarea ng-model="newmessage.body"></textarea>
         <input type="submit" value="Submit">
       </form>

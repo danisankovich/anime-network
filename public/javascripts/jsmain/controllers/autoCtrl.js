@@ -1,9 +1,19 @@
 app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location, userService){
   $(document).ready(function() {
+    function getFriends() {
+      $rootScope.currentUser.friendIds.forEach(function(e) {
+        $http.get('/users/' + e.friendId).success(function(friend) {
+          e.username = friend.username
+          e.isLoggedIn = friend.isLoggedIn
+        })
+      })
+    }
     $scope.hideGenre = false;
     var availableTags = [];
     userService.getCurrentUser().success(function(data) {
       $rootScope.currentUser = data;
+      $rootScope.currentUser.friendList = [];
+      getFriends()
     });
     $('.searchinput').keyup(debounce(function(){
         $scope.n = $(".autocomplete").val();
@@ -85,7 +95,14 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
       $http.get('/users/userleave/' + msg).success(function() {
         $http.get('/allloggedin').success(function(currentUserList) {
           $rootScope.currentUserList = currentUserList
+          getFriends()
         })
+      })
+    });
+    socket.on('user enter', function(msg) {
+      getFriends()
+      $http.get('/allloggedin').success(function(currentUserList) {
+        $rootScope.currentUserList = currentUserList
       })
     });
   });
@@ -94,6 +111,7 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
     $http.post('/users/login', user).success(function(user){
       // userService.getCurrentUser().success(function(data) {
         $rootScope.currentUser = user;
+        getFriends()
         $('#loginModal').foundation('reveal', 'close');
       // });
     }).error(function(err) {
@@ -125,7 +143,8 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
   $scope.loginModal = function() {
     $('#loginModal').foundation('reveal', 'open');
   }
-  $scope.mailModal = function() {
+  $scope.mailModal = function(friend) {
+    $scope.friend = friend
     $('#mailModal').foundation('reveal', 'open');
   }
   $scope.choose=function(friend) {
@@ -134,7 +153,6 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
   $scope.message=function(newmessage) {
     newmessage.friend = $scope.friend._id
     var theMessage = {to: $scope.friend.friendId, toName: $scope.friend.username, from: $rootScope.currentUser._id, body: newmessage.body, createdAt: Date.now()}
-    console.log(theMessage)
     $http.post('/newmessage', theMessage).success(function(success) {
       $scope.newmessage = {}
       newmessage = {}
