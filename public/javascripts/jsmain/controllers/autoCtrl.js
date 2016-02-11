@@ -1,5 +1,16 @@
 app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location, userService){
   $(document).ready(function() {
+    $scope.friendShow = false
+    $scope.showList = function() {
+      if($scope.friendShow === false) {
+        $scope.friendShow = true
+      }
+      else {
+        $scope.friendShow = false;
+      }
+
+    };
+
     function getFriends() {
       $rootScope.currentUser.friendIds.forEach(function(e) {
         $http.get('/users/' + e.friendId).success(function(friend) {

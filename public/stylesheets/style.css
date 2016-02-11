@@ -1,3 +1,15 @@
+.headerImg {
+  background: url('/img/header.png');
+  background-size: cover;
+  height: 240px;
+}
+.friendBackground {
+  background-color: white !important;
+  padding: 5px 5px 5px 5px;
+}
+.accordion-navigation {
+  padding-top: 10px !important;
+}
 #anime {
   text-align: center;
 }
@@ -18,17 +30,37 @@
   position: fixed;
   bottom: 0;
   right: 0;
-  padding: 5px 10px 5px 10px;
+  padding: -10px 10px -10px 10px;
   background-color: #efefef;
-  width: 400px;
+  width: 300px;
 }
 .stuckBottom:hover {
   background-color: #e3e3e3;
 }
+.circleOnline {
+  height: 10px;
+  width: 10px;
+  border: 1px solid;
+  border-radius: 999px;
+  background-color: lightgreen;
+}
+.inline {
+  display: inline-block;
+}
+.friendThing span {
+  padding-left: 20px;
+}
+.friendThing:hover {
+  background-color: #EFEFEF;
+  cursor: pointer;
+}
+.friendList {
+  height:400px;
+  overflow:auto;
+}
 ul.synopsis li {
   list-style: none;
 }
-
 .anime {
   height: 402px;
 }
@@ -186,17 +218,7 @@ ul.reviews li ul {
   background-color: white;
   padding: 5px 10px 5px 10px;
 }
-.circleOnline {
-  height: 10px;
-  width: 10px;
-  border: 1px solid;
-  border-radius: 999px;
-  background-color: lightgreen;
-}
-.inline {
-  /*float: left;*/
-  display: inline-block;
-}
+
 /*====================================
 =================Chatroom CSS===================
 ====================================

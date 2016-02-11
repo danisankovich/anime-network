@@ -12,7 +12,7 @@
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 </head>
 <body ng-app="Anime">
-
+  <div class="headerImg"></div>
   <nav class="top-bar" data-topbar role="navigation" ng-controller="autoCtrl">
     <ul class="title-area">
       <li class="name">
@@ -170,16 +170,16 @@
   <div ui-view></div>
   <div ng-controller="autoCtrl">
     <div class="stuckBottom" ng-if="currentUser">
-      <!-- User List Will Go Here. Only Friends. Friends logged in at top -->
-      <!-- <a class="mailButton" ng-click="mailModal()">Message A Friend</a> -->
       <ul class="accordion" data-accordion>
         <li class="accordion-navigation">
-          <div id="panel1a" class="content">
-            <ul>
-              <li ng-repeat="friend in currentUser.friendIds" ng-click="mailModal(friend)"><div class="inline">{{friend.username}} <span class="inline" ng-show="friend.isLoggedIn"><div class="circleOnline"> </div></span></div></li>
-            </ul>
+          <div class="friendBackground friendList active" ng-show="friendShow">
+            <h5>Click User To Message</h5>
+              <h6 ng-repeat="friend in currentUser.friendIds" ng-click="mailModal(friend)" class="friendThing">
+                <div class="inline"><span>{{friend.username}}</span><span class="inline" ng-show="friend.isLoggedIn"><div class="circleOnline"> </div></span></div>
+                <hr>
+              </h6>
           </div>
-          <a href="#panel1a">Friends</a>
+          <a ng-click="showList()"><h3>Friends</h3></a>
         </li>
       </ul>
     </div>
@@ -207,6 +207,7 @@
 <script src="/javascripts/js/foundation.min.js"></script>
 <script>
 $(document).foundation();
+
 </script>
 <script src="/stylesheets/sweetalert-master/dist/sweetalert.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
