@@ -8,7 +8,6 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
       else {
         $scope.friendShow = false;
       }
-
     };
 
     function getFriends() {
@@ -120,11 +119,9 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
 
   $scope.login = function(user) {
     $http.post('/users/login', user).success(function(user){
-      // userService.getCurrentUser().success(function(data) {
-        $rootScope.currentUser = user;
-        getFriends()
-        $('#loginModal').foundation('reveal', 'close');
-      // });
+      $rootScope.currentUser = user;
+      getFriends()
+      $('#loginModal').foundation('reveal', 'close');
     }).error(function(err) {
       $scope.loginMessage = "Incorrect Username/Password Combination"
     })
@@ -149,7 +146,6 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
   $scope.closeLogin = function() {
     $('#loginModal').foundation('reveal', 'close');
   }
-
   });
   $scope.loginModal = function() {
     $('#loginModal').foundation('reveal', 'open');

@@ -36,7 +36,6 @@ If they are not logged in, the buttons pop up a modal for them to log in from
                   <p class="headerPad">Author</p>
                 </div>
               </div>
-              <!-- <div id="author"><p>{{topic.user.username}}</p></div> -->
               <div class="small-8 columns">
                 <div id="title"><p class="headerPad">Topic: {{topic.title}} (Read {{topic.viewCount}} Times)</p></div>
               </div>
@@ -48,7 +47,7 @@ If they are not logged in, the buttons pop up a modal for them to log in from
                 <div id="authorInfo">
                   <div id="author">
                     <p>User: <a ng-click="toUser(topic)">{{topic.user.username}}</a></p>
-                    <p>Picture: {{topic.user.profilePic}}</p>
+                    <img ng-src="{{topic.user.avatar}}">
                     <p>Member Since: {{topic.user.createdAt | date: "MMM d, y"}}</p>
                     <p>Message: Email | Message</p>
                     <p>Karma: </p>
@@ -74,8 +73,8 @@ If they are not logged in, the buttons pop up a modal for them to log in from
                     <div class="small-4 columns">
                       <div id="authorInfo">
                         <div id="author">
-                          <p>User: {{topic.user.username}}</p>
-                          <p>Picture: {{topic.user.profilePic}}</p>
+                          <p>User: {{response.user.username}}</p>
+                          <img ng-src="{{response.user.avatar}}" alt="">
                           <p>Member Since: {{topic.user.createdAt | date: "MMM d, y"}}</p>
                           <p>Message: Email | Message</p>
                           <p>Karma: </p>
@@ -96,8 +95,8 @@ If they are not logged in, the buttons pop up a modal for them to log in from
                     <div class="small-4 columns">
                       <div id="authorInfo">
                         <div id="author">
-                          <p>User: asdf</p>
-                          <p>Picture: asdf</p>
+                          <p>User: {{post.user.username}}</p>
+                          <img ng-src="{{post.user.avatar}}" alt="">
                           <p>Member Since: asfaf</p>
                           <p>Message: Email | Message</p>
                           <p>Karma: </p>

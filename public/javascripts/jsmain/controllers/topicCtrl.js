@@ -8,8 +8,21 @@ app.controller('topicCtrl', function($scope, $state, $http, animeService, userSe
     $http.get('/users/' + onetopic[0].creatorId).success(function(user){
       onetopic[0].user = user
       $scope.topic = onetopic[0]
+      $scope.topic.responses.forEach(function(e) {
+        $http.get('/users/' + e.user).success(function(here) {
+          e.user = here
+          if (e.responses.length > 0) {
+            e.responses.forEach(function(a) {
+              $http.get('/users/' + a.user).success(function(there) {
+                a.user = there
+              })
+            })
+          }
+        })
+      })
     })
   })
+
   $scope.reply = function(response) { //reply to main topic
     response.user = $scope.user._id
     response.createdAt = Date.now()
