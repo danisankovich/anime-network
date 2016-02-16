@@ -5,7 +5,7 @@
         <img class="avatar" ng-src="{{person.avatar}}" alt="">
       </div>
       <div class="small-6 medium-6 large-6 columns">
-        <h3>Username: {{person.username}} </h3> <a ng-click="addFriend(person)">Send Friend Request</a>
+        <h3>Username: {{person.username}} </h3> <a ng-click="addFriend(person)" ng-show="notFriend(person)">Send Friend Request</a>
         <h5>Email: {{person.email}}</h5>
         <h6>User Since: {{person.createdAt | date : 'MMM d, y'}}</h6>
       </div>

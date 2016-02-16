@@ -25,19 +25,32 @@ app.controller('userCtrl', function($scope, $state, $http, $rootScope, userServi
         $scope.person.friendList.push(e)
       })
     })
-    console.log($scope.person)
   })
+
+  $scope.notFriend = function() {
+    if($rootScope.currentUser) {
+      var found = $scope.person.friendIds.some(function (el) {
+        return el.friendId === $rootScope.currentUser._id;
+      });
+      if(!found) { return true; }
+      else { return false; }
+    }
+    else { return false; }
+  }
   $scope.addFriend = function(person) {
     var found = person.friendIds.some(function (el) {
-      return el.friendId === $scope.user._id;
+      return el.friendId === $rootScope.currentUser._id;
     });
     if(found === false) {
       $http.post('/users/friendrequest/' + person._id).success(function(success) {
-        console.log(success)
+        swal('success', "Friend Request Sent", 'success')
       })
     }
   }
   $scope.showOneAnime = function(review) {
     $state.go('anime', {animename: review.showTitle});
   };
+  $scope.toUser = function(friend) {
+    $state.go('user', {userId: friend.friendId})
+  }
 });
