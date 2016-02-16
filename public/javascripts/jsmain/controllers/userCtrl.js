@@ -44,6 +44,16 @@ app.controller('userCtrl', function($scope, $state, $http, $rootScope, userServi
     if(found === false) {
       $http.post('/users/friendrequest/' + person._id).success(function(success) {
         swal('success', "Friend Request Sent", 'success')
+        $http.get('/users/' + $state.params.userId).success(function(person) {
+          $scope.person = person
+          $scope.person.friendList = []
+          $scope.person.friendIds.forEach(function(e) {
+            $http.get('/users/' + e.friendId).success(function(friend) {
+              e.username = friend.username
+              $scope.person.friendList.push(e)
+            })
+          })
+        })
       })
     }
   }
