@@ -5,8 +5,18 @@
         <ul>
           <li>Click on a friend To see all messages from them</li>
           <li ng-repeat="friend in user.friendIds" ng-click="showMessages(friend)">{{friend.username}}
-            <span ng-show="friend.isLoggedIn"><p class="circleOnline"> </p></span>
+            <span ng-show="friend.isLoggedIn" class="inline">
+              <div class="circleOnline"> </div>
+            </span>
           </li>
+          <!-- <h6 ng-repeat="friend in currentUser.friendIds" ng-click="mailModal(friend)" class="friendThing">
+            <div class="inline">
+              <span>{{friend.username}}</span><span class="inline" ng-show="friend.isLoggedIn">
+                <div class="circleOnline"> </div>
+              </span>
+            </div>
+            <hr>
+          </h6> -->
         </ul>
       </div>
       <div>

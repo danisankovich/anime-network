@@ -118,10 +118,13 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
   });
 
   $scope.login = function(user) {
-    $http.post('/users/login', user).success(function(user){
-      $rootScope.currentUser = user;
-      getFriends()
-      $('#loginModal').foundation('reveal', 'close');
+    $http.post('/users/login', user).success(function(){
+      userService.getCurrentUser().success(function(data) {
+        $rootScope.currentUser = data;
+        $rootScope.currentUser.friendList = [];
+        getFriends()
+        $('#loginModal').foundation('reveal', 'close');
+      });
     }).error(function(err) {
       $scope.loginMessage = "Incorrect Username/Password Combination"
     })
