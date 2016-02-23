@@ -9,6 +9,14 @@
             <button class="tiny button" ng-click="uploadImage()">Submit</button>
           </div>
         </form>
+        <p ng-hide="showSigEdit">{{currentUser.signature}} <button class="tiny button" ng-click="showSig()">Edit Signature</button></p>
+        <form ng-show="showSigEdit">
+          <div>
+            <input type="text" ng-model="signature" placeholder="New Signature">
+            <button class="tiny button" ng-click="showSig()">Cancel</button>
+            <button class="tiny button" ng-click="newSignature(signature)">Submit</button>
+          </div>
+        </form>
       </div>
       <div class="small-6 medium-6 large-6 columns">
         <h3>Username: {{user.username}}</h3>

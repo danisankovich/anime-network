@@ -23,6 +23,16 @@ router.get('/:id', function(req, res, next) {
   });
 });
 
+router.post('/edituser', function(req, res) {
+  User.findById(req.user.id, function(err, user) {
+    if (err) { res.send(err);}
+    else {
+      user.signature = req.body.signature
+      user.save()
+    }
+  })
+})
+
 router.get('/username/:id', function(req, res, next) {
   User.find({username: req.params.id}, function(err, user) {
     if (err) { res.send(err);}
@@ -53,7 +63,6 @@ router.get('/anime/:id', function(req, res) {
     res.send(anime)
   })
 });
-
 
 router.post('/newavatar', function(req, res) {
   console.log(req.body[0])

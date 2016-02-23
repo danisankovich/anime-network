@@ -80,5 +80,15 @@ app.controller('profileCtrl', function($scope, $state, $http, $rootScope, userSe
   $scope.watchingAnime = function() {
     $state.go('watching')
   }
+  $scope.showSig = function() {
+    $scope.showSigEdit = ($scope.showSigEdit === true) ? false : true;
+  }
+  $scope.newSignature = function(signature) {
+    $rootScope.currentUser.signature = signature
+    $scope.showSigEdit = false
+    $http.post('/users/edituser', $rootScope.currentUser).success(function() {
+      console.log($rootScope.currentUser)
+    })
+  }
 
 });
