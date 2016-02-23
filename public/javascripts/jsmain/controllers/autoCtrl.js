@@ -60,13 +60,20 @@ app.controller('autoCtrl', function($scope, $state, $http, $rootScope, $location
     });
     $scope.searchAnime = function(anime) {
       if($scope.searchWhat === 'searchAnime') {
+        anime = document.getElementById('tags').value;
         $state.go('animelist', {animename: anime});
         document.getElementById('tags').value = '';
       }
       else {
         document.getElementById('tags').value = '';
         $http.get('/users/findname/' + anime).success(function(user) {
-          $state.go('user', {userId: user._id})
+          console.log(user)
+          if(user !== null) {
+            $state.go('user', {userId: user._id})
+          }
+          else {
+            swal('error', 'No user with username: ' + anime, 'error')
+          }
         })
       }
     };
