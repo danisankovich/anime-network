@@ -23,6 +23,17 @@ router.get('/:id', function(req, res, next) {
   });
 });
 
+router.get('/findname/:username', function(req, res, next) {
+  console.log(req.params.username)
+  User.findOne({username: req.params.username.toLowerCase()}, function(err, user) {
+    if (err) { res.send(err);}
+    else {
+      console.log(user)
+      res.json(user);
+    }
+  });
+});
+
 router.post('/edituser', function(req, res) {
   User.findById(req.user.id, function(err, user) {
     if (err) { res.send(err);}

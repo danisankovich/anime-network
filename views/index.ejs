@@ -27,14 +27,31 @@
         <li class="has-form">
           <form>
             <div class="row collapse">
+              <div class="form-group move-down large-3 small-3 columns">
+                <select name="searchThis" id="searchThis" ng-model="searchWhat">
+                  <option value="searchAnime" ng-selected="true">Search Anime</option>
+                  <option value="searchUser">Search Users</option>
+                </select>
+              </div>
+              <div class="form-group move-down large-6 small-6 columns ui-widget">
+                <input id="tags" class="autocomplete searchinput" ng-model="anime" placeholder="Search" ng-show="searchWhat === 'searchAnime'">
+                <input id="notags" ng-model="anime" placeholder="Search" ng-hide="searchWhat === 'searchAnime'">
+              </div>
+              <div class="large-3 small-3 columns">
+                <button type="button" class="alert button expand" ng-click="searchAnime(anime)">Search</button>
+              </div>
+            </div>
+          </form>
+          <!-- <form>
+            <div class="row collapse">
               <div class="form-group move-down large-8 small-9 columns ui-widget">
-                <input id="tags" class="autocomplete searchinput" ng-model="anime" placeholder="Search Titles">
+                <input id="tags" class="autocomplete searchinput" ng-model="anime" placeholder="Search">
               </div>
               <div class="large-4 small-3 columns">
                 <button type="button" class="alert button expand" ng-click="searchAnime(anime)">Search</button>
               </div>
             </div>
-          </form>
+          </form> -->
         </li>
         <li ng-show="currentUser"><a ui-sref="chatroom">Chatroom</a></li>
         <li ng-show="currentUser"><a ui-sref="messages">Messages</a></li>

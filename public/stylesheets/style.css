@@ -115,6 +115,9 @@ footer {
 #tags {
   margin-right: 60px;
 }
+#notags {
+  margin-right: 60px;
+}
 .borderbar {
   border-right: black 1px solid;
 }
