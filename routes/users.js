@@ -28,7 +28,9 @@ router.post('/edituser', function(req, res) {
     if (err) { res.send(err);}
     else {
       user.signature = req.body.signature
+      user.email = req.body.email
       user.save()
+      res.send()
     }
   })
 })

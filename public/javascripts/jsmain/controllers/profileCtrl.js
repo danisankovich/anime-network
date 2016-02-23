@@ -83,12 +83,21 @@ app.controller('profileCtrl', function($scope, $state, $http, $rootScope, userSe
   $scope.showSig = function() {
     $scope.showSigEdit = ($scope.showSigEdit === true) ? false : true;
   }
-  $scope.newSignature = function(signature) {
-    $rootScope.currentUser.signature = signature
+  $scope.newEdits = function() {
+    console.log(this)
+    if(this.email) {
+      $rootScope.currentUser.email = this.email
+    }
+    if(this.signature) {
+      $rootScope.currentUser.signature = this.signature
+    }
     $scope.showSigEdit = false
+    $scope.showEmailEdit = false
     $http.post('/users/edituser', $rootScope.currentUser).success(function() {
       console.log($rootScope.currentUser)
     })
   }
-
+  $scope.showEmail = function() {
+    $scope.showEmailEdit = ($scope.showEmailEdit === true) ? false : true;
+  }
 });
