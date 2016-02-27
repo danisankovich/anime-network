@@ -52,4 +52,7 @@ app.controller('topicCtrl', function($scope, $state, $http, animeService, userSe
     $('#replyPostModal').foundation('reveal', 'open');
     $scope.post = this.response
   }
+  $scope.test = function() {
+    console.log(this)
+  }
 })

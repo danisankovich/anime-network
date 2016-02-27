@@ -38,4 +38,5 @@ app.controller('messageCtrl', function($scope, $state, $http, $rootScope, userSe
       newmessage = {}
     })
   }
+
 });

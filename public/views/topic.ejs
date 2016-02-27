@@ -1,29 +1,4 @@
-
-=================================
-=================================
-=================================
-=================================
-=================================
-=================================
-=================================
-=================================
-=================================
-===================================
-===================================
-===================================
-===================================
-===================================
-===================================
-===================================
-===================================
-===================================
-If they are not logged in, the buttons pop up a modal for them to log in from
-
-
-
-
-
-
+<div ng-if="!currentUser">Log In To Post Replies</div>
 <div class='layout'>
   <div class="container">
     <div class="row">
@@ -49,8 +24,7 @@ If they are not logged in, the buttons pop up a modal for them to log in from
                     <p>User: <a ng-click="toUser(topic)">{{topic.user.username}}</a></p>
                     <img ng-src="{{topic.user.avatar}}">
                     <p>Member Since: {{topic.user.createdAt | date: "MMM d, y"}}</p>
-                    <p>Message: Email | Message</p>
-                    <p>Karma: </p>
+                    <p ng-click="test()">Message: Email | Message</p>
                   </div>
                 </div>
               </div>
@@ -76,7 +50,7 @@ If they are not logged in, the buttons pop up a modal for them to log in from
                           <p>User: {{response.user.username}}</p>
                           <img ng-src="{{response.user.avatar}}" alt="">
                           <p>Member Since: {{topic.user.createdAt | date: "MMM d, y"}}</p>
-                          <p>Message: Email | Message</p>
+                          <p ng-click="test()">Message: Email | Message</p>
                           <p>Karma: </p>
                         </div>
                       </div>
@@ -86,7 +60,7 @@ If they are not logged in, the buttons pop up a modal for them to log in from
                       <p>
                         {{response.body}}
                       </p>
-                      <div class="small-3 small-offset-9 columns replyDiv">
+                      <div class="small-3 small-offset-9 columns replyDiv" ng-if="currentUser">
                         <a class="replyButton" ng-click="replyPostModal()">REPLY TO POST</a>
                       </div>
                     </div>
@@ -98,7 +72,7 @@ If they are not logged in, the buttons pop up a modal for them to log in from
                           <p>User: {{post.user.username}}</p>
                           <img ng-src="{{post.user.avatar}}" alt="">
                           <p>Member Since: asfaf</p>
-                          <p>Message: Email | Message</p>
+                          <p ng-click="test()">Message: Email | Message</p>
                           <p>Karma: </p>
                         </div>
                       </div>
@@ -107,7 +81,7 @@ If they are not logged in, the buttons pop up a modal for them to log in from
                       <p>
                         {{post.body}}
                       </p>
-                      <div class="small-3 small-offset-9 columns replyDiv">
+                      <div class="small-3 small-offset-9 columns replyDiv" ng-if="currentUser">
                         <a class="replyButton" ng-click="replyPostModal()">REPLY TO POST</a>
                       </div>
                     </div>
@@ -119,7 +93,7 @@ If they are not logged in, the buttons pop up a modal for them to log in from
               </div>
 
                 <div class="columns small-12">
-                  <div class="small-3 small-offset-9 columns replyDiv">
+                  <div class="small-3 small-offset-9 columns replyDiv" ng-if="currentUser">
                     <a class="replyButton" ng-click="replyModal()">REPLY TO TOPIC</a>
                   </div>
                 </div>
@@ -131,7 +105,7 @@ If they are not logged in, the buttons pop up a modal for them to log in from
 </div>
 
 <div id="replyModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-  <h2 id="modalTitle">Reply To Topic</h2>
+  <h2 id="modalTitle" ng-if="currentUser">Reply To Topic</h2>
   <p class="lead">Choose a Maximum of 4 Genres</p>
   <form ng-submit="reply(response)" ng-model="genre">
     <textarea ng-model="response.body"></textarea>
@@ -141,7 +115,7 @@ If they are not logged in, the buttons pop up a modal for them to log in from
 </div>
 
 <div id="replyPostModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-  <h2 id="modalTitle">Reply To Topic</h2>
+  <h2 id="modalTitle" ng-if="currentUser">Reply To Topic</h2>
   <p class="lead">Choose a Maximum of 4 Genres</p>
   <form ng-submit="replyToPost(response)" ng-model="genre">
     <textarea ng-model="response.body"></textarea>
