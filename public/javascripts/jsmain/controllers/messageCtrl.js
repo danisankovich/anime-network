@@ -25,6 +25,7 @@ app.controller('messageCtrl', function($scope, $state, $http, $rootScope, userSe
         e.position = 'theirs'
       }
     })
+    $scope.selected = this.$index
     $scope.thisFriendsMessages = friend.messages
   }
   $scope.sendMessage=function(newmessage) {

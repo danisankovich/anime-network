@@ -1,3 +1,39 @@
+.wrapper {
+  margin-top: 4%;
+}
+.friendStyle {
+  list-style: none;
+  background-color: #DEDEDE;
+  border: black 1px solid;
+  padding: 5px 0 5px 10px;
+}
+.friendStyle:hover {
+  background-color: #34BBFF;
+  cursor: pointer;
+}
+.sel {
+  background-color: #34BBFF;
+}
+#friendBox {
+  padding-top: 20px;
+  padding-right: 30px;
+  border: 1px solid black;
+  height: 50vh;
+  overflow:auto;
+  background-color: #DEDEDE;
+}
+.messagesBox {
+  position: relative;
+  border: 1px solid black;
+  overflow:auto;
+  height: 50vh;
+  padding: 10px 0 20px 0;
+}
+.messageText {
+  position: absolute;
+  bottom: 0;
+  width: 95%;
+}
 .headerImg {
   background: url('/img/header.png');
   background-size: cover;
@@ -10,6 +46,7 @@
 .accordion-navigation {
   padding-top: 10px !important;
 }
+
 #anime {
   text-align: center;
 }

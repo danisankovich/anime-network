@@ -1,32 +1,26 @@
-<div class="container">
-  <div class="row">
-    <div class="columns small-10 small-offset-1">
-      <div class="columns small-3">
-        <ul>
-          <li>Click on a friend To see all messages from them</li>
-          <li ng-repeat="friend in user.friendIds" ng-click="showMessages(friend)">{{friend.username}}
-            <span ng-show="friend.isLoggedIn" class="inline">
-              <div class="circleOnline"> </div>
-            </span>
-          </li>
-          <!-- <h6 ng-repeat="friend in currentUser.friendIds" ng-click="mailModal(friend)" class="friendThing">
-            <div class="inline">
-              <span>{{friend.username}}</span><span class="inline" ng-show="friend.isLoggedIn">
+<div class="wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="columns small-10 small-offset-1">
+        <h4>Click On A Friend To Open Message History</h4>
+        <div class="columns small-3" id="friendBox">
+          <ul class='messageFriends'>
+            <li class="friendStyle" ng-class="{sel: $index == selected}" ng-repeat="friend in user.friendIds" ng-click="showMessages(friend)">{{friend.username}}
+              <span ng-show="friend.isLoggedIn" class="inline">
                 <div class="circleOnline"> </div>
               </span>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <div class="columns small-9 messagesBox">
+            <p ng-repeat="message in thisFriendsMessages" class="message-{{message.position}}">{{message.body}}</p>
+            <div ng-show="friend">
+            <form ng-model="newmessage" ng-submit="sendMessage(newmessage)">
+              <textarea ng-model="newmessage.body"></textarea>
+              <input type="submit" value="Submit">
+            </form>
             </div>
-            <hr>
-          </h6> -->
-        </ul>
-      </div>
-      <div>
-        <div class="columns small-9">
-          <p ng-repeat="message in thisFriendsMessages" class="message-{{message.position}}">{{message.body}}</p>
-          <div ng-show="friend">
-          <form ng-model="newmessage" ng-submit="sendMessage(newmessage)">
-            <textarea ng-model="newmessage.body"></textarea>
-            <input type="submit" value="Submit">
-          </form>
           </div>
         </div>
       </div>
